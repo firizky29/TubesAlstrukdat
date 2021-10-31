@@ -44,8 +44,5 @@ void adv() {
 	/* Algoritma */
 	retval = fscanf(tape,"%c",&currentChar);
 	eot = (currentChar == MARK);
-	if (eot) {
-              fclose(tape);
- 	}
 }
 

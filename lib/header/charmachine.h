@@ -4,7 +4,7 @@
 #include "boolean.h"
 #include <string.h>
 
-#define MARK '.'
+#define MARK '\n'
 /* Char Engine State */
 extern char currentChar;
 extern boolean eot;

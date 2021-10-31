@@ -4,7 +4,7 @@ CC = gcc
 ## flags for compiler
 CFLAGS = -g -Wall
 ## final output
-TARGET = main_exec
+TARGET = Mobita
 
 # Folders
 ## "temporary" output for object files
@@ -27,6 +27,7 @@ INC_DIRS := $(LIB_DIR)/header
 INC_FLAGS := $(addprefix -I, $(INC_DIRS))
 LDFLAGS = -lm
 
+all: run clean
 ./$(TARGET): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) $(INC_FLAGS) -o $@
 
