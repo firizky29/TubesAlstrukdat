@@ -1,8 +1,9 @@
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H
 
-#include "../../boolean.h"
+#include "boolean.h"
 #include "../mesin-karakter/charmachine.h"
+#include "../file-reader/filecharmachine.h"
 
 #define CAPACITY 50
 #define BLANK ' '

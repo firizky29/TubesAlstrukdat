@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include "boolean.h"
 #include "wordmachine.h"
+#include "../file-reader/filecharmachine.h"
 
 /* Word Engine State */
 boolean endWord;
@@ -9,8 +11,8 @@ void ignoreBlank_file(){
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang 
    F.S. : currentChar != BLANK atau currentChar = EOF */
-	while (currentChar == BLANK){
-		adv_file();
+	while (currentCharFile == BLANK){
+		advFile();
 	}
 }
 
@@ -19,7 +21,7 @@ void ignoreBlank_command(){
    I.S. : currentChar sembarang 
    F.S. : currentChar != BLANK atau currentChar = MARK */
 	while (currentChar == BLANK){
-		adv_command();
+		adv();
 	}
 }
 
@@ -29,9 +31,9 @@ void startWord_file(char *filename){
    F.S. : endWord = true, dan currentChar = EOF; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-	start_file(filename);
+	startFile(filename);
 	ignoreBlank_file();
-	if (currentChar == EOF){
+	if (currentCharFile == MARKFILE){
 		endWord = true;
 	}
 	else{
@@ -46,7 +48,7 @@ void startWord_command(){
    F.S. : endWord = true, dan currentChar = MARK; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-	start_command();
+	start();
 	ignoreBlank_command();
 	if (currentChar == MARK){
 		endWord = true;
@@ -80,7 +82,7 @@ void advWord_file(){
           Jika currentChar = EOF, endWord = true.		  
    Proses : Akuisisi kata menggunakan procedure copyWord */
 	ignoreBlank_file();
-	if (currentChar == EOF){
+	if (currentCharFile == MARKFILE){
 		endWord = true;
 	}
 	else{
@@ -101,7 +103,7 @@ void copyWord_command(){
 	while (currentChar != MARK && currentChar != BLANK){
 		currentWord.contents[i] = currentChar;
 		i++;
-		adv_command();
+		adv();
 	}
 	if (i > CAPACITY){
 		currentWord.length = CAPACITY;
@@ -119,10 +121,10 @@ void copyWord_file(){
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 	int i = 0;
-	while (currentChar != BLANK && currentChar != EOF){
-		currentWord.contents[i] = currentChar;
+	while (currentCharFile != BLANK && currentCharFile != MARKFILE){
+		currentWord.contents[i] = currentCharFile;
 		i++;
-		adv_file();
+		advFile();
 	}
 	if (i > CAPACITY){
 		currentWord.length = CAPACITY;

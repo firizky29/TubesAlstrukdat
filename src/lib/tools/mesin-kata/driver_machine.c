@@ -1,9 +1,5 @@
 #include <stdio.h>
-#include "boolean.h"
-#include "charmachine.c"
-#include "charmachine.h"
 #include "wordmachine.h"
-#include "wordmachine.c"
 
 boolean endWord;
 Word currentWord;
@@ -15,7 +11,7 @@ int main(){
     kata.contents[0] = 'a';
     kata.contents[1] = 'b';
     kata.contents[2] = 'c';
-    startWord_command();
+    startWord();
     boolean found = isWordEqual(currentWord, kata);
     if (found){
         printf("yoi\n");

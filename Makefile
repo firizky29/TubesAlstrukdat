@@ -45,4 +45,4 @@ run: build
 
 clean: clear
 
-.PHONY: clear all build run clean debug
+.PHONY: clear all build run clean debug vscode

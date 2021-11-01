@@ -1,14 +1,13 @@
-#include "charmachine.h"
+#include "filecharmachine.h"
 #include <stdio.h>
 
-char currentChar;
-boolean eot;
+char currentCharFile;
+boolean endFile;
 
-static FILE * tape;
-static int retval;
+static FILE * tapeFile;
+static int retvalFile;
 
-
-void start() {
+void startFile(char *filename){
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -17,11 +16,12 @@ void start() {
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	tape = stdin;
-	adv();
+       tapeFile = fopen(filename, "r");
+       advFile();
 }
 
-void adv() {
+
+void advFile() {
 /* Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
@@ -29,7 +29,10 @@ void adv() {
 		      Jika  currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	retval = fscanf(tape,"%c",&currentChar);
-	eot = (currentChar == MARK);
+	retvalFile = fscanf(tapeFile,"%c",&currentCharFile);
+	endFile = (currentCharFile == MARKFILE);
+    if(endFile){
+        fclose(tapeFile);
+    }
 }
 
