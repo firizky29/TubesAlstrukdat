@@ -19,7 +19,7 @@ void CreateMatrix(int nRow, int nCol, Matrix *m) {
 }
 
 /* *** Selektor "DUNIA Matrix" *** */
-boolean isIdxValid(int i, int j) {
+boolean isMatrixIdxValid(int i, int j) {
     /* KAMUS LOKAL */
     /* ALGORITMA */
     return(((i >= 0) && (i <= ROW_CAP - 1)) && ((j >= 0) && (j <= COL_CAP - 1)));
@@ -36,7 +36,7 @@ Index getLastIdxCol(Matrix m) {
     /* ALGORITMA */
     return (COLS(m) - 1);
 }
-boolean isIdxEff(Matrix m, Index i, Index j) {
+boolean isMatrixIdxEff(Matrix m, Index i, Index j) {
     /* KAMUS LOKAL */
     /* ALGORITMA */
     return(((i >= 0) && (i <= getLastIdxRow(m))) && ((j >= 0) && (j <= getLastIdxCol(m))));

@@ -1,68 +1,96 @@
 #include <stdio.h>
-#include "boolean.h"
-#include "charmachine.h"
 #include "wordmachine.h"
 
 /* Word Engine State */
 boolean endWord;
 Word currentWord;
 
-void ignoreBlank(){
+void ignoreBlank_file(){
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang 
+   F.S. : currentChar != BLANK atau currentChar = EOF */
+	while (currentChar == BLANK){
+		adv_file();
+	}
+}
+
+void ignoreBlank_command(){
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang 
    F.S. : currentChar != BLANK atau currentChar = MARK */
 	while (currentChar == BLANK){
-		adv();
+		adv_command();
 	}
 }
 
 void startWord_file(char *filename){
-/* start word tp input dr file, mark masih '.' */
+/* 
+   I.S. : currentChar sembarang
+   F.S. : endWord = true, dan currentChar = EOF; 
+          atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
 	start_file(filename);
-	ignoreBlank();
-	if (currentChar == MARK){
+	ignoreBlank_file();
+	if (currentChar == EOF){
 		endWord = true;
 	}
 	else{
-		copyWord();
+		copyWord_file();
 		endWord = false;
 	}
 }
 
 void startWord_command(){
-/* start word tp input dr cmd, mark masih '.' 
+/* 
    I.S. : currentChar sembarang
    F.S. : endWord = true, dan currentChar = MARK; 
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 	start_command();
-	ignoreBlank();
+	ignoreBlank_command();
 	if (currentChar == MARK){
 		endWord = true;
 	}
 	else{
-		copyWord();
+		copyWord_command();
 		endWord = false;
 	}
 }
 
-void advWord(){
+void advWord_command(){
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika currentChar = MARK, endWord = true.		  
    Proses : Akuisisi kata menggunakan procedure copyWord */
-	ignoreBlank();
+	ignoreBlank_command();
 	if (currentChar == MARK){
 		endWord = true;
 	}
 	else{
-		copyWord();
-		ignoreBlank();
+		copyWord_command();
+		ignoreBlank_command();
 	}
 }
 
-void copyWord(){
+void advWord_file(){
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi 
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi, 
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin EOF
+          Jika currentChar = EOF, endWord = true.		  
+   Proses : Akuisisi kata menggunakan procedure copyWord */
+	ignoreBlank_file();
+	if (currentChar == EOF){
+		endWord = true;
+	}
+	else{
+		copyWord_file();
+		ignoreBlank_file();
+	}
+}
+
+
+void copyWord_command(){
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : currentWord berisi kata yang sudah diakuisisi; 
@@ -73,7 +101,28 @@ void copyWord(){
 	while (currentChar != MARK && currentChar != BLANK){
 		currentWord.contents[i] = currentChar;
 		i++;
-		adv();
+		adv_command();
+	}
+	if (i > CAPACITY){
+		currentWord.length = CAPACITY;
+	}
+	else{
+		currentWord.length = i;
+	}
+}
+
+void copyWord_file(){
+/* Mengakuisisi kata, menyimpan dalam currentWord
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi kata yang sudah diakuisisi; 
+          currentChar = BLANK atau currentChar = EOF; 
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+	int i = 0;
+	while (currentChar != BLANK && currentChar != EOF){
+		currentWord.contents[i] = currentChar;
+		i++;
+		adv_file();
 	}
 	if (i > CAPACITY){
 		currentWord.length = CAPACITY;

@@ -7,8 +7,8 @@
 #ifndef LISTDIN_H
 #define LISTDIN_H
 
-#include "boolean.h"
-#include "point.h"
+#include "../../boolean.h"
+#include "../point/point.h"
 
 /*  Kamus Umum */
 #define IDX_UNDEF -1

@@ -17,8 +17,9 @@ void start_file(char *filename){
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
+       eot = false;
        tape = fopen(filename, "r");
-       adv();
+       adv_file();
 }
 
 void start_command() {
@@ -31,10 +32,20 @@ void start_command() {
 
 	/* Algoritma */
 	tape = stdin;
-	adv();
+	adv_command();
 }
 
-void adv() {
+void adv_file(){
+/* Pita dimajukan satu karakter. 
+   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
+   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
+          currentChar mungkin = MARK
+		      Jika  currentChar = MARK maka EOP akan menyala (true) */
+       retval = fscanf(tape,"%c",&currentChar);
+	eot = (currentChar == EOF);
+}
+
+void adv_command() {
 /* Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 

@@ -25,11 +25,19 @@ void start_command();
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
-void adv();
+void adv_command();
 /* Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+void adv_file();
+/* Pita dimajukan satu karakter. 
+   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
+   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
+          currentChar mungkin = MARK
+          Jika  currentChar = MARK maka EOP akan menyala (true) */
+
 
 #endif

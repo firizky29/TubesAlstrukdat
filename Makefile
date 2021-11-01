@@ -1,46 +1,48 @@
-# Basic stuff for compiling:
-## the compiler
 CC = gcc
-## flags for compiler
-CFLAGS = -g -Wall
-## final output
-TARGET = Mobita
 
-# Folders
-## "temporary" output for object files
-BUILD_DIR = ./obj
-## "libraries" we use, ADTs
-LIB_DIR = ./lib
-## the main "driver", heart of the program
-MAIN_DIR = ./src
+# FLAGS
+CFLAG = -Wall -std=c99
+BUILD_FLAG = -lm
+TARGET = Mobilita
+INC = -Isrc/lib -Itest
 
-# Processing folders
-## get .c files
-SRCS := $(shell find $(LIB_DIR)/body -name *.c) $(shell find $(MAIN_DIR) -name *.c)
-## "foresee" .o files' paths
-OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.o)
+# DIREKTORI
+OBJ_SRC_DIR = ./obj/src
+BIN_SRC_DIR = ./bin/src
+TARGET_DIR = ./bin/$(TARGET)
 
-# Processing headers
-## headers for ADTs
-INC_DIRS := $(LIB_DIR)/header
-## Include them in compilation time
-INC_FLAGS := $(addprefix -I, $(INC_DIRS))
-LDFLAGS = -lm
+SRCS := $(shell find -name "*.c")
+OBJS := $(patsubst %.c,obj/%.o,$(SRCS))
+DRIVER_SRC := $(shell find src -name "*.c"  ! -name "driver_*" ! -name "main.c")
+DRIVER_OBJ := $(patsubst %.c,obj/%.o,$(DRIVER_SRC))
 
-all: run clean
-./$(TARGET): $(OBJS)
-	$(CC) $(OBJS) $(LDFLAGS) $(INC_FLAGS) -o $@
 
-run: ./$(TARGET)
-	./$<
+$(OBJ_SRC_DIR)%.o: ./src/%.c ./src/%.h
+	@mkdir -p $(dir $@)
+	@$(CC) -g $(CFLAG) -c $(INC) $< -o $@
 
-$(BUILD_DIR)/%.o: %.c
-	$(MKDIR_P) $(dir $@)
-	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
+$(OBJ_SRC_DIR)%.o: ./src/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) -g $(CFLAG) -c $(INC) $< -o $@
 
-.PHONY: clean
+all: clear build run
 
-clean:
-	$(RM) -rf $(BUILD_DIR)
+clear:
+	@rm -rf obj/* bin/*
 
-MKDIR_P ?= mkdir -p
+$(BIN_SRC_DIR): $(DRIVER_OBJ)
+	@mkdir -p bin
+	@$(CC) -g $^ -o $@ $(BUILD_FLAG) $(TEST_FLAG)
+
+$(TARGET_DIR): $(DRIVER_OBJ) $(OBJ_SRC_DIR)/main.o
+	@mkdir -p bin
+	@$(CC) $^ -o $@ $(BUILD_FLAG) -O3
+
+build: $(TARGET_DIR)
+
+run: build
+	@$(TARGET_DIR)
+
+clean: clear
+
+.PHONY: clear all build run clean debug
