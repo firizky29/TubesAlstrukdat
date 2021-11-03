@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdio.h>
 
+static int retval;
+static FILE * tape;
+boolean endFile;
 char currentChar;
 
 void start_file(char *filename){
@@ -13,6 +16,7 @@ void start_file(char *filename){
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
+       endFile = false;
        tape = fopen(filename, "r");
        adv();
 }

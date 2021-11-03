@@ -1,12 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "lib/data-structure/list-dinamis/listdin.h"
-#include "lib/data-structure/matriks/matrix.h"
-#include "lib/data-structure/point/point.h"
-#include "lib/tools/mesin-karakter/charmachine.h"
-#include "lib/boolean.h"
-#include "lib/tools/mesin-kata/wordmachine.h"
+#include "lib/state/init/initstate.h"
+#include "lib/state/cur-state/command.h"
 
 /* SIMULASI MAIN MENU + BACA CONFIG
 dari tahap main menu sampe get info dari config 
@@ -22,36 +18,40 @@ int main(){
 	}
     // NEW_GAME (start new game)
 	if (isNewGame(choice)){
-		printf("Enter configuration file level ([filename].txt): ");
-		Word filename = inputWord();
-		while (!fopen(filename.contents, "r")){
-			printf("File not found, enter filename again: ");
-			filename = inputWord();
-		}
-		printf("Opening ");
-		printWord(filename);
-		printf("\n");
-        
-        // reading file config + get info
-		readFile(filename);
-        Matrix map = getMap();
-        POINT hq = getPoint();
-        ListDin loc = getLoc(hq);
-        Matrix adj = getAdjacency(loc.capacity);
-        // display info
-        printf("\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
-        printf("Map: %d x %d\n", map.rowEff, map.colEff);
-        displayMatrix(map);
-        printf("\n\n");
-        displayMatrix(adj);
-        printf("\n\n");
-        displayList(loc);
-        printf("\n\n");
-        // sisanya di print dulu aja karena nunggu ADTnya ada dulu
-        while(!endFile){
-            printWordFile(currentWord);
+		globalinit();
+        while(true){
+            choice = inputWord();
+            if(isMove(choice)){
+                Move();
+            }
+            else if(isPickUp(choice)){
+                Pickup();
+            }
+            else if(isDropOff(choice)){
+                Dropoff();
+            }
+            else if(isInProgress(choice)){
+                displayInProgress();
+            }
+            else if(isToDo(choice)){
+                displayToDoList();
+            }
+            else if(isMap(choice)){
+                displayMap();
+            }
+            else if(isInventory()){
+                displayInventory();
+            }
+            else if(isBuy()){
+                Buy();
+            }
+            else if(isHelp()){
+                displayHelp();
+            }
+            else if(isReturn()){
+                Retur();
+            }
         }
-        fclose(tape);
 	}
     // exit game
 	else{

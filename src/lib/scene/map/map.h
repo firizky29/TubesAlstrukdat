@@ -6,13 +6,13 @@
 
 extern int N, M, L;
 // N: rows, M: cols, L: location
-extern Map curMap;
 
 typedef struct  map{
     Matrix Adj;
     Matrix Peta;
     ListDin Building;
 } Map;
+extern Map curMap;
 
 /* Setter dan getter */
 #define ADJ(m) m.Adj

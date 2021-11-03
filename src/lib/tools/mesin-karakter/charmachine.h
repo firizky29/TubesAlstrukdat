@@ -7,10 +7,8 @@
 
 #define MARK '\n'
 /* Char Engine State */
-static int retval;
-static FILE * tape;
-static boolean endFile = false;
 
+extern boolean endFile;
 extern char currentChar;
 
 void start_file(char *filename);

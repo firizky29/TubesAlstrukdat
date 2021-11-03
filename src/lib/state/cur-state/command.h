@@ -40,6 +40,14 @@ void Move();
 /* Mengubah curPosition, curTime*/
 void Pickup();
 /* Mengubah curBag, curProgress, cur..*/
+void Dropoff();
+void displayMap();
+void displayToDoList();
+void displayInProgress();
+void Buy();
+void displayInventory();
+void displayHelp();
+void Retur();
 
 
 #endif
