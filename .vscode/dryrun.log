@@ -1,0 +1,35 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/firizky29/Documents/tubes/TubesAlstrukdat'
+ 
+rm -rf obj/* bin/*
+mkdir -p obj/src/lib/tools/mesin-kata/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/tools/mesin-kata/wordmachine.c -o obj/src/lib/tools/mesin-kata/wordmachine.o
+mkdir -p obj/src/lib/tools/mesin-karakter/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/tools/mesin-karakter/charmachine.c -o obj/src/lib/tools/mesin-karakter/charmachine.o
+mkdir -p obj/src/lib/tools/pcolor/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/tools/pcolor/pcolor.c -o obj/src/lib/tools/pcolor/pcolor.o
+mkdir -p obj/src/lib/state/save-state/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/state/save-state/savestate.c -o obj/src/lib/state/save-state/savestate.o
+mkdir -p obj/src/lib/state/load-state/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/state/load-state/loadstate.c -o obj/src/lib/state/load-state/loadstate.o
+mkdir -p obj/src/lib/state/cur-state/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/state/cur-state/command.c -o obj/src/lib/state/cur-state/command.o
+mkdir -p obj/src/lib/state/init/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/state/init/initstate.c -o obj/src/lib/state/init/initstate.o
+mkdir -p obj/src/lib/scene/map/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/scene/map/map.c -o obj/src/lib/scene/map/map.o
+mkdir -p obj/src/lib/data-structure/matriks/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/data-structure/matriks/matrix.c -o obj/src/lib/data-structure/matriks/matrix.o
+mkdir -p obj/src/lib/data-structure/list-dinamis/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/data-structure/list-dinamis/listdin.c -o obj/src/lib/data-structure/list-dinamis/listdin.o
+mkdir -p obj/src/lib/data-structure/stack/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/data-structure/stack/stack.c -o obj/src/lib/data-structure/stack/stack.o
+mkdir -p obj/src/lib/data-structure/point/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//lib/data-structure/point/point.c -o obj/src/lib/data-structure/point/point.o
+mkdir -p obj/src/
+gcc -g -Wall -std=c99 -c -Isrc/lib -Itest src//main.c -o obj/src/main.o
+mkdir -p bin
+gcc obj/src/lib/tools/mesin-kata/wordmachine.o obj/src/lib/tools/mesin-karakter/charmachine.o obj/src/lib/tools/pcolor/pcolor.o obj/src/lib/state/save-state/savestate.o obj/src/lib/state/load-state/loadstate.o obj/src/lib/state/cur-state/command.o obj/src/lib/state/init/initstate.o obj/src/lib/scene/map/map.o obj/src/lib/data-structure/matriks/matrix.o obj/src/lib/data-structure/list-dinamis/listdin.o obj/src/lib/data-structure/stack/stack.o obj/src/lib/data-structure/point/point.o obj/src/main.o -o bin/Mobilita -lm -O3
+./bin/Mobilita
+make: Leaving directory '/home/firizky29/Documents/tubes/TubesAlstrukdat'
+ 

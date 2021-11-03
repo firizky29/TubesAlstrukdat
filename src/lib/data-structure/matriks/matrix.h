@@ -4,13 +4,14 @@
 #define Matrix_H
 
 #include "../../boolean.h"
+#include "../list-dinamis/listdin.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define ROW_CAP 100
 #define COL_CAP 100
 
 typedef int Index; /* Index baris, kolom */
-typedef int ElType;
+// typedef int ElType;
 typedef struct
 {
    ElType contents[ROW_CAP][COL_CAP];
@@ -34,7 +35,7 @@ void CreateMatrix(int nRow, int nCol, Matrix *m);
 #define ELMT(M, i, j) (M).contents[(i)][(j)]
 
 /* *** Selektor "DUNIA Matrix" *** */
-boolean isIdxValid(int i, int j);
+boolean isMatrixIdxValid(int i, int j);
 /* Mengirimkan true jika i, j adalah Index yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
@@ -42,7 +43,7 @@ Index getLastIdxRow(Matrix m);
 /* Mengirimkan Index baris terbesar m */
 Index getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
-boolean isIdxEff(Matrix m, Index i, Index j);
+boolean isMatrixIdxEff(Matrix m, Index i, Index j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
 ElType getElmtDiagonal(Matrix m, Index i);
 /* Mengirimkan elemen m(i,i) */

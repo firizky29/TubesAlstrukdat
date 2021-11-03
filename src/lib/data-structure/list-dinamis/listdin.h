@@ -17,7 +17,7 @@
 /* Definisi elemen dan koleksi objek */
 typedef struct {
     char charLoc;
-    POINT coorLoc;
+    Point coorLoc;
 } ElType; /* type elemen list */
 typedef int IdxType;
 typedef struct

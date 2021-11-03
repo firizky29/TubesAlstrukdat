@@ -18,7 +18,7 @@ void start_file(char *filename){
 }
 
 void start_command(){
-/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+/* Mfesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
    F.S. : currentChar adalah karakter pertama pada pita

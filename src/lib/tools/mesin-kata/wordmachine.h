@@ -78,44 +78,8 @@ void printWord(Word kata);
 int wtoi(Word kata);
 /* convert word to integer */
 
-/* GET INFO FROM CONFIG FILE */
-Matrix getMap();
-/* get n x m from config and return n x m matrix */
-POINT getPoint();
-/* get and return point from config */
-Matrix getAdjacency(int n);
-/* get and return adjacency matrix from config */
-ListDin getLoc(POINT pointhq);
-/* get char and coord of loc and return list dinamis */
 
-/* CHECK COMMAND VALIDITY */
-boolean isNewGame(Word kata);
-/* return true if kata is NEW_GAME and false if not */
-boolean isExit(Word kata);
-/* return true if kata is EXIT and false if not */
-boolean isLoadGame(Word kata);
-/* return true if kata is LOAD_GAME and false if not */
-boolean isMove(Word kata);
-/* return true if kata is MOVE and false if not */
-boolean isPickUp(Word kata);
-/* return true if kata is PICK_UP and false if not */
-boolean isDropOff(Word kata);
-/* return true if kata is DROP_OFF and false if not */
-boolean isMap(Word kata);
-/* return true if kata is MAP and false if not */
-boolean isToDo(Word kata);
-/* return true if kata is TO_DO and false if not */
-boolean isInProgress(Word kata);
-/* return true if kata is IN_PROGRESS and false if not */
-boolean isBuy(Word kata);
-/* return true if kata is BUY and false if not */
-boolean isInventory(Word kata);
-/* return true if kata is INVENTORY and false if not */
-boolean isHelp(Word kata);
-/* return true if kata is HELP and false if not */
-boolean isSaveGame(Word kata);
-/* return true if kata is SAVE_GAME and false if not */
-boolean isReturn(Word kata);
-/* return true if kata is RETURN and false if not */
+
+
 
 #endif
