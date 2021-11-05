@@ -47,12 +47,11 @@ ListDin getLoc(Point pointhq){
 /* get char and coord of loc and return list dinamis */
 	int i;
 	ListDin loc;
-	int num;
-	L = wtoi(currentWord);
-	CreateListDin(&loc, (num+1));
+	int loc_count = wtoi(currentWord);
+	CreateListDin(&loc, (loc_count+1));
 	CHARLOC(loc, 0) = '8';
 	COORLOC(loc, 0) = pointhq;
-	for (i = 1; i < (L + 1); i++){
+	for (i = 1; i < (loc_count + 1); i++){
 		CHARLOC(loc, i) = currentWord.contents[0];
 		advWord_file();
 		COORLOC(loc, i) = getPoint();
