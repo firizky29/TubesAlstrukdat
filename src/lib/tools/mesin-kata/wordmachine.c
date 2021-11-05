@@ -10,7 +10,7 @@ Word currentWord;
 /* PRIMITIVE FUNCTIONS (File & CMD) */
 void ignoreBlank(){
 /* self describing function */
-	while (currentChar == BLANK){
+	while (currentChar == BLANK && !endFile){
 		adv();
 	}
 }

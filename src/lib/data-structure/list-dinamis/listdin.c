@@ -15,7 +15,7 @@ Deskripsi : Pra Praktikum 4 (Program listdin.c)
 void CreateListDin(ListDin *l, int capacity) {
     /* KAMUS */
     /* ALGORITMA */
-    BUFFER(*l) = (ElType*) malloc (capacity * sizeof (ElType));
+    BUFFER(*l) = (Location*) malloc (capacity * sizeof (Location));
     NEFF(*l) = 0;
     CAPACITY(*l) = capacity;
 }
@@ -42,26 +42,26 @@ IdxType getLastIdx(ListDin l) {
     return(length(l) - 1);
 }
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListDin l, int i) {
-    /* KAMUS */
-    /* ALGORITMA */
-    return((i >= 0) && (i <= CAPACITY(l)));
-}
-boolean isIdxEff(ListDin l, IdxType i) {
-    /* KAMUS */
-    /* ALGORITMA */
-    return((i >= 0) && (i <= NEFF(l)));
-}
+// boolean isListIdxValid(ListDin l, int i) {
+//     /* KAMUS */
+//     /* ALGORITMA */
+//     return((i >= 0) && (i <= CAPACITY(l)));
+// }
+// boolean isIdxEff(ListDin l, IdxType i) {
+//     /* KAMUS */
+//     /* ALGORITMA */
+//     return((i >= 0) && (i <= NEFF(l)));
+// }
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
-boolean isEmpty(ListDin l) {
+boolean isListEmpty(ListDin l) {
     /* KAMUS */
     /* ALGORITMA */
     return(NEFF(l) == 0);
 }
 /* *** Test list penuh *** */
-boolean isFull(ListDin l) {
+boolean isListFull(ListDin l) {
     /* KAMUS */
     /* ALGORITMA */
     return(NEFF(l) == CAPACITY(l));
@@ -76,7 +76,7 @@ void readList(ListDin *l) {
     /* ALGORITMA */
     CreateListDin(l, CAPACITY(*l));
     scanf("%d", &n);
-    while(!(isIdxValid(*l,n))) {
+    while(!((n >= 0) && (n <= NEFF(*l)))) {
         scanf("%d", &n);
     }
     if (n > 0) {
@@ -94,14 +94,14 @@ void displayList(ListDin l) {
     int i;
     /* ALGORITMA */
     printf("[");
-    if (!(isEmpty(l))) {
+    if (!(isListEmpty(l))) {
         for (i = 0; i < getLastIdx(l); i++) {
             printf("(%c,", CHARLOC(l, i));
-            TulisPOINT(COORLOC(l, i));
+            TulisPoint(COORLOC(l, i));
             printf("),");
         }
         printf("(%c,", CHARLOC(l,getLastIdx(l)));
-        TulisPOINT(COORLOC(l, getLastIdx(l)));    
+        TulisPoint(COORLOC(l, getLastIdx(l)));    
         printf(")");
     }
     printf("]");
@@ -196,7 +196,7 @@ IdxType indexOfCoorLoc(ListDin l, int X, int Y) {
 }
 
 /* ********** NILAI EKSTREM (TIDAK DAPAT DIGUNAKAN) ********** */
-// void extremes(ListDin l, ElType *max, ElType *min) {
+// void extremes(ListDin l,(Location *max,(Location *min) {
 //     /* KAMUS */
 //     int i;
 
@@ -227,27 +227,27 @@ void copyList(ListDin lIn, ListDin *lOut) {
 }
 
 /* ********** TIDAK DAPAT DIGUNAKAN ********** */
-// ElType sumList(ListDin l) {
+//(Location sumList(ListDin l) {
 //     /* KAMUS */
-//     ElType sum;
+//    (Location sum;
 //     int i;
 
 //     /* ALGORITMA */
 //     sum = 0;
-//     if (!(isEmpty(l))) {
+//     if (!(isListEmpty(l))) {
 //         for (i = 0; i < length(l); i++) {
 //             sum = sum + ELMT(l,i);
 //         }
 //     }
 //     return sum;
 // }
-// int countVal(ListDin l, ElType val) {
+// int countVal(ListDin l,(Location val) {
 //     /* KAMUS */
 //     int count, i;
 
 //     /* ALGORITMA */
 //     count = 0;
-//     if (!(isEmpty(l))) {
+//     if (!(isListEmpty(l))) {
 //         for (i = 0; i < length(l); i++) {
 //             if (val == ELMT(l,i)) {
 //                 count++;
@@ -263,7 +263,7 @@ void copyList(ListDin lIn, ListDin *lOut) {
 
 //     /* ALGORITMA */
 //     flag = true;
-//     if (!(isEmpty(l))) {
+//     if (!(isListEmpty(l))) {
 //         i = 0;
 //         while (i < length(l) && flag == true) {
 //             if (ELMT(l,i) % 2 != 0) {
@@ -280,7 +280,7 @@ void copyList(ListDin lIn, ListDin *lOut) {
 // void sort(ListDin *l, boolean asc) {
 //     /* KAMUS */
 //     int i,j, idx;
-//     ElType temp;
+//    (Location temp;
 
 //     /* ALGORITMA */
 //     for (i = 0; i < length(*l); i++) {

@@ -7,9 +7,9 @@ ll curMoney;
 int curSpeed; // dalam persen
 Stack curBag;
 Map curMap;
-List curInventory;
-LinkedList curProgress;
-Queue curUsedGadget;
+// List curInventory;
+// LinkedList curProgress;
+// Queue curUsedGadget;
 
 Matrix getMap(){
 /* get n x m from config and return n x m matrix */
@@ -25,7 +25,7 @@ Point getPoint(){
 	int x, y;
 	x = wtoi(currentWord);
 	y = wtoi(currentWord);
-	POINT hq = MakePOINT(x, y);
+	Point hq = MakePoint(x, y);
 	return hq;
 }
 
@@ -37,7 +37,7 @@ Matrix getAdjacency(int n){
 	for (i = 0; i < n; i++){
 		for (j = 0; j < n; j++){
 			temp = wtoi(currentWord);
-			ELMT(adjacency, i, j) = temp;
+			MAT(adjacency, i, j) = temp;
 		}
 	}
 	return adjacency;
@@ -47,6 +47,7 @@ ListDin getLoc(Point pointhq){
 /* get char and coord of loc and return list dinamis */
 	int i;
 	ListDin loc;
+	int num;
 	L = wtoi(currentWord);
 	CreateListDin(&loc, (num+1));
 	CHARLOC(loc, 0) = '8';
@@ -61,8 +62,20 @@ ListDin getLoc(Point pointhq){
 }
 
 void globalinit(){
+	struct dirent *de;  // Pointer for directory entry
+
+    DIR *dr = opendir("data/original-config-file");
+    if (dr == NULL){
+        printf("Could not open current directory" );
+		return;
+    }
+    while ((de = readdir(dr)) != NULL)
+            printf("%s\n", de->d_name);
+  
+    closedir(dr);
     printf("Enter configuration file level ([filename].txt): ");
     Word filename = inputWord();
+	printWord(filename);
     while (!fopen(filename.contents, "r")){
         printf("File not found, enter filename again: ");
         filename = inputWord();
@@ -72,6 +85,7 @@ void globalinit(){
     printf("\n");
     
     // reading file config + get info
+	ListDin loc;
     readFile(filename);
     setPeta(&curMap, getMap());
     Point hq = getPoint();
@@ -79,18 +93,19 @@ void globalinit(){
     setAdj(&curMap, getAdjacency(loc.capacity));
     // display info
 
-    // printf("\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
-    // printf("Map: %d x %d\n", map.rowEff, map.colEff);
-    // displayMatrix(map);
-    // printf("\n\n");
-    // displayMatrix(adj);
-    // printf("\n\n");
-    // displayList(loc);
-    // printf("\n\n");
+    printf("\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
+    printf("Map: %d x %d\n", curMap.Peta.rowEff, curMap.Peta.colEff);
+    displayMatrix(curMap.Peta);
+    printf("\n\n");
+    displayMatrix(curMap.Adj);
+    printf("\n\n");
+    displayList(loc);
+    printf("\n\n");
     // sisanya di print dulu aja karena nunggu ADTnya ada dulu
     while(!endFile){
         printWordFile(currentWord);
     }
+	printf("Selamat\n");
     curMoney = 0;
     curTime = 0;
     curSpeed = 100;

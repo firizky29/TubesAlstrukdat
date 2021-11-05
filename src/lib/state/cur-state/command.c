@@ -86,3 +86,35 @@ boolean isReturn(Word kata){
 	return isWordEqual(kata, cmd_return);
 }
 
+void Move(){
+	printf("Move\n");
+}
+/* Mengubah curPosition, curTime*/
+void Pickup(){
+	printf("Pickup\n");
+}
+/* Mengubah curBag, curProgress, cur..*/
+void Dropoff(){
+	printf("Dropoff\n");
+}
+void displayMap(){
+	printf("Display\n");
+}
+void displayToDoList(){
+	printf("Todo\n");
+}
+void displayInProgress(){
+	printf("Progress\n");
+}
+void Buy(){
+	printf("Buy\n");
+}
+void displayInventory(){
+	printf("Inventori\n");
+}
+void displayHelp(){
+	printf("Help\n");
+}
+void Retur(){
+	printf("Retur\n");
+}

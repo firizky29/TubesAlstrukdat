@@ -1,9 +1,6 @@
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H
 
-#include "../../data-structure/list-dinamis/listdin.h"
-#include "../../data-structure/matriks/matrix.h"
-#include "../../data-structure/point/point.h"
 #include "../mesin-karakter/charmachine.h"
 #include "../../boolean.h"
 

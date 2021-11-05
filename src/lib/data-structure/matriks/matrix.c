@@ -26,37 +26,37 @@ boolean isMatrixIdxValid(int i, int j) {
 }
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-Index getLastIdxRow(Matrix m) {
+IdxType getLastIdxRow(Matrix m) {
     /* KAMUS LOKAL */
     /* ALGORITMA */
     return (ROWS(m) - 1);
 }
-Index getLastIdxCol(Matrix m) {
+IdxType getLastIdxCol(Matrix m) {
     /* KAMUS LOKAL */
     /* ALGORITMA */
     return (COLS(m) - 1);
 }
-boolean isMatrixIdxEff(Matrix m, Index i, Index j) {
+boolean isMatrixIdxEff(Matrix m, IdxType i, IdxType j) {
     /* KAMUS LOKAL */
     /* ALGORITMA */
     return(((i >= 0) && (i <= getLastIdxRow(m))) && ((j >= 0) && (j <= getLastIdxCol(m))));
 }
-ElType getElmtDiagonal(Matrix m, Index i) {
+int getElmtDiagonal(Matrix m, IdxType i) {
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return(ELMT(m, i, i));
+    return(MAT(m, i, i));
 }
 
 /* ********** Assignment  Matrix ********** */
 void copyMatrix(Matrix mIn, Matrix *mRes) {
     /* KAMUS LOKAL */
-    Index i, j;
+    IdxType i, j;
 
     /* ALGORITMA */
     CreateMatrix(ROWS(mIn), COLS(mIn), mRes);
     for (i = 0; i <= getLastIdxRow(mIn); i++) {
         for (j = 0; j <= getLastIdxCol(mIn); j++) {
-            ELMT(*mRes, i, j) = ELMT(mIn, i, j);
+            MAT(*mRes, i, j) = MAT(mIn, i, j);
         }
     }
 }
@@ -70,22 +70,22 @@ void readMatrix(Matrix *m, int nRow, int nCol) {
     CreateMatrix(nRow, nCol, m);
     for (i = 0; i <= getLastIdxRow(*m); i++) {
         for (j = 0; j <= getLastIdxCol(*m); j++) {
-            scanf("%d", &ELMT(*m, i, j));
+            scanf("%d", &MAT(*m, i, j));
         }
     }
 }
 
 void displayMatrix(Matrix m) {
     /* KAMUS LOKAL */
-    Index i, j;
+    IdxType i, j;
 
     /* ALGORITMA */
     for (i = 0; i <= getLastIdxRow(m); i++) {
         for (j = 0; j <= getLastIdxCol(m); j++) {
             if (j == getLastIdxCol(m)) {
-                printf("%d", ELMT(m, i, j));
+                printf("%d", MAT(m, i, j));
             } else {
-                printf("%d ", ELMT(m, i, j));
+                printf("%d ", MAT(m, i, j));
             }
         }
         if (i != getLastIdxRow(m)) {
@@ -98,13 +98,13 @@ void displayMatrix(Matrix m) {
 // Matrix addMatrix(Matrix m1, Matrix m2) {
 //     /* KAMUS LOKAL */
 //     Matrix m3;
-//     Index i, j;
+//     IdxType i, j;
 
 //     /* ALGORITMA */
 //     CreateMatrix(ROWS(m1), COLS(m1), &m3);
 //     for (i = 0; i <= getLastIdxRow(m1); i++) {
 //         for (j = 0; j <= getLastIdxCol(m1); j++) {
-//             ELMT(m3, i, j) = ELMT(m1, i, j) + ELMT(m2, i, j);
+//             MAT(m3, i, j) = MAT(m1, i, j) + MAT(m2, i, j);
 //         }
 //     }
 //     return m3;
@@ -112,13 +112,13 @@ void displayMatrix(Matrix m) {
 // Matrix subtractMatrix(Matrix m1, Matrix m2) {
 //     /* KAMUS LOKAL */
 //     Matrix m3;
-//     Index i, j;
+//     IdxType i, j;
 
 //     /* ALGORITMA */
 //     CreateMatrix(ROWS(m1), COLS(m1), &m3);
 //     for (i = 0; i <= getLastIdxRow(m1); i++) {
 //         for (j = 0; j <= getLastIdxCol(m1); j++) {
-//             ELMT(m3, i, j) = ELMT(m1, i, j) - ELMT(m2, i, j);
+//             MAT(m3, i, j) = MAT(m1, i, j) - MAT(m2, i, j);
 //         }
 //     }
 //     return m3;
@@ -126,19 +126,19 @@ void displayMatrix(Matrix m) {
 // Matrix multiplyMatrix(Matrix m1, Matrix m2) {
 //     /* KAMUS LOKAL */
 //     Matrix m3;
-//     Index i, j, k;
+//     IdxType i, j, k;
 
 //     /* ALGORITMA */
 //     CreateMatrix(ROWS(m1), COLS(m2), &m3);
 //     for (i = 0; i <= getLastIdxRow(m3); i++) {
 //         for (j = 0; j <= getLastIdxCol(m3); j++) {
-//             ELMT(m3, i, j) = 0;
+//             MAT(m3, i, j) = 0;
 //         }
 //     }
 //     for (i = 0; i <= getLastIdxRow(m3); i++) {
 //         for (j = 0; j <= getLastIdxCol(m3); j++) {
 //             for (k = 0; k <= getLastIdxCol(m1); k++) {
-//                 ELMT(m3, i, j) = ELMT(m3, i, j) + (ELMT(m1, i, k)*ELMT(m2, k, j));
+//                 MAT(m3, i, j) = MAT(m3, i, j) + (MAT(m1, i, k)*MAT(m2, k, j));
 //             }
 //         }
 //     }
@@ -148,25 +148,25 @@ void displayMatrix(Matrix m) {
 // Matrix multiplyConst(Matrix m, ElType x) {
 //     /* KAMUS LOKAL */
 //     Matrix m2;
-//     Index i, j;
+//     IdxType i, j;
 
 //     /* ALGORITMA */
 //     CreateMatrix(ROWS(m), COLS(m), &m2);
 //     for (i = 0; i <= getLastIdxRow(m); i++) {
 //         for (j = 0; j <= getLastIdxCol(m); j++) {
-//             ELMT(m2, i, j) = ELMT(m, i, j) * x;
+//             MAT(m2, i, j) = MAT(m, i, j) * x;
 //         }
 //     }
 //     return m2;
 // }
 // void pMultiplyConst(Matrix *m, ElType k) {
 //     /* KAMUS LOKAL */
-//     Index i, j;
+//     IdxType i, j;
 
 //     /* ALGORITMA */
 //     for (i = 0; i <= getLastIdxRow(*m); i++) {
 //         for (j = 0; j <= getLastIdxCol(*m); j++) {
-//             ELMT(*m, i, j) = ELMT(*m, i, j) * k;
+//             MAT(*m, i, j) = MAT(*m, i, j) * k;
 //         }
 //     }
 // }
@@ -182,7 +182,7 @@ void displayMatrix(Matrix m) {
 //         flag = true;
 //         for (i = 0; i <= getLastIdxRow(m1); i++) {
 //             for (j = 0; j <= getLastIdxCol(m2); j++) {
-//                 if(ELMT(m1, i, j) != ELMT(m2, i, j)) {
+//                 if(MAT(m1, i, j) != MAT(m2, i, j)) {
 //                     flag = false;
 //                 }
 //             }
@@ -226,7 +226,7 @@ void displayMatrix(Matrix m) {
 //         flag = true;
 //         for (i = 0; i <= getLastIdxRow(m); i++) {
 //             for (j = 0; j <= getLastIdxCol(m); j++) {
-//                 if(ELMT(m, i, j) != ELMT(m, j, i)) {
+//                 if(MAT(m, i, j) != MAT(m, j, i)) {
 //                     flag = false;
 //                 }
 //             }
@@ -247,11 +247,11 @@ void displayMatrix(Matrix m) {
 //         for (i = 0; i <= getLastIdxRow(m); i++) {
 //             for (j = 0; j <= getLastIdxCol(m); j++) {
 //                 if (i == j) {
-//                     if(ELMT(m, i, j) != 1) {
+//                     if(MAT(m, i, j) != 1) {
 //                         flag = false;
 //                     }
 //                 } else {
-//                     if(ELMT(m, i, j) != 0) {
+//                     if(MAT(m, i, j) != 0) {
 //                         flag = false;
 //                     }
 //                 }
@@ -272,7 +272,7 @@ void displayMatrix(Matrix m) {
 //     countNotZero = 0;
 //     for (i = 0; i <= getLastIdxRow(m); i++) {
 //         for (j = 0; j <= getLastIdxCol(m); j++) {
-//             if(ELMT(m, i, j) != 0) {
+//             if(MAT(m, i, j) != 0) {
 //                 countNotZero += 1;
 //             }
 //         }
@@ -306,9 +306,9 @@ void displayMatrix(Matrix m) {
 //     /* ALGORITMA */
 //     det = 0;
 //     if (count(m) == 1) {
-//         det = ELMT(m, 0, 0);
+//         det = MAT(m, 0, 0);
 //     } else if (count(m) == 4) {
-//         det = (ELMT(m, 0, 0) * ELMT(m, 1, 1)) - (ELMT(m, 0, 1) * ELMT(m, 1, 0));
+//         det = (MAT(m, 0, 0) * MAT(m, 1, 1)) - (MAT(m, 0, 1) * MAT(m, 1, 0));
 //     } else {
 //         for (i = 0; i <= getLastIdxRow(m); i++) {
 //             CreateMatrix((ROWS(m) - 1), (COLS(m) - 1), &m2);
@@ -317,16 +317,16 @@ void displayMatrix(Matrix m) {
 //                 if (rowM != i) {
 //                     colM2 = 0;
 //                     for (colM = 1; colM <= getLastIdxCol(m); colM++) {
-//                         ELMT(m2, rowM2, colM2) = ELMT(m, rowM, colM);
+//                         MAT(m2, rowM2, colM2) = MAT(m, rowM, colM);
 //                         colM2++;
 //                     }
 //                     rowM2++;
 //                 }
 //             }
 //             if ((i + 1) % 2 == 1) {
-//                 det += ELMT(m, i, 0) * determinant(m2);
+//                 det += MAT(m, i, 0) * determinant(m2);
 //             } else {
-//                 det -= ELMT(m, i, 0) * determinant(m2);
+//                 det -= MAT(m, i, 0) * determinant(m2);
 //             }
 //         }
 //     }
@@ -334,15 +334,15 @@ void displayMatrix(Matrix m) {
 // }
 // void transpose(Matrix *m) {
 //     /* KAMUS LOKAL */
-//     Index i, j;
+//     IdxType i, j;
 //     ElType temp;
 
 //     /* ALGORITMA */
 //     for (i = 0; i <= getLastIdxRow(*m); i++) {
 //         for (j = i; j <= getLastIdxCol(*m); j++) {
-//             temp = ELMT(*m, i, j);
-//             ELMT(*m, i, j) = ELMT(*m, j, i);
-//             ELMT(*m, j, i) = temp;
+//             temp = MAT(*m, i, j);
+//             MAT(*m, i, j) = MAT(*m, j, i);
+//             MAT(*m, j, i) = temp;
 //         }
 //     }
 // }

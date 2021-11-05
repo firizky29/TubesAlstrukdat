@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 
-static int retval;
-static FILE * tape;
+FILE * tape;
+int retval;
 boolean endFile;
 char currentChar;
 
@@ -44,7 +44,7 @@ void adv(){
 	/* Algoritma */
 	retval = fscanf(tape, "%c", &currentChar);
        if (retval == EOF){
-              fclose(tape);
+              // fclose(tape);
               endFile = true;
  	}
        else if (currentChar == '\n'){

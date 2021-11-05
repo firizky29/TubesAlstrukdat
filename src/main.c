@@ -3,6 +3,7 @@
 
 #include "lib/state/init/initstate.h"
 #include "lib/state/cur-state/command.h"
+#include "lib/boolean.h"
 
 /* SIMULASI MAIN MENU + BACA CONFIG
 dari tahap main menu sampe get info dari config 
@@ -10,6 +11,7 @@ baru sampe get map matrix, matrix adjacency, sama point lokasi2 */
 
 int main(){
     // main menu
+    printf("HELLO");
 	printf("Type one of the following:\n1. NEW_GAME\n2. EXIT\nEnter your choice: ");
 	Word choice = inputWord();
 	while (!isNewGame(choice) && !isExit(choice)){
@@ -18,6 +20,7 @@ int main(){
 	}
     // NEW_GAME (start new game)
 	if (isNewGame(choice)){
+
 		globalinit();
         while(true){
             choice = inputWord();
@@ -39,16 +42,16 @@ int main(){
             else if(isMap(choice)){
                 displayMap();
             }
-            else if(isInventory()){
+            else if(isInventory(choice)){
                 displayInventory();
             }
-            else if(isBuy()){
+            else if(isBuy(choice)){
                 Buy();
             }
-            else if(isHelp()){
+            else if(isHelp(choice)){
                 displayHelp();
             }
-            else if(isReturn()){
+            else if(isReturn(choice)){
                 Retur();
             }
         }

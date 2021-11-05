@@ -1,20 +1,17 @@
-/* ********** Definisi TYPE Matrix dengan Index dan elemen integer ********** */
+/* ********** Definisi TYPE Matrix dengan IdxType dan elemen integer ********** */
 
 #ifndef Matrix_H
 #define Matrix_H
 
 #include "../../boolean.h"
 #include "../list-dinamis/listdin.h"
+#include "../../component/global.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
-#define ROW_CAP 100
-#define COL_CAP 100
-
-typedef int Index; /* Index baris, kolom */
-// typedef int ElType;
-typedef struct
-{
-   ElType contents[ROW_CAP][COL_CAP];
+#define IDX_UNDEF -1
+typedef int IdxType;
+typedef struct{
+   int contents[ROW_CAP][COL_CAP];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -32,20 +29,20 @@ void CreateMatrix(int nRow, int nCol, Matrix *m);
 /* *** Selektor *** */
 #define ROWS(M) (M).rowEff
 #define COLS(M) (M).colEff
-#define ELMT(M, i, j) (M).contents[(i)][(j)]
+#define MAT(M, i, j) (M).contents[(i)][(j)]
 
 /* *** Selektor "DUNIA Matrix" *** */
 boolean isMatrixIdxValid(int i, int j);
-/* Mengirimkan true jika i, j adalah Index yang valid untuk matriks apa pun */
+/* Mengirimkan true jika i, j adalah IdxType yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-Index getLastIdxRow(Matrix m);
-/* Mengirimkan Index baris terbesar m */
-Index getLastIdxCol(Matrix m);
-/* Mengirimkan Index kolom terbesar m */
-boolean isMatrixIdxEff(Matrix m, Index i, Index j);
-/* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, Index i);
+IdxType getLastIdxRow(Matrix m);
+/* Mengirimkan IdxType baris terbesar m */
+IdxType getLastIdxCol(Matrix m);
+/* Mengirimkan IdxType kolom terbesar m */
+boolean isMatrixIdxEff(Matrix m, IdxType i, IdxType j);
+/* Mengirimkan true jika i, j adalah IdxType efektif bagi m */
+int getElmtDiagonal(Matrix m, IdxType i);
 /* Mengirimkan elemen m(i,i) */
 
 /* ********** Assignment  Matrix ********** */
@@ -84,16 +81,16 @@ void displayMatrix(Matrix m);
 // Matrix multiplyMatrix(Matrix m1, Matrix m2);
 // /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 // /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
-// Matrix multiplyConst(Matrix m, ElType x);
+// Matrix multiplyConst(Matrix m, int x);
 // /* Mengirim hasil perkalian setiap elemen m dengan x */
-// void pMultiplyConst(Matrix *m, ElType k);
+// void pMultiplyConst(Matrix *m, int k);
 // /* I.S. m terdefinisi, k terdefinisi */
 // /* F.S. Mengalikan setiap elemen m dengan k */
 
 // /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP Matrix ********** */
 // boolean isEqual(Matrix m1, Matrix m2);
 // /* Mengirimkan true jika m1 = m2, yaitu count(m1) = count(m2) dan */
-// /* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
+// /* untuk setiap i,j yang merupakan IdxType baris dan kolom m1(i,j) = m2(i,j) */
 // /* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
 // boolean isNotEqual(Matrix m1, Matrix m2);
 // /* Mengirimkan true jika m1 tidak sama dengan m2 */

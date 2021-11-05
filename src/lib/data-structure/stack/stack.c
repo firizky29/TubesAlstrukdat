@@ -15,27 +15,27 @@ void CreateStack(Stack *s){
 }
 
 /* ************ Prototype ************ */
-boolean isEmpty(Stack s){
+boolean isStackEmpty(Stack s){
 /* Mengirim true jika s kosong: lihat definisi di atas */
     /* KAMUS LOKAL */
     /* ALGORITMA */
     return IDX_TOP(s) == IDX_UNDEF;
 }
-boolean isFull(Stack s){
+boolean isStackFull(Stack s){
 /* Mengirim true jika tabel penampung nilai s stack penuh */
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return IDX_TOP(s) == CAPACITY-1;
+    return IDX_TOP(s) == STACK_CAP-1;
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void push(Stack *s, ElType val){
+void push(Stack *s, int val){
 /* Menambahkan val sebagai elemen Stack s */
 /* I.S. s mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    if(isEmpty(*s)){
+    if(isStackEmpty(*s)){
         IDX_TOP(*s) = 0;
     }
     else{
@@ -45,7 +45,7 @@ void push(Stack *s, ElType val){
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *s, ElType *val){
+void pop(Stack *s, int *val){
 /* Menghapus val dari Stack s */
 /* I.S. s tidak mungkin kosong */
 /* F.S. val adalah nilai elemen TOP yang lama, IDX_TOP berkurang 1 */

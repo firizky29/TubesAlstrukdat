@@ -4,6 +4,7 @@
 #include "../../tools/mesin-kata/wordmachine.h"
 #include "../../component/global.h"
 #include "../../scene/map/map.h"
+#include <dirent.h>
 
 /* GET INFO FROM CONFIG FILE */
 Matrix getMap();

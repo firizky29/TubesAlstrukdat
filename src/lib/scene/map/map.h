@@ -15,9 +15,9 @@ typedef struct  map{
 extern Map curMap;
 
 /* Setter dan getter */
-#define ADJ(m) m.Adj
-#define MAP(m) m.Peta
-#define BUILDING(m) m.Building
+#define ADJ(m) (m).Adj
+#define MAP(m) (m).Peta
+#define BUILDING(m) (m).Building
 
 void setAdj(Map *m, Matrix Adj);
 void setPeta(Map *m, Matrix Peta);

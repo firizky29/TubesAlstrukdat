@@ -9,20 +9,20 @@
 
 #include "../../boolean.h"
 #include "../point/point.h"
+#include "../../component/global.h"
 
-/*  Kamus Umum */
 #define IDX_UNDEF -1
-/* Indeks tak terdefinisi*/
+typedef int IdxType;
+/*  Kamus Umum */
 
 /* Definisi elemen dan koleksi objek */
 typedef struct {
     char charLoc;
     Point coorLoc;
-} ElType; /* type elemen list */
-typedef int IdxType;
-typedef struct
-{
-    ElType *buffer; /* memori tempat penyimpan elemen (container) */
+} Location; /* type elemen list */
+
+typedef struct{
+    Location *buffer; /* memori tempat penyimpan elemen (container) */
     int nEff;       /* >=0, banyaknya elemen efektif */
     int capacity;   /* ukuran elemen */
 } ListDin;
@@ -71,19 +71,19 @@ IdxType getLastIdx(ListDin l);
 /* Mengirimkan indeks elemen l terakhir */
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListDin l, int i);
-/* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
-/* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(ListDin l, IdxType i);
-/* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
-/* yaitu antara 0..NEFF(l) */
+// boolean isIdxValid(ListDin l, int i);
+// /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
+// /* yaitu antara indeks yang terdefinisi utk container*/
+// boolean isIdxEff(ListDin l, IdxType i);
+// /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
+// /* yaitu antara 0..NEFF(l) */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
-boolean isEmpty(ListDin l);
+boolean isListEmpty(ListDin l);
 /* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
 /* *** Test list penuh *** */
-boolean isFull(ListDin l);
+boolean isListFull(ListDin l);
 /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
