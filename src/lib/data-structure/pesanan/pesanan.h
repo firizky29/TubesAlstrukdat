@@ -33,4 +33,8 @@ void subtractPtime(Pesanan *P);
 boolean isXItem(Pesanan P, char itemChar);
 /* Mereturn true jika Pesanan P berisi item bertipe itemChar */
 
+boolean isEqualPesanan(Pesanan P1, Pesanan P2);
+/* Mereturn true jika Pesanan P1 sama dengan Pesanan P2 */
+/* Perishable time tidak diperhitungkan karena dapat berubah-ubah */
+
 #endif
