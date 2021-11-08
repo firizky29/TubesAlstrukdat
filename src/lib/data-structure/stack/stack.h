@@ -14,14 +14,14 @@ typedef int IdxType;
 typedef struct {
   Pesanan buffer[STACK_CAP]; /* tabel penyimpan elemen */
   int idxTop;              /* alamat TOP: elemen puncak */
-  int Neff;
+  int curCap;
 } Stack;
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika s adalah Stack, maka akses elemen : */
 #define IDX_TOP(s) (s).idxTop
 #define     TOP(s) (s).buffer[(s).idxTop]
-#define    NEFF(s) (s).NEFF
+#define    CURCAP(s) (s).curCap
 
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s);
@@ -35,17 +35,17 @@ boolean isStackEmpty(Stack s);
 /* Mengirim true jika s kosong: lihat definisi di atas */
 boolean isStackFull(Stack s);
 /* Mengirim true jika tabel penampung nilai s stack penuh */
-boolean isCanUpgrade(stack s);
+boolean isCanUpgrade(Stack s);
 /* Mengirim true jika s masih upgradeable */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void push(Stack *s, int val);
+void push(Stack *s, Pesanan val);
 /* Menambahkan val sebagai elemen Stack s */
 /* I.S. s mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *s, int *val);
+void pop(Stack *s, Pesanan *val);
 /* Menghapus val dari Stack s */
 /* I.S. s tidak mungkin kosong */
 /* F.S. val adalah nilai elemen TOP yang lama, IDX_TOP berkurang 1 */

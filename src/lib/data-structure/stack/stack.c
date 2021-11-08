@@ -25,14 +25,14 @@ boolean isStackFull(Stack s){
 /* Mengirim true jika tabel penampung nilai s stack penuh */
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return IDX_TOP(s) == NEFF(s)-1;
+    return IDX_TOP(s) == CURCAP(s)-1;
 }
 
 boolean isCanUpgrade(Stack s){
 /* Mengirim true jika s masih upgradeable */
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return NEFF(s) == STACK_CAP;
+    return CURCAP(s) == STACK_CAP;
 }
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void push(Stack *s, Pesanan val){
