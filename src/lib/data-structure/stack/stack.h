@@ -5,20 +5,23 @@
 #ifndef STACK_H
 #define STACK_H
 #include "../../boolean.h"
+#include "../pesanan/pesanan.h"
 
 
 #define STACK_CAP 100
 typedef int IdxType;
 #define IDX_UNDEF -1
 typedef struct {
-  int buffer[STACK_CAP]; /* tabel penyimpan elemen */
+  Pesanan buffer[STACK_CAP]; /* tabel penyimpan elemen */
   int idxTop;              /* alamat TOP: elemen puncak */
+  int Neff;
 } Stack;
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika s adalah Stack, maka akses elemen : */
 #define IDX_TOP(s) (s).idxTop
 #define     TOP(s) (s).buffer[(s).idxTop]
+#define    NEFF(s) (s).NEFF
 
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s);
@@ -32,6 +35,8 @@ boolean isStackEmpty(Stack s);
 /* Mengirim true jika s kosong: lihat definisi di atas */
 boolean isStackFull(Stack s);
 /* Mengirim true jika tabel penampung nilai s stack penuh */
+boolean isCanUpgrade(stack s);
+/* Mengirim true jika s masih upgradeable */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void push(Stack *s, int val);
