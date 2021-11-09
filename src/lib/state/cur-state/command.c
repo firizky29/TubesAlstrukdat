@@ -86,34 +86,143 @@ boolean isReturn(Word kata){
 	return isWordEqual(kata, cmd_return);
 }
 
-void Move(){
-	printf("Move\n");
-}
 /* Mengubah curPosition, curTime*/
-void Pickup(){
-	printf("Pickup\n");
+void Move(){
+	printf("Here are the nearest buildings:\n");
+	// disini tambahin bagian ngecek adjacency dari curposition
+	// disini display posisi yang dicapai + 0 to cancel
+	printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
+	int choice = wtoi(inputWord());
+	if (choice != 0){
+		// TIME HANDLING
+		if (speedBoost && countHeavyItem == 0){ // ini kasus punya speedboost & gaada heavy item
+			if (countMove < 10){
+				if (countMove != 0 && (countMove % 2) == 0){
+					curTime += 1;
+				}
+			}
+			else{
+				speedBoost = false;
+				countMove = 0;
+			}
+		}
+		else if (countHeavyItem > 0){ // ini kasus ada heavy item
+			if (speedBoost){ // kalo sblmnya ada speedboost, dideactivate + reinitialize
+				speedBoost = false;
+				countMove = 0;
+			}
+			curTime += 1 + countHeavyItem;
+		}
+		else{ // ini kasus gaada speedboost dan gaada heavy item
+			curTime += 1;
+		}
+
+		// POSITION HANDLING
+		/* move player based on choice
+		curPosition = [POSITION_CHOICE] */
+
+		printf("You are now in point (%d, %d)", curPosition.X, curPosition.Y);
+		printf("Time: %ld", curTime);
+	}
 }
+
+void Pickup(){
+	// CASE 1: ITEM IS AVAILABLE FOR PICKUP
+	/*if ([ada item di cur position]){
+		printf("Pickup of [isi type item] successful!\n");
+		(isi bagian ini sama proses pengambilan pesanan)
+		printf("Item destination: [isi destinasi drop off] \n");
+	}
+
+	// CASE 2: NO AVAILABLE ITEM FOR PICKUP
+	else{
+		printf("There seems to be no items here... Pickup unsuccessful.\n");
+	}*/
+	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
+}
+
 /* Mengubah curBag, curProgress, cur..*/
 void Dropoff(){
-	printf("Dropoff\n");
+	// CASE 1: ITEM IS AVAILABLE FOR DROP OFF
+	/*if ([ada item yg sabi di drop off]){
+		printf("[isi type item] successfully dropped off!\n");
+		(isi bagian ini sama proses drop off)
+		printf("You gained: %d Yen", [isi harga dari type item]\n");
+
+		// AKTIVASI ABILITY
+		if (type item == heavy item){
+			speedBoost == true;
+		}
+		else if (type item == perishable item){
+			increase capacity + 1 buat bawa item (max 100)
+		}
+	}
+
+	// CASE 2: NO AVAILABLE ITEM FOR DROP OFF
+	else{
+		printf("There's nothing to drop off here.\n");
+	}*/
+	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
 }
 void displayMap(){
-	printf("Display\n");
+	printf("Here's the Map:\n");
+	DisplayMap(curMap);
+	printf("(current position = yellow point)\n");
 }
 void displayToDoList(){
-	printf("Todo\n");
+	printf("Here's your to-do list:\n");
+	// isi bagian ini sama display to-do list
 }
 void displayInProgress(){
-	printf("Progress\n");
+	printf("Order(s) in-progress:\n");
+	// isi bagian ini sama display in progress
 }
 void Buy(){
-	printf("Buy\n");
+	/*if (curPosition lagi di point hq){
+		printf("Current money: %ld Yen\n", curMoney);
+		printf("Check out these gadgets...!\n");
+		// isi bagian ini sama display gadget
+		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+		int choice = wtoi(inputWord());
+		if (curMoney >= harga gadgetnya{
+			// isi bagian ini sama proses beli gadgetnya
+			curMoney -= harga gadget
+			printf("Gadget successfully bought!\n");
+			printf("Current money: %ld Yen\n", curMoney);
+		}
+		else{
+			printf("Oops... Seems like you don't have enough money!\n");
+		}
+	}
+	else{
+		printf("You can only buy when you're in HQ.\n");
+	}*/
+	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
 }
 void displayInventory(){
-	printf("Inventori\n");
+	printf("Here's your inventory:\n");
+	// isi bagian ini sama display inventory
+	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+	int choice = wtoi(inputWord());
+	/* if (choice itu ada di inventory){
+		// isi bagian ini sama proses penghilangan gadget dari inventory
+		// isi juga sama aktivasi efek dari gadget
+		printf("Gadget successfully used!\n");
+	}
+	else{
+		printf("Unable to use gadget!");
+	}*/
 }
 void displayHelp(){
-	printf("Help\n");
+	printf("1. MOVE: move to next location\n");
+	printf("2. PICK_UP: pickup item in current location\n");
+	printf("3. DROP_OFF: deliver top-most item to current location\n");
+	printf("4. MAP: display map\n");
+	printf("5. TO_DO: display list of to-do order(s)\n");
+	printf("6. IN_PROGRESS: display list of in-progress order(s)\n");
+	printf("7. BUY: purchase gadgets (only available when in HQ)\n");
+	printf("8. INVENTORY: display list of inventory\n");
+	printf("9. HELP: display list of available command(s)\n");
 }
 void Retur(){
 	printf("Retur\n");
