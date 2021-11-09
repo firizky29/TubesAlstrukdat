@@ -82,7 +82,7 @@ void deleteAt(List *l, int idx, Pesanan *val);
 
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void displayList(List l);
+/*void displayList(List l);*/
 // void printInfo(List l);
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
