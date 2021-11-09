@@ -14,20 +14,20 @@
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateList(List *l){
+void CreateList(LinkedList *l){
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
     FIRST(*l) = NULL;
 }
 
 /****************** TEST LIST KOSONG ******************/
-boolean isEmpty(List l){
+boolean isEmpty(LinkedList l){
 /* Mengirim true jika list kosong */
     return FIRST(l) == NULL;
 }
 
 /****************** GETTER SETTER ******************/
-Pesanan getElmt(List l, int idx){
+Pesanan getElmt(LinkedList l, int idx){
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     // tetep harus dicacah dari nol
@@ -42,7 +42,7 @@ Pesanan getElmt(List l, int idx){
     return INFO(p);
 }
 
-void setElmt(List *l, int idx, Pesanan val){
+void setElmt(LinkedList *l, int idx, Pesanan val){
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     int idxcount = 0;
@@ -55,7 +55,7 @@ void setElmt(List *l, int idx, Pesanan val){
     INFO(p) = val;
 }
 
-int indexOf(List l, Pesanan val){
+int indexOf(LinkedList l, Pesanan val){
 /* I.S. l, val terdefinisi */
 /* F.S. Mencari apakah ada elemen list l yang bernilai val */
 /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
@@ -82,7 +82,7 @@ int indexOf(List l, Pesanan val){
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void insertFirst(List *l, Pesanan val){
+void insertFirst(LinkedList *l, Pesanan val){
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
@@ -94,7 +94,7 @@ void insertFirst(List *l, Pesanan val){
     }
 }
 
-void insertLastLL(List *l, Pesanan val){
+void insertLastLL(LinkedList *l, Pesanan val){
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -112,7 +112,7 @@ void insertLastLL(List *l, Pesanan val){
     }
 }
 
-void insertAt(List *l, Pesanan val, int idx){
+void insertAt(LinkedList *l, Pesanan val, int idx){
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
@@ -136,7 +136,7 @@ void insertAt(List *l, Pesanan val, int idx){
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirst(List *l, Pesanan *val){
+void deleteFirst(LinkedList *l, Pesanan *val){
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
@@ -148,7 +148,7 @@ void deleteFirst(List *l, Pesanan *val){
 
 }
 
-void deleteLastLL(List *l, Pesanan *val){
+void deleteLastLL(LinkedList *l, Pesanan *val){
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -171,7 +171,7 @@ void deleteLastLL(List *l, Pesanan *val){
 
 }
 
-void deleteAt(List *l, int idx, Pesanan *val){
+void deleteAt(LinkedList *l, int idx, Pesanan *val){
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
@@ -216,7 +216,7 @@ void deleteAt(List *l, int idx, Pesanan *val){
 
 */
 
-int lengthLL(List l){
+int lengthLL(LinkedList l){
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
     int idxcount = 0;
     Address p = FIRST(l);
