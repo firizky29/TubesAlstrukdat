@@ -1,4 +1,5 @@
 #include "command.h"
+#include "../../component/global.h"
 
 
 /* CHECK COMMAND VALIDITY */

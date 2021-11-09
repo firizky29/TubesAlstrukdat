@@ -5,6 +5,7 @@
 #include "../data-structure/stack/stack.h"
 #include "../data-structure/point/point.h"
 #include "../data-structure/list-dinamis/listdin.h"
+#include "../data-structure/list-linked/list_linked.h"
 
 
 // kapasitas stack
