@@ -94,7 +94,7 @@ void insertFirst(List *l, Pesanan val){
     }
 }
 
-void insertLast(List *l, Pesanan val){
+void insertLastLL(List *l, Pesanan val){
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -148,7 +148,7 @@ void deleteFirst(List *l, Pesanan *val){
 
 }
 
-void deleteLast(List *l, Pesanan *val){
+void deleteLastLL(List *l, Pesanan *val){
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -193,14 +193,14 @@ void deleteAt(List *l, int idx, Pesanan *val){
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void displayList(List l){ 
+/*void displayList(List l){ 
 // void printInfo(List l);
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-
+/*
     printf("[");
     Address p = FIRST(l);
 
@@ -214,9 +214,9 @@ void displayList(List l){
     printf("]");
 }
 
+*/
 
-
-int length(List l){
+int lengthLL(List l){
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
     int idxcount = 0;
     Address p = FIRST(l);
