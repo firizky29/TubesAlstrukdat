@@ -25,6 +25,8 @@ extern Stack curBag;
 // extern List curInventory;
 // extern LinkedList curProgress;
 // extern Queue curUsedGadget;
-
+extern boolean speedBoost;
+extern int countHeavyItem;
+extern int countMove;
 
 #endif
