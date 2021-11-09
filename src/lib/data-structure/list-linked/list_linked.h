@@ -12,7 +12,7 @@
 
 typedef Address LinkedList;
 
-#define IDX_UNDEF (-1)
+#define IDX_UNDEF -1
 #define FIRST(l) (l)
 
 /* Definisi List : */
