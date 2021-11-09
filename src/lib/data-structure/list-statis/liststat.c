@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <liststat.h>
 
+void CreateGadget(Gadget *g){
+    IDGADGET(*g) = IDGADGET_UNDEF;
+    HARGAGADGET(*g) = HARGAGADGET_UNDEF;
+}
 void CreateInventory(Inventory *inv){
     for(int i=0 ; i < INVENTORY_CAP; i++ ){
         IDGADGET(*inv, i) = IDGADGET_UNDEF;
         HARGAGADGET(*inv, i) = HARGAGADGET_UNDEF;
     }
 }
+
 void addGadget(Inventory *inv, Gadget g){
     if(isInventoryFull(*inv)){
         printf(" Inventory penuh!\n");

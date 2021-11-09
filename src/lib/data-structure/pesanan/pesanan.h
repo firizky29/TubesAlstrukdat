@@ -8,7 +8,8 @@ typedef struct pesanan {
     int time; /*waktu pesanan muncul*/
     char pickup; /* bangun pick up item */
     char dropoff; /* bangun drop off item */
-    char type; /* tipe item */
+    char type; /* tipe item : N = Normal item; H = Heavy item; P = Perishable item; V = VIP item*/
+    int firstptime;
     int ptime; /* waktu hangus jika perishable item */
 } Pesanan;
 
@@ -16,6 +17,7 @@ typedef struct pesanan {
 #define PICKUPPESANAN(p) (p).pickup
 #define DROPOFFPESANAN(p) (p).dropoff
 #define TIPEITEM(p) (p).type
+#define FIRSTPITEM(p) (p).firstptime
 #define PTIME(p) (p).ptime
 
 #define TIME_UNDEF (-1)

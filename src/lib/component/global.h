@@ -5,6 +5,7 @@
 #include "../data-structure/stack/stack.h"
 #include "../data-structure/point/point.h"
 #include "../data-structure/list-dinamis/listdin.h"
+#include "../data-structure/list-statis/liststat.h"
 #include "../data-structure/list-linked/list_linked.h"
 
 
@@ -23,12 +24,12 @@ extern Point curPosition;
 extern ll curMoney;
 extern int curSpeed;
 extern Stack curBag;
-// extern List curInventory;
+extern Inventory curInventory;
 extern LinkedList curProgress;
 extern LinkedList curToDoList;
-// extern Queue curUsedGadget;
+// extern Queue curUsedGadget; {maaf kayaknya ini ga perlu, karna gadget langsung dipakai di saat itu juga biar ga susah}
 extern boolean speedBoost;
-extern int countHeavyItem;
+extern int countHeavyItem ;
 extern int countMove;
 
 #endif
