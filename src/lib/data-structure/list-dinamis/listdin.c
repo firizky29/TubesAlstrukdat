@@ -10,6 +10,47 @@ Deskripsi : Pra Praktikum 4 (Program listdin.c)
 #include <stdlib.h>
 #include "listdin.h"
 
+
+void setLoc(Location *L, int x, int y, char c){
+    COORLOC(*L) = MakePoint(x, y);
+    CHARLOC(*L) = c;
+}
+
+void displayLoc(Location L){
+    TulisPoint(COORLOC(L));
+    printf(" %c", CHARLOC(L));
+}
+
+boolean IsHQ (Location P){
+/* Menghasilkan true jika P adalah titik HQ */
+    return CHARLOC(P) == '8';
+}
+
+boolean isSpace(Location P){
+    return CHARLOC(P) == ' ';
+}
+
+boolean isDropOffPoint(Location P){
+    Pesanan T = TOP(curBag);
+    return CHARLOC(P) == DROPOFFPESANAN(T);
+}
+
+boolean isPickUpPoint(Location P){
+    Address p;
+
+    p = FIRST(curToDoList);
+    while(p!=NULL){
+        if(CHARLOC(P)==PICKUPPESANAN(INFO(p))){
+            return true;
+        }
+        p = NEXT(p);
+    }
+    return false;
+}
+
+boolean isMobitaPoint(Location P){
+    return CHARLOC(curPosition)==CHARLOC(P)&&EQ(COORLOC(curPosition),COORLOC(P));
+}
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
 void CreateListDin(ListDin *l, int capacity) {
@@ -41,17 +82,6 @@ IdxType getLastIdx(ListDin l) {
     /* ALGORITMA */
     return(length(l) - 1);
 }
-/* ********** Test Indeks yang valid ********** */
-// boolean isListIdxValid(ListDin l, int i) {
-//     /* KAMUS */
-//     /* ALGORITMA */
-//     return((i >= 0) && (i <= CAPACITY(l)));
-// }
-// boolean isIdxEff(ListDin l, IdxType i) {
-//     /* KAMUS */
-//     /* ALGORITMA */
-//     return((i >= 0) && (i <= NEFF(l)));
-// }
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
@@ -82,9 +112,9 @@ void readList(ListDin *l) {
     if (n > 0) {
         NEFF(*l) = n;
         for(i = 0; i < n; i++) {
-            scanf(" %c", &CHARLOC(*l, i));
-            scanf(" %f", &Absis(COORLOC(*l, i)));
-            scanf(" %f", &Ordinat(COORLOC(*l, i)));
+            scanf(" %c", &CHARLOC(ELMT(*l, i)));
+            scanf(" %d", &Absis(COORELMT(*l, i)));
+            scanf(" %d", &Ordinat(COORELMT(*l, i)));
         }
     }
 }
@@ -96,36 +126,17 @@ void displayList(ListDin l) {
     printf("[");
     if (!(isListEmpty(l))) {
         for (i = 0; i < getLastIdx(l); i++) {
-            printf("(%c,", CHARLOC(l, i));
-            TulisPoint(COORLOC(l, i));
+            printf("(%c,", CHARELMT(l, i));
+            TulisPoint(COORELMT(l, i));
             printf("),");
         }
-        printf("(%c,", CHARLOC(l,getLastIdx(l)));
-        TulisPoint(COORLOC(l, getLastIdx(l)));    
+        printf("(%c,", CHARELMT(l,getLastIdx(l)));
+        TulisPoint(COORELMT(l, getLastIdx(l)));    
         printf(")");
     }
     printf("]");
 }
 
-/* ********** OPERATOR ARITMATIKA (TIDAK DAPAT DIGUNAKAN) ********** */
-/* *** Aritmatika list : Penjumlahan, pengurangan, perkalian, ... *** */
-// ListDin plusMinusList(ListDin l1, ListDin l2, boolean plus) {
-//     /* KAMUS */
-//     ListDin lNew;
-//     int i;
-
-//     /* ALGORITMA */
-//     CreateListDin(&lNew, CAPACITY(l1));
-//     NEFF(lNew) = NEFF(l1);
-//     for (i = 0; i < length(l1); i++) {
-//         if (plus) {
-//             ELMT(lNew,i) = ELMT(l1,i) + ELMT(l2,i);
-//         } else {
-//             ELMT(lNew,i) = ELMT(l1,i) - ELMT(l2,i);
-//         }
-//     }
-//     return lNew;
-// }
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan list : < =, > *** */
@@ -139,7 +150,7 @@ boolean isListEqual(ListDin l1, ListDin l2) {
     i = 0;
     if (length(l1) == length(l2)) {
         while (i < length(l1) && flag == true) {
-        if ((CHARLOC(l1,i) != CHARLOC(l2,i)) || (Absis(COORLOC(l1,i)) != Absis(COORLOC(l2,i))) || (Ordinat(COORLOC(l1,i)) != Ordinat(COORLOC(l2,i)))) {
+        if ((CHARELMT(l1,i) != CHARELMT(l2,i)) || (Absis(COORELMT(l1,i)) != Absis(COORELMT(l2,i))) || (Ordinat(COORELMT(l1,i)) != Ordinat(COORELMT(l2,i)))) {
             flag = false;
         } else {
             i++;
@@ -164,7 +175,7 @@ IdxType indexOfCharLoc(ListDin l, char charloc) {
     i = 0;
     found = false;
     while (i < length(l) && found == false) {
-        if (CHARLOC(l,i) == charloc) {
+        if (CHARELMT(l,i) == charloc) {
             idx = i;
             found = true;
         } else {
@@ -185,7 +196,7 @@ IdxType indexOfCoorLoc(ListDin l, int X, int Y) {
     i = 0;
     found = false;
     while (i < length(l) && found == false) {
-        if ((Absis(COORLOC(l,i)) == X) && (Ordinat(COORLOC(l,i)) == Y)) {
+        if ((Absis(COORELMT(l,i)) == X) && (Ordinat(COORELMT(l,i)) == Y)) {
             idx = i;
             found = true;
         } else {
@@ -195,23 +206,6 @@ IdxType indexOfCoorLoc(ListDin l, int X, int Y) {
     return idx;
 }
 
-/* ********** NILAI EKSTREM (TIDAK DAPAT DIGUNAKAN) ********** */
-// void extremes(ListDin l,(Location *max,(Location *min) {
-//     /* KAMUS */
-//     int i;
-
-//     /* ALGORITMA */
-//     *max = ELMT(l,0);
-//     *min = ELMT(l,0);
-//     for (i = 0; i < length(l); i++) {
-//         if (ELMT(l,i) >= *max) {
-//             *max = ELMT(l,i);
-//         }
-//         if (ELMT(l,i) <= *min) {
-//             *min = ELMT(l,i);
-//         }
-//     }
-// }
 
 /* ********** OPERASI LAIN ********** */
 void copyList(ListDin lIn, ListDin *lOut) {
@@ -226,100 +220,25 @@ void copyList(ListDin lIn, ListDin *lOut) {
     }
 }
 
-/* ********** TIDAK DAPAT DIGUNAKAN ********** */
-//(Location sumList(ListDin l) {
-//     /* KAMUS */
-//    (Location sum;
-//     int i;
-
-//     /* ALGORITMA */
-//     sum = 0;
-//     if (!(isListEmpty(l))) {
-//         for (i = 0; i < length(l); i++) {
-//             sum = sum + ELMT(l,i);
-//         }
-//     }
-//     return sum;
-// }
-// int countVal(ListDin l,(Location val) {
-//     /* KAMUS */
-//     int count, i;
-
-//     /* ALGORITMA */
-//     count = 0;
-//     if (!(isListEmpty(l))) {
-//         for (i = 0; i < length(l); i++) {
-//             if (val == ELMT(l,i)) {
-//                 count++;
-//             }
-//         }
-//     }
-//     return count;
-// }
-// boolean isAllEven(ListDin l) {
-//     /* KAMUS */
-//     boolean flag;
-//     int i;
-
-//     /* ALGORITMA */
-//     flag = true;
-//     if (!(isListEmpty(l))) {
-//         i = 0;
-//         while (i < length(l) && flag == true) {
-//             if (ELMT(l,i) % 2 != 0) {
-//                 flag = false;
-//             } else {
-//                 i++;
-//             }
-//         }
-//     }
-//     return flag;
-// }
-
-/* ********** SORTING (TIDAK DAPAT DIGUNAKAN) ********** */
-// void sort(ListDin *l, boolean asc) {
-//     /* KAMUS */
-//     int i,j, idx;
-//    (Location temp;
-
-//     /* ALGORITMA */
-//     for (i = 0; i < length(*l); i++) {
-//         idx = i;
-//         for (j = i+1; j < length(*l); j++) {
-//             if (asc == true) {
-//                 if (ELMT(*l,j) < ELMT(*l,idx)) {
-//                     idx = j;
-//                 }
-//             } else { 
-//                 if (ELMT(*l,j) > ELMT(*l,idx)) {
-//                     idx = j;
-//                 }
-//             }
-//         }
-//         temp = ELMT(*l,idx);
-//         ELMT(*l, idx) = ELMT(*l, i);
-//         ELMT(*l, i) = temp;
-//     }
-// }
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListDin *l, char charloc, float X, float Y) {
+void insertLast(ListDin *l, char charloc, int X, int Y) {
     /* KAMUS */
     /* ALGORITMA */
-    CHARLOC(*l, length(*l)) = charloc;
-    Absis(COORLOC(*l, length(*l))) = X;
-    Ordinat(COORLOC(*l, length(*l))) = Y;
+    CHARELMT(*l, length(*l)) = charloc;
+    Absis(COORELMT(*l, length(*l))) = X;
+    Ordinat(COORELMT(*l, length(*l))) = Y;
     NEFF(*l) = NEFF(*l) + 1;
 }
 
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(ListDin *l, char *charloc, float *X, float *Y) {
+void deleteLast(ListDin *l, char *charloc, int *X, int *Y) {
     /* KAMUS */
     /* ALGORITMA */
-    *charloc = CHARLOC(*l, getLastIdx(*l));
-    *X = Absis(COORLOC(*l, getLastIdx(*l)));
-    *Y = Ordinat(COORLOC(*l, getLastIdx(*l)));
+    *charloc = CHARELMT(*l, getLastIdx(*l));
+    *X = Absis(COORELMT(*l, getLastIdx(*l)));
+    *Y = Ordinat(COORELMT(*l, getLastIdx(*l)));
     NEFF(*l) = NEFF(*l) - 1;
 }
 
@@ -370,4 +289,39 @@ void compactList(ListDin *l) {
         ELMT(*l,i) = ELMT(lTemp,i);
     }
     dealocate(&lTemp);
+}
+
+ListDin getNeighbor(Location L){
+    ListDin P;
+    CreateListDin(&P, COLS(adj));
+    char c;
+    int k = indexOfCharLoc(LocList, CHARLOC(L));
+    for(int i=0; i<COLS(adj); i++){
+        if(MAT(adj, k, i)){
+            if(i==0){
+                c = '8';
+            }
+            else{
+                c = i+'A'-1;
+            }
+            insertLast(&P, c, Absis(COORELMT(LocList, i)), Ordinat(COORELMT(LocList, i)));
+        }
+    }
+    return P;
+}
+
+void displayNeighbor(Location L){
+    ListDin P;
+    P = getNeighbor(L);
+    for(int i=0; i<NEFF(P); i++){
+        if(CHARELMT(P,i)=='8'){
+            printf("%d. %s ", i+1, "HQ");
+        }
+        else{
+            printf("%d. %c ", i+1, CHARELMT(P, i));
+        }
+        
+        TulisPoint(COORELMT(P, i));
+        printf("\n");
+    }
 }

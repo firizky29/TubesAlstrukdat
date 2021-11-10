@@ -2,7 +2,7 @@
 #define COMMAND_H
 
 #include "../../tools/mesin-kata/wordmachine.h"
-#include "../../scene/map/map.h"
+#include "../../scene/peta/peta.h"
 #include "../../component/global.h"
 
 /* CHECK COMMAND VALIDITY */

@@ -2,22 +2,29 @@
 
 int N, M, L, P;
 ll curTime;
-Point curPosition;
+Location curPosition;
 ll curMoney;
 int curSpeed; // dalam persen
 Stack curBag;
 Map curMap;
+Matrix adj;
+// extern Inventory curInventory;
+LinkedList curProgress;
+LinkedList curToDoList;
+boolean speedBoost;
+int countHeavyItem ;
+int countMove;
+ListDin LocList;
+
 // List curInventory;
 // LinkedList curProgress;
 // Queue curUsedGadget;
 
-Matrix getMap(){
+void getMap(){
 /* get n x m from config and return n x m matrix */
 	N = wtoi(currentWord);
 	M = wtoi(currentWord);
-	Matrix map;
-	CreateMatrix(N, M, &map);
-	return map;
+	CreateMap(&curMap, N, M);
 }
 
 Point getPoint(){
@@ -29,35 +36,31 @@ Point getPoint(){
 	return hq;
 }
 
-Matrix getAdjacency(int n){
+void getAdjacency(Matrix *m, int n){
 /* get and return adjacency matrix from config */
 	int temp, i, j;
-	Matrix adjacency;
-	CreateMatrix(n, n, &adjacency);
+	CreateMatrix(n, n, m);
 	for (i = 0; i < n; i++){
 		for (j = 0; j < n; j++){
 			temp = wtoi(currentWord);
-			MAT(adjacency, i, j) = temp;
+			MAT(*m, i, j) = temp;
 		}
 	}
-	return adjacency;
 }
 
-ListDin getLoc(Point pointhq){
+void getLoc(Point pointhq){
 /* get char and coord of loc and return list dinamis */
 	int i;
-	ListDin loc;
-	int loc_count = wtoi(currentWord);
-	CreateListDin(&loc, (loc_count+1));
-	CHARLOC(loc, 0) = '8';
-	COORLOC(loc, 0) = pointhq;
-	for (i = 1; i < (loc_count + 1); i++){
-		CHARLOC(loc, i) = currentWord.contents[0];
+	int L = wtoi(currentWord);
+	CreateListDin(&LocList, (L+1));
+	CHARELMT(LocList, 0) = '8';
+	COORELMT(LocList, 0) = pointhq;
+	for (i = 1; i < (L + 1); i++){
+		CHARELMT(LocList, i) = currentWord.contents[0];
 		advWord_file();
-		COORLOC(loc, i) = getPoint();
+		COORELMT(LocList, i) = getPoint();
 	}
-	NEFF(loc) = loc.capacity;
-	return loc;
+	NEFF(LocList) = L+1;
 }
 
 void globalinit(){
@@ -84,21 +87,19 @@ void globalinit(){
     printf("\n");
     
     // reading file config + get info
-	ListDin loc;
     readFile(filename);
-    setPeta(&curMap, getMap());
+    getMap();
     Point hq = getPoint();
-    setBuilding(&curMap, getLoc(hq));
-    setAdj(&curMap, getAdjacency(loc.capacity));
-    // display info
-
-    printf("\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
-    printf("Map: %d x %d\n", curMap.Peta.rowEff, curMap.Peta.colEff);
-    displayMatrix(curMap.Peta);
+    getLoc(hq);
+    BuildingToMap(&curMap, LocList);
+    getAdjacency(&adj, NEFF(LocList));
+// display info2"\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
+    printf("Map: %d x %d\n", REFF(curMap), CEFF(curMap));
+    DisplayMap(curMap);
     printf("\n\n");
-    displayMatrix(curMap.Adj);
+    displayMatrix(adj);
     printf("\n\n");
-    displayList(loc);
+    displayList(LocList);
     printf("\n\n");
     // sisanya di print dulu aja karena nunggu ADTnya ada dulu
     while(!endFile){
@@ -108,6 +109,7 @@ void globalinit(){
     curMoney = 0;
     curTime = 0;
     curSpeed = 100;
+    curPosition = ELMT(LocList, 0);
     fclose(tape);
 
 }

@@ -7,9 +7,10 @@
 #ifndef LISTDIN_H
 #define LISTDIN_H
 
-#include "../../boolean.h"
+// #include "../../../boolean.h"
 #include "../point/point.h"
 #include "../../component/global.h"
+#include "../matriks/matrix.h"
 
 #define IDX_UNDEF -1
 typedef int IdxType;
@@ -17,15 +18,19 @@ typedef int IdxType;
 
 /* Definisi elemen dan koleksi objek */
 typedef struct {
-    char charLoc;
+    char charLoc;  /* berisi alfabetis lokasi, 8 jika HQ, A-Z jika lokasi lain, BLANK jika kosong */
     Point coorLoc;
 } Location; /* type elemen list */
+
 
 typedef struct{
     Location *buffer; /* memori tempat penyimpan elemen (container) */
     int nEff;       /* >=0, banyaknya elemen efektif */
     int capacity;   /* ukuran elemen */
 } ListDin;
+extern ListDin LocList;
+extern Location curPosition;
+
 /* Indeks yang digunakan [0..capacity-1] */
 /* Jika l adalah : ListDin, cara deklarasi dan akses: */
 /* Deklarasi : l : ListDin */
@@ -44,9 +49,22 @@ typedef struct{
 #define NEFF(l) (l).nEff
 #define BUFFER(l) (l).buffer
 #define ELMT(l, i) (l).buffer[i]
-#define CHARLOC(l, i) (l).buffer[i].charLoc
-#define COORLOC(l, i) (l).buffer[i].coorLoc
 #define CAPACITY(l) (l).capacity
+#define CHARELMT(l,i) CHARLOC(((l).buffer[i]))
+#define COORELMT(l, i) COORLOC((l).buffer[i])
+#define CHARLOC(L) (L).charLoc
+#define COORLOC(L) (L).coorLoc
+
+
+void setLoc(Location *L, int x, int y, char c);
+void displayLoc(Location L);
+boolean IsHQ (Location P);
+boolean isSpace(Location P);
+boolean isDropOffPoint(Location P);
+boolean isPickUpPoint(Location P);
+boolean isMobitaPoint(Location P);
+ListDin getNeighbor(Location L);
+void displayNeighbor(Location L);
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
@@ -70,13 +88,6 @@ IdxType getLastIdx(ListDin l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
-/* ********** Test Indeks yang valid ********** */
-// boolean isIdxValid(ListDin l, int i);
-// /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
-// /* yaitu antara indeks yang terdefinisi utk container*/
-// boolean isIdxEff(ListDin l, IdxType i);
-// /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
-// /* yaitu antara 0..NEFF(l) */
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
@@ -107,12 +118,6 @@ void displayList(ListDin l);
 /* Contoh : jika ada tiga elemen bernilai (A,(10,1)), (B,(1,15)), (C,(1,9)) akan dicetak: [(A,(10,1)), (B,(1,15)),(C,(1,9))] */
 /* Jika list kosong : menulis [] */
 
-/* ********** OPERATOR ARITMATIKA (TIDAK DAPAT DIGUNAKAN) ********** */
-/* *** Aritmatika list : Penjumlahan, pengurangan, perkalian, ... *** */
-/* ListDin plusMinusList(ListDin l1, ListDin l2, boolean plus); */
-/* Prekondisi : l1 dan l2 memiliki Neff sama dan tidak kosong */
-/* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada indeks yang sama dijumlahkan */
-/* Jika plus = false, mengirimkan l1-l2, yaitu setiap elemen l1 dikurangi elemen l2 pada indeks yang sama */
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan list : < =, > *** */
@@ -147,32 +152,14 @@ void copyList(ListDin lIn, ListDin *lOut);
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
 /* Proses : Menyalin isi lIn ke lOut */
 
-/* ********** TIDAK DAPAT DIGUNAKAN ********** */
-/* ElType sumList(ListDin l); */
-/* Menghasilkan hasil penjumlahan semua elemen l */
-/* Jika l kosong menghasilkan 0 */
-/* int countVal(ListDin l, ElType val); */
-/* Menghasilkan berapa banyak kemunculan val di l */
-/* Jika l kosong menghasilkan 0 */
-/* boolean isAllEven(ListDin l); */
-/* Menghailkan true jika semua elemen l genap. l boleh kosong */
-
-/* ********** SORTING (TIDAK DAPAT DIGUNAKAN) ********** */
-/* void sort(ListDin *l, boolean asc); */
-/* I.S. l boleh kosong */
-/* F.S. Jika asc = true, l terurut membesar */
-/*      Jika asc = false, l terurut mengecil */
-/* Proses : Mengurutkan l dengan salah satu algoritma sorting,
-   algoritma bebas */
-
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListDin *l, char charloc, float X, float Y);
+void insertLast(ListDin *l, char charloc, int X, int Y);
 /* Proses: Menambahkan charloc, X, dan Y sebagai karakter dan koordinat lokasi elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLast(ListDin *l, char *charloc, float *X, float *Y);
+void deleteLast(ListDin *l, char *charloc, int *X, int *Y);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. charloc, X, dan Y adalah karakter dan koordinat lokasi elemen terakhir l sebelum penghapusan, */
@@ -194,5 +181,6 @@ void compactList(ListDin *l);
 /* Proses : Mengurangi capacity sehingga nEff = capacity */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran nEff = capacity */
+
 
 #endif

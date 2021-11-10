@@ -4,17 +4,20 @@
 #define Matrix_H
 
 #include "../../boolean.h"
-#include "../list-dinamis/listdin.h"
-#include "../../component/global.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define IDX_UNDEF -1
 typedef int IdxType;
+#define ROW_CAP 100
+#define COL_CAP 100
+
 typedef struct{
    int contents[ROW_CAP][COL_CAP];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
+
+extern Matrix adj;
 /* rowEff >= 1 dan colEff >= 1 */
 /* Indeks matriks yang digunakan: [0..ROW_CAP-1][0..COL_CAP-1] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <liststat.h>
+#include "liststat.h"
 
 void CreateGadget(Gadget *g){
     IDGADGET(*g) = IDGADGET_UNDEF;

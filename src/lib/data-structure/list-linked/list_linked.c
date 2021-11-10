@@ -193,28 +193,6 @@ void deleteAt(LinkedList *l, int idx, Pesanan *val){
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-/*void displayList(List l){ */
-// void printInfo(List l);
-/* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-/*
-    printf("[");
-    Address p = FIRST(l);
-
-    for (int i=0; i<length(l); i++){
-        printf("%d",INFO(p));
-        if (i != length(l)-1){
-            printf(",");
-        }
-        p = NEXT(p);
-    }
-    printf("]");
-}
-
-*/
 
 int lengthLL(LinkedList l){
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
@@ -228,31 +206,3 @@ int lengthLL(LinkedList l){
 
     return idxcount;
 }
-
-/****************** PROSES TERHADAP LIST ******************/
-/*List concat(List l1, List l2){ */
-/* I.S. l1 dan l2 sembarang */
-/* F.S. l1 dan l2 kosong, l3 adalah hasil konkatenasi l1 & l2 */
-/* Konkatenasi dua buah list : l1 dan l2    */
-/* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
-/*
-    List l3;
-    CreateList(&l3);
-    Address p = FIRST(l1);
-    
-    while (p != NULL){
-        insertLast(&l3,INFO(p));
-        p = NEXT(p);
-    }
-
-    p = FIRST(l2);
-
-    while (p != NULL){
-        insertLast(&l3,INFO(p));
-        p = NEXT(p);
-    }
-
-    return l3;
-}
-*/
