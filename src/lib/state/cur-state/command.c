@@ -270,15 +270,18 @@ void displayInventory(){
 	}
 }
 void displayHelp(){
-	printf("1. MOVE: move to next location\n");
-	printf("2. PICK_UP: pickup item in current location\n");
-	printf("3. DROP_OFF: deliver top-most item to current location\n");
-	printf("4. MAP: display map\n");
-	printf("5. TO_DO: display list of to-do order(s)\n");
-	printf("6. IN_PROGRESS: display list of in-progress order(s)\n");
-	printf("7. BUY: purchase gadgets (only available when in HQ)\n");
-	printf("8. INVENTORY: display list of inventory\n");
-	printf("9. HELP: display list of available command(s)\n");
+	printf("1.  MOVE: move to next location\n");
+	printf("2.  PICK_UP: pickup item in current location\n");
+	printf("3.  DROP_OFF: deliver top-most item to current location\n");
+	printf("4.  MAP: display map\n");
+	printf("5.  TO_DO: display list of to-do order(s)\n");
+	printf("6.  IN_PROGRESS: display list of in-progress order(s)\n");
+	printf("7.  BUY: purchase gadgets (only available when in HQ)\n");
+	printf("8.  INVENTORY: display list of inventory\n");
+	printf("9.  RETURN: \n");
+	printf("10. HELP: display list of available command(s)\n");
+	printf("11. EXIT: \n");
+	printf("12. SAVE: \n");
 }
 void Retur(){
 	printf("Retur\n");

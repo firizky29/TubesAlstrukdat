@@ -22,6 +22,7 @@ int main(){
 
 		globalinit();
         while(true){
+            printf("\n>> ");
             choice = inputWord();
             if(isMove(choice)){
                 Move();
@@ -52,6 +53,10 @@ int main(){
             }
             else if(isReturn(choice)){
                 Retur();
+            }
+            else{
+                printf("Your command is not recognized. Input one of these following command: \n");
+                displayHelp();
             }
         }
 	}
