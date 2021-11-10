@@ -22,8 +22,8 @@ typedef struct{
     Gadget contents[INVENTORY_CAP];
 }Inventory;
 
-#define IDGADGET(g) g.idGadget
-#define HARGAGADGET(g) g.harga
+#define IDGADGET(g) (g).idGadget
+#define HARGAGADGET(g) (g).harga
 #define INVIDGADGET(I,idx) (I).contents[(idx)].idGadget
 #define INVHARGAGADGET(I,idx) (I).contents[(idx)].harga
 
@@ -39,7 +39,7 @@ void addGadget(Inventory *inv, Gadget g);
 /* Proses : Melakukan searching dengan traversal pada inventory, penambahan*/
 /*          dilakukan pada bagian inv yang kosong dan pertama kali ketemu */
 
-void displayGadget(Inventory *inv);
+void displayGadgetinInventory(Inventory inv);
 /* Proses : Menuliskan gadget pada Inventory dengan traversal, gadget ditulis berurutan*/
 /*          berdasarkan idGadget pada Inventory.*/
 /*          idGadget = 1 -> KainPembungkusWaktu */

@@ -7,8 +7,8 @@ void CreateGadget(Gadget *g){
 }
 void CreateInventory(Inventory *inv){
     for(int i=0 ; i < INVENTORY_CAP; i++ ){
-        IDGADGET(*inv, i) = IDGADGET_UNDEF;
-        HARGAGADGET(*inv, i) = HARGAGADGET_UNDEF;
+        INVIDGADGET(*inv, i) = IDGADGET_UNDEF;
+        INVHARGAGADGET(*inv, i) = HARGAGADGET_UNDEF;
     }
 }
 
@@ -28,17 +28,19 @@ void addGadget(Inventory *inv, Gadget g){
     }
 }
 
-void displayGadgetinInventory(Inventory *inv){
+void displayGadgetinInventory(Inventory inv){
     for(int i=0 ; i < INVENTORY_CAP; i++ ){
         printf("%d ",i+1);
-        if(INVIDGADGET(*inv) == 1){
+        if(INVIDGADGET(inv,i) == 1){
             printf("Kain Pembungkus Waktu\n");
-        }else if(INVIDGADGET(*inv) == 2){
+        }else if(INVIDGADGET(inv,i) == 2){
             printf("Senter Pembesar\n");
-        }else if(INVIDGADGET(*inv) == 3){
+        }else if(INVIDGADGET(inv,i) == 3){
             printf("Pintu Kemana Saja\n");
-        }else if(INVIDGADGET(*inv) == 4){
+        }else if(INVIDGADGET(inv,i) == 4){
             printf("Mesin Waktu\n");
+        }else if(INVIDGADGET(inv,i) == 5){
+            printf("Senter Pengecil\n");
         }else{
             printf("-\n");
         }
@@ -46,10 +48,10 @@ void displayGadgetinInventory(Inventory *inv){
 }
 
 boolean isInventoryEmpty(Inventory inv){
-    flag = true;
+    boolean flag = true;
     int i = 0;
     while(i < INVENTORY_CAP){
-        if(IDGADGET(inv, i) != IDGADGET_UNDEF){
+        if(INVIDGADGET(inv, i) != IDGADGET_UNDEF){
             flag = false;
         }
         i += 1;
@@ -58,10 +60,10 @@ boolean isInventoryEmpty(Inventory inv){
 }
 
 boolean isInventoryFull(Inventory inv){
-    flag = true;
+    boolean flag = true;
     int i = 0;
     while(i < INVENTORY_CAP){
-        if(IDGADGET(inv, i) == IDGADGET_UNDEF){
+        if(INVIDGADGET(inv, i) == IDGADGET_UNDEF){
             flag = false;
         }
         i += 1;

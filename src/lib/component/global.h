@@ -17,7 +17,7 @@ extern ll curTime;
 extern ll curMoney;
 extern int curSpeed;
 extern Stack curBag;
-// extern Inventory curInventory;
+extern Inventory curInventory;
 extern LinkedList curProgress;
 extern LinkedList curToDoList;
 

@@ -211,21 +211,21 @@ void displayInventory(){
 	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
 	if (choice != 0){
-		if (INVIDGADGET(&curInventory, choice-1) != IDGADGET_UNDEF){
+		if (INVIDGADGET(curInventory, choice-1) != IDGADGET_UNDEF){
 			Gadget g;
 			// isi bagian ini sama proses penghilangan gadget dari inventory
-			deleteGadget(&curInventory,choice-1,g);
+			deleteGadget(&curInventory,choice-1,&g);
 			// isi juga sama aktivasi efek dari gadget
 			// Cek kalau masih salah
 			if(IDGADGET(g) == 1){
 				Stack tempBag;
-				int i = 0
-				flag = true;
+				int i = 0;
+				boolean flag = true;
 				Pesanan val;
 				
 				while(i != IDX_UNDEF && flag){
 					if(TIPEITEM(TOP(curBag)) == 'P'){
-						PTIME(TOP(curBag)) = FIRSTPITEM(TIO(curBag));
+						PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag));
 					}else{
 						pop(&curBag, &val);
 						push(&tempBag, val);
@@ -253,7 +253,6 @@ void displayInventory(){
 				}else{
 					curTime -= 50;
 				}
-			}
 			}else if(IDGADGET(g) == 5){
 				//Diskusi sama yang ngerjakan MOVE
 			}
