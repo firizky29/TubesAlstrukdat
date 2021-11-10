@@ -28,7 +28,7 @@ void addGadget(Inventory *inv, Gadget g){
     }
 }
 
-void displayGadget(Inventory *inv){
+void displayGadgetinInventory(Inventory *inv){
     for(int i=0 ; i < INVENTORY_CAP; i++ ){
         printf("%d ",i+1);
         if(INVIDGADGET(*inv) == 1){

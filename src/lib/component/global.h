@@ -25,6 +25,7 @@ extern ll curMoney;
 extern int curSpeed;
 extern Stack curBag;
 extern Inventory curInventory;
+extern Inventory market; //dibentuk seperti curInventory tapi tidak bisa diubah
 extern LinkedList curProgress;
 extern LinkedList curToDoList;
 // extern Queue curUsedGadget; {maaf kayaknya ini ga perlu, karna gadget langsung dipakai di saat itu juga biar ga susah}

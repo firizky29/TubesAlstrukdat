@@ -183,10 +183,13 @@ void Buy(){
 	/*if (curPosition lagi di point hq){
 		printf("Current money: %ld Yen\n", curMoney);
 		printf("Check out these gadgets...!\n");
-		// isi bagian ini sama display gadget
+		printf("1. Kain Pembungkus Waktu (800 Yen)")
+		printf("2. Senter Pembesar (1200 Yen)")
+		printf("3. Pintu Kemana Saja (1500 Yen)")
+		printf("4. Mesin Waktu (3000 Yen)")
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 		int choice = wtoi(inputWord());
-		if (curMoney >= harga gadgetnya{
+		if (curMoney >= harga gadgetnya){
 			// isi bagian ini sama proses beli gadgetnya
 			curMoney -= harga gadget
 			printf("Gadget successfully bought!\n");
@@ -203,7 +206,7 @@ void Buy(){
 }
 void displayInventory(){
 	printf("Here's your inventory:\n");
-	displayInventory(curInventory);
+	displayGadgetinInventory(curInventory);
 	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
 	if (choice != 0){
