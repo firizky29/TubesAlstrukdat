@@ -54,6 +54,9 @@ int main(){
             else if(isReturn(choice)){
                 Retur();
             }
+            else if(isExit(choice)){
+                Exit();
+            }
             else{
                 printf("Your command is not recognized. Input one of these following command: \n");
                 displayHelp();

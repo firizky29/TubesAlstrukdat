@@ -48,6 +48,6 @@ void Buy();
 void displayInventory();
 void displayHelp();
 void Retur();
-
+void Exit();
 
 #endif

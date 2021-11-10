@@ -87,6 +87,7 @@ boolean isReturn(Word kata){
 	return isWordEqual(kata, cmd_return);
 }
 
+
 /* Mengubah curPosition, curTime*/
 void Move(){
 	printf("Here are the nearest buildings:\n");
@@ -181,29 +182,28 @@ void displayInProgress(){
 	// isi bagian ini sama display in progress
 }
 void Buy(){
-	/*if (curPosition lagi di point hq){
-		printf("Current money: %ld Yen\n", curMoney);
-		printf("Check out these gadgets...!\n");
-		printf("1. Kain Pembungkus Waktu (800 Yen)")
-		printf("2. Senter Pembesar (1200 Yen)")
-		printf("3. Pintu Kemana Saja (1500 Yen)")
-		printf("4. Mesin Waktu (3000 Yen)")
-		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-		int choice = wtoi(inputWord());
-		if (curMoney >= harga gadgetnya){
-			// isi bagian ini sama proses beli gadgetnya
-			curMoney -= harga gadget
-			printf("Gadget successfully bought!\n");
-			printf("Current money: %ld Yen\n", curMoney);
-		}
-		else{
-			printf("Oops... Seems like you don't have enough money!\n");
-		}
-	}
-	else{
-		printf("You can only buy when you're in HQ.\n");
-	}*/
-	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
+	// if (IsHQ(curPosition)){
+	// 	printf("Current money: %ld Yen\n", curMoney);
+	// 	printf("Check out these gadgets...!\n");
+	// 	printf("1. Kain Pembungkus Waktu (800 Yen)")
+	// 	printf("2. Senter Pembesar (1200 Yen)")
+	// 	printf("3. Pintu Kemana Saja (1500 Yen)")
+	// 	printf("4. Mesin Waktu (3000 Yen)")
+	// 	printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+	// 	int choice = wtoi(inputWord());
+	// 	if (curMoney >= harga gadgetnya){
+	// 		// isi bagian ini sama proses beli gadgetnya
+	// 		curMoney -= ;
+	// 		printf("Gadget successfully bought!\n");
+	// 		printf("Current money: %ld Yen\n", curMoney);
+	// 	}
+	// 	else{
+	// 		printf("Oops... Seems like you don't have enough money!\n");
+	// 	}
+	// }
+	// else{
+	// 	printf("You can only buy when you're in HQ.\n");
+	// }
 }
 void displayInventory(){
 	printf("Here's your inventory:\n");
@@ -285,4 +285,23 @@ void displayHelp(){
 }
 void Retur(){
 	printf("Retur\n");
+}
+
+void Exit(){
+	// bisa save before exit atau nggak
+	printf("Are you sure want to quit the game (yes/no)? : ");
+	Word YayOrNay = inputWord();
+	if(YayOrNay.contents[0]=='y'||YayOrNay.contents[0]=='Y'){
+		// prosedur save kalau jadi ada
+		system("clear");
+		system("cls");
+		printf("Quitting...\n\nSAYOOONARAAAAAAAAAA!");
+		exit(0);
+	}
+	else if(YayOrNay.contents[0]=='n'||YayOrNay.contents[0]=='N'){
+		printf("Continuing...\n");
+	}
+	else{
+		printf("Assumed to continue...\n");
+	}
 }
