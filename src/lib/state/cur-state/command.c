@@ -223,46 +223,46 @@ void displayInventory(){
 				flag = true;
 				Pesanan val;
 				
-	// 			while(i != IDX_UNDEF && flag){
-	// 				if(TIPEITEM(TOP(curBag)) == 'P'){
-	// 					PTIME(TOP(curBag)) = FIRSTPITEM(TIO(curBag));
-	// 				}else{
-	// 					pop(&curBag, &val);
-	// 					push(&tempBag, val);
-	// 				}
-	// 			}
-	// 			while(!isStackEmpty(tempBag)){
-	// 				Pesanan val2;
-	// 				pop(&tempBag, &val);
-	// 				push(&curBag, val);
-	// 			}
-	// 		}else if(IDGADGET(g) == 2){
-	// 			if(CURCAP(curBag)*2 >= STACK_CAP){
-	// 				CURCAP(curBag) = STACK_CAP;
-	// 			}else{
-	// 				CURCAP(curBag) *= 2;
-	// 			}
-	// 		}else if(IDGADGET(g) == 3){
-	// 			printf("Where do you want to go next? : ");
-	// 			//menampilkan map atau menampilkan posisi dalam bentuk point?
-	// 			char loc = wtoi(inputWord()); //eh ini gimana masukkan ke dalam "kata" nya?
-	// 			//curPosition = [POSITION_CHOICE];
-	// 		}else if(IDGADGET(g) == 4){
-	// 			if(curTime <= 50){
-	// 				curTime = 0;
-	// 			}else{
-	// 				curTime -= 50;
-	// 			}
-	// 		}
-	// 		}else if(IDGADGET(g) == 5){
-	// 			//Diskusi sama yang ngerjakan MOVE
-	// 		}
-	// 		printf("Gadget successfully used!\n");
-	// 	}
-	// 	else{
-	// 		printf("Unable to use gadget!");
-	// 	}
-	// }
+				while(i != IDX_UNDEF && flag){
+					if(TIPEITEM(TOP(curBag)) == 'P'){
+						PTIME(TOP(curBag)) = FIRSTPITEM(TIO(curBag));
+					}else{
+						pop(&curBag, &val);
+						push(&tempBag, val);
+					}
+				}
+				while(!isStackEmpty(tempBag)){
+					Pesanan val2;
+					pop(&tempBag, &val);
+					push(&curBag, val);
+				}
+			}else if(IDGADGET(g) == 2){
+				if(CURCAP(curBag)*2 >= STACK_CAP){
+					CURCAP(curBag) = STACK_CAP;
+				}else{
+					CURCAP(curBag) *= 2;
+				}
+			}else if(IDGADGET(g) == 3){
+				printf("Where do you want to go next? : ");
+				//menampilkan map atau menampilkan posisi dalam bentuk point?
+				char loc = wtoi(inputWord()); //eh ini gimana masukkan ke dalam "kata" nya?
+				//curPosition = [POSITION_CHOICE];
+			}else if(IDGADGET(g) == 4){
+				if(curTime <= 50){
+					curTime = 0;
+				}else{
+					curTime -= 50;
+				}
+			}
+			}else if(IDGADGET(g) == 5){
+				//Diskusi sama yang ngerjakan MOVE
+			}
+			printf("Gadget successfully used!\n");
+		}
+		else{
+			printf("Unable to use gadget!");
+		}
+	}
 }
 void displayHelp(){
 	printf("1. MOVE: move to next location\n");
