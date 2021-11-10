@@ -210,7 +210,7 @@ void displayInventory(){
 	displayGadgetinInventory(curInventory);
 	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
-	if (choice != 0){
+	if (choice != 0||choice > INVENTORY_CAP){
 		if (INVIDGADGET(curInventory, choice-1) != IDGADGET_UNDEF){
 			Gadget g;
 			// isi bagian ini sama proses penghilangan gadget dari inventory
@@ -232,7 +232,7 @@ void displayInventory(){
 					}
 				}
 				while(!isStackEmpty(tempBag)){
-					Pesanan val2;
+					// Pesanan val2;
 					pop(&tempBag, &val);
 					push(&curBag, val);
 				}
@@ -243,10 +243,12 @@ void displayInventory(){
 					CURCAP(curBag) *= 2;
 				}
 			}else if(IDGADGET(g) == 3){
+				displayMap();
 				printf("Where do you want to go next? : ");
 				//menampilkan map atau menampilkan posisi dalam bentuk point?
-				char loc = wtoi(inputWord()); //eh ini gimana masukkan ke dalam "kata" nya?
+				// Word loc = inputWord();
 				//curPosition = [POSITION_CHOICE];
+
 			}else if(IDGADGET(g) == 4){
 				if(curTime <= 50){
 					curTime = 0;
@@ -256,10 +258,14 @@ void displayInventory(){
 			}else if(IDGADGET(g) == 5){
 				//Diskusi sama yang ngerjakan MOVE
 			}
+			else{
+				printf("Gadget is unavailable\n");
+				return;
+			}
 			printf("Gadget successfully used!\n");
 		}
 		else{
-			printf("Unable to use gadget!");
+			printf("Unable to use gadget\n");
 		}
 	}
 }

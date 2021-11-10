@@ -299,10 +299,10 @@ ListDin getNeighbor(Location L){
     for(int i=0; i<COLS(adj); i++){
         if(MAT(adj, k, i)){
             if(i==0){
-                c = '8';
+                c = (char) '8';
             }
             else{
-                c = i+'A'-1;
+                c = (char) (i+'A'-1);
             }
             insertLast(&P, c, Absis(COORELMT(LocList, i)), Ordinat(COORELMT(LocList, i)));
         }

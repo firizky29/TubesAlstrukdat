@@ -8,7 +8,7 @@ int curSpeed; // dalam persen
 Stack curBag;
 Map curMap;
 Matrix adj;
-// extern Inventory curInventory;
+Inventory curInventory;
 LinkedList curProgress;
 LinkedList curToDoList;
 boolean speedBoost;
@@ -63,31 +63,56 @@ void getLoc(Point pointhq){
 	NEFF(LocList) = L+1;
 }
 
+void interface(){
+    Word interface = {"data/interface/grafitti.txt", 27};
+    readFile(interface);
+    while(!endFile){
+        if(currentChar!='?'){
+            printf("%c", currentChar);
+        }
+        else{
+            printf("\n");
+        }
+        adv();
+    }
+}
+
 void globalinit(){
 	struct dirent *de;  // Pointer for directory entry
-
-    DIR *dr = opendir("data/original-config-file");
+    char* newGameDir = "data/original-config-file/";
+    DIR *dr = opendir(newGameDir);
     if (dr == NULL){
         printf("Could not open current directory" );
 		return;
     }
-    while ((de = readdir(dr)) != NULL)
-            printf("%s\n", de->d_name);
-  
+    printf("These are all available files you can choose: \n");
+    while ((de = readdir(dr)) != NULL){
+        if(de->d_name[0]!='.'){
+            printf("- %s\n", de->d_name);
+        }
+    }
     closedir(dr);
-    printf("Enter configuration file level ([filename].txt): ");
+    printf("Enter configuration file level ([filename]): ");
     Word filename = inputWord();
-	printWord(filename);
-    while (!fopen(filename.contents, "r")){
+    Word filepath;
+    strcpy(filepath.contents, newGameDir);
+    strcat(filepath.contents, filename.contents);
+    strcat(filepath.contents, ".txt");
+    filepath.length = 31+filename.length;
+    while (!fopen(filepath.contents, "r")){
         printf("File not found, enter filename again: ");
         filename = inputWord();
+        strcpy(filepath.contents, newGameDir);
+        strcat(filepath.contents, filename.contents);
+        strcat(filepath.contents, ".txt");
+        filepath.length = 31+filename.length;
     }
     printf("Opening ");
     printWord(filename);
-    printf("\n");
-    
+    printf("....\n");
+    interface();
     // reading file config + get info
-    readFile(filename);
+    readFile(filepath);
     getMap();
     Point hq = getPoint();
     getLoc(hq);
@@ -105,7 +130,6 @@ void globalinit(){
     while(!endFile){
         printWordFile(currentWord);
     }
-	printf("Selamat\n");
     curMoney = 0;
     curTime = 0;
     curSpeed = 100;

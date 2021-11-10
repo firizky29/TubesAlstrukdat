@@ -21,4 +21,6 @@ void getLoc(Point pointhq);
 void globalinit();
 /* Menginisialisasi segala hal */
 
+void interface();
+
 #endif

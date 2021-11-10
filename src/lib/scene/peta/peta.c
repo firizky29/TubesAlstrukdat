@@ -6,8 +6,14 @@ void CreateMap(Map* m, int rows, int cols){
     int i, j;
     for(i=0; i<rows+2; i++){
         for(j=0; j<cols+2; j++){
-            if(j==0||j==cols+1||i==0||i==rows+1){
-                TILE(*m,i, j) = '#';
+            if(i==0){
+                TILE(*m, i, j) = '_';
+            }
+            else if(j==0||j==cols+1){
+                TILE(*m, i, j) = '|';
+            }
+            else if(i==rows+1){
+                TILE(*m, i, j) = '=';
             }
             else{
                 TILE(*m, i, j) = ' ';

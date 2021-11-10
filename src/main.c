@@ -11,7 +11,6 @@ baru sampe get map matrix, matrix adjacency, sama point lokasi2 */
 
 int main(){
     // main menu
-    printf("HELLO");
 	printf("Type one of the following:\n1. NEW_GAME\n2. EXIT\nEnter your choice: ");
 	Word choice = inputWord();
 	while (!isNewGame(choice) && !isExit(choice)){
