@@ -184,10 +184,13 @@ void Buy(){
 	/*if (curPosition lagi di point hq){
 		printf("Current money: %ld Yen\n", curMoney);
 		printf("Check out these gadgets...!\n");
-		// isi bagian ini sama display gadget
+		printf("1. Kain Pembungkus Waktu (800 Yen)")
+		printf("2. Senter Pembesar (1200 Yen)")
+		printf("3. Pintu Kemana Saja (1500 Yen)")
+		printf("4. Mesin Waktu (3000 Yen)")
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 		int choice = wtoi(inputWord());
-		if (curMoney >= harga gadgetnya{
+		if (curMoney >= harga gadgetnya){
 			// isi bagian ini sama proses beli gadgetnya
 			curMoney -= harga gadget
 			printf("Gadget successfully bought!\n");
@@ -203,22 +206,22 @@ void Buy(){
 	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
 }
 void displayInventory(){
-	// printf("Here's your inventory:\n");
-	// displayInventory(curInventory);
-	// printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-	// int choice = wtoi(inputWord());
-	// if (choice != 0){
-	// 	if (INVIDGADGET(&curInventory, choice-1) != IDGADGET_UNDEF){
-	// 		Gadget g;
-	// 		// isi bagian ini sama proses penghilangan gadget dari inventory
-	// 		deleteGadget(&curInventory,choice-1,g);
-	// 		// isi juga sama aktivasi efek dari gadget
-	// 		// Cek kalau masih salah
-	// 		if(IDGADGET(g) == 1){
-	// 			Stack tempBag;
-	// 			int i = 0
-	// 			flag = true;
-	// 			Pesanan val;
+	printf("Here's your inventory:\n");
+	displayGadgetinInventory(curInventory);
+	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+	int choice = wtoi(inputWord());
+	if (choice != 0){
+		if (INVIDGADGET(&curInventory, choice-1) != IDGADGET_UNDEF){
+			Gadget g;
+			// isi bagian ini sama proses penghilangan gadget dari inventory
+			deleteGadget(&curInventory,choice-1,g);
+			// isi juga sama aktivasi efek dari gadget
+			// Cek kalau masih salah
+			if(IDGADGET(g) == 1){
+				Stack tempBag;
+				int i = 0
+				flag = true;
+				Pesanan val;
 				
 	// 			while(i != IDX_UNDEF && flag){
 	// 				if(TIPEITEM(TOP(curBag)) == 'P'){
