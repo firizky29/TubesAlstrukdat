@@ -13,8 +13,8 @@
 
 // P: Jumlah pesanan
 extern int P;
-extern ll curTime;
-extern ll curMoney;
+extern long curTime;
+extern long curMoney;
 extern int curSpeed;
 extern Stack curBag;
 extern Inventory curInventory;

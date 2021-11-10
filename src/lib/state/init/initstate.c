@@ -1,9 +1,9 @@
 #include "initstate.h"
 
 int N, M, L, P;
-ll curTime;
+long curTime;
 Location curPosition;
-ll curMoney;
+long curMoney;
 int curSpeed; // dalam persen
 Stack curBag;
 Map curMap;

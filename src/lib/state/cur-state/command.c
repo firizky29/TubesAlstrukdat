@@ -182,28 +182,79 @@ void displayInProgress(){
 	// isi bagian ini sama display in progress
 }
 void Buy(){
-	// if (IsHQ(curPosition)){
-	// 	printf("Current money: %ld Yen\n", curMoney);
-	// 	printf("Check out these gadgets...!\n");
-	// 	printf("1. Kain Pembungkus Waktu (800 Yen)")
-	// 	printf("2. Senter Pembesar (1200 Yen)")
-	// 	printf("3. Pintu Kemana Saja (1500 Yen)")
-	// 	printf("4. Mesin Waktu (3000 Yen)")
-	// 	printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-	// 	int choice = wtoi(inputWord());
-	// 	if (curMoney >= harga gadgetnya){
-	// 		// isi bagian ini sama proses beli gadgetnya
-	// 		curMoney -= ;
-	// 		printf("Gadget successfully bought!\n");
-	// 		printf("Current money: %ld Yen\n", curMoney);
-	// 	}
-	// 	else{
-	// 		printf("Oops... Seems like you don't have enough money!\n");
-	// 	}
-	// }
-	// else{
-	// 	printf("You can only buy when you're in HQ.\n");
-	// }
+	if (IsHQ(curPosition)){
+		printf("Current money: %ld Yen\n", curMoney);
+		printf("Check out these gadgets...!\n");
+		printf("1. Kain Pembungkus Waktu (800 Yen)\n");
+		printf("2. Senter Pembesar (1200 Yen)\n");
+		printf("3. Pintu Kemana Saja (1500 Yen)\n");
+		printf("4. Mesin Waktu (3000 Yen)\n");
+		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+		int choice = wtoi(inputWord());
+		while(choice<0||choice>4){
+			system("cls");
+			system("clear");
+			printf("The gadget you selected is not available.\n");
+			printf("Current money: %ld Yen\n", curMoney);
+			printf("Select one of these gadget...\n");
+			printf("1. Kain Pembungkus Waktu (800 Yen)\n");
+			printf("2. Senter Pembesar (1200 Yen)\n");
+			printf("3. Pintu Kemana Saja (1500 Yen)\n");
+			printf("4. Mesin Waktu (3000 Yen)\n");
+			printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+			choice = wtoi(inputWord());
+		}
+		if(choice == 1){
+			if (curMoney >= 800){
+				// isi bagian ini sama proses beli gadgetnya
+				curMoney -= 800;
+				printf("Gadget successfully bought!\n");
+				printf("Current money: %ld Yen\n", curMoney);
+			}
+			else{
+				printf("Oops... Seems like you don't have enough money!\n");
+			}
+		}
+		else if(choice == 2){
+			if (curMoney >= 1200){
+				// isi bagian ini sama proses beli gadgetnya
+				curMoney -= 1200;
+				printf("Gadget successfully bought!\n");
+				printf("Current money: %ld Yen\n", curMoney);
+			}
+			else{
+				printf("Oops... Seems like you don't have enough money!\n");
+			}
+		}
+		else if(choice == 3){
+			if (curMoney >= 1500){
+				// isi bagian ini sama proses beli gadgetnya
+				curMoney -= 1500;
+				printf("Gadget successfully bought!\n");
+				printf("Current money: %ld Yen\n", curMoney);
+			}
+			else{
+				printf("Oops... Seems like you don't have enough money!\n");
+			}
+		}
+		else if(choice == 4){
+			if (curMoney >= 3000){
+				// isi bagian ini sama proses beli gadgetnya
+				curMoney -= 3000;
+				printf("Gadget successfully bought!\n");
+				printf("Current money: %ld Yen\n", curMoney);
+			}
+			else{
+				printf("Oops... Seems like you don't have enough money!\n");
+			}
+		}
+		else{
+			printf("\nCancelling...\n");
+		}
+	}
+	else{
+		printf("You can only buy when you're in HQ.\n");
+	}
 }
 void displayInventory(){
 	printf("Here's your inventory:\n");
