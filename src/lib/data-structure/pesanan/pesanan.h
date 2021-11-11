@@ -22,7 +22,7 @@ typedef struct pesanan {
 
 #define TIME_UNDEF (-1)
 
-Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT);
+Pesanan CreatePesanan(int T, char PU, char DO, char TP, int FPI, int PT);
 /* Membentuk Pesanan */
 /* Mereturn pesanan yang akan dimasukkan ke dalam queue/linkedlist */
 
