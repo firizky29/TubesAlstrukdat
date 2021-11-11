@@ -2,7 +2,8 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "charmachine.h": "c",
-        "global.h": "c"
+        "global.h": "c",
+        "boolean.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

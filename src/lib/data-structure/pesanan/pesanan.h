@@ -2,7 +2,7 @@
 #define PESANAN_H
 
 #include <stdlib.h>
-#include "../../boolean.h"
+#include <boolean.h>
 
 typedef struct pesanan {
     int time; /*waktu pesanan muncul*/

@@ -2,7 +2,7 @@
 #define NODE_H
 
 #include <stdlib.h>
-#include "../pesanan/pesanan.h"
+#include <pesanan.h>
 
 typedef struct node* Address;
 typedef struct node {

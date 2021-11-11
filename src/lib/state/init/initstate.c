@@ -1,4 +1,4 @@
-#include "initstate.h"
+#include <initstate.h>
 
 int N, M, L, P;
 long curTime;

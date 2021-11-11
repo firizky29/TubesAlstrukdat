@@ -5,7 +5,7 @@
 // Deskripsi : Membuat ADT Queue
 
 #include<stdio.h>
-#include"queue.h"
+#include <queue.h>
 
 /* *** Kreator *** */
 void CreateQueue(Queue *q){

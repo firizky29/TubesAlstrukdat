@@ -4,8 +4,8 @@
 
 #ifndef STACK_H
 #define STACK_H
-#include "../../boolean.h"
-#include "../pesanan/pesanan.h"
+#include <boolean.h>
+#include <pesanan.h>
 
 
 #define STACK_CAP 100

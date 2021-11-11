@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "lib/state/init/initstate.h"
-#include "lib/state/cur-state/command.h"
-#include "lib/boolean.h"
+#include <initstate.h>
+#include <command.h>
+#include <boolean.h>
 
 /* SIMULASI MAIN MENU + BACA CONFIG
 dari tahap main menu sampe get info dari config 

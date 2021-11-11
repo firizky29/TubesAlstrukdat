@@ -1,9 +1,9 @@
 #ifndef INITSTATE_H
 #define INITSTATE_H
 
-#include "../../tools/mesin-kata/wordmachine.h"
-#include "../../component/global.h"
-#include "../../scene/peta/peta.h"
+#include <wordmachine.h>
+#include <global.h>
+#include <peta.h>
 #include <dirent.h>
 
 

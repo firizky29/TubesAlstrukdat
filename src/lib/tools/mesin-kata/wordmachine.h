@@ -1,8 +1,8 @@
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H
 
-#include "../mesin-karakter/charmachine.h"
-#include "../../boolean.h"
+#include <charmachine.h>
+#include <boolean.h>
 
 #define MAXWORD 50
 #define BLANK ' '

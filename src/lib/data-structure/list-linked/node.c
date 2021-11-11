@@ -1,7 +1,7 @@
 /* File: node.c */
 /* Implementasi Node */
 
-#include "node.h"
+#include <node.h>
 #include <stdlib.h>
 
 Address newNode(Pesanan val) {

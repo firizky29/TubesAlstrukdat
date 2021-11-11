@@ -1,71 +1,40 @@
 CC = gcc
-PROJECT_MANAGER = project
-PRJOCET_BIN = listpost
 
-# FLAGS
+BUILD_DIR := ./build
+BIN_DIR := ./bin
+SRC_DIR := ./src
+TARGET := $(BIN_DIR)/MobitaGame
+
+CFLAG = -Wall -std=c99
 BUILD_FLAG = -lm
-CFLAG = -Wall -std=c99 -Isrc/lib
-TEST_FLAG = -lcheck -lcheck -lm -lpthread -lrt -lsubunit -std=c99 -lsubunit -lgcov -coverage
 
-BUILD_SRC = ./build/src
-BUILD_TEST = ./build/test
+SRCS := $(shell find src -name *.c ! -name "main.c")
+OBJS := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 
-BIN_SRC = $(shell find src -name "*.c")
-BIN_OBJ = $(patsubst %.c,build/%.o,$(BIN_SRC))
 
-NMAIN_SRC = $(shell find src -name "*.c"  ! -name "main_*" ! -name "main.c")
-NMAIN_OBJ = $(patsubst %.c,build/%.o,$(NMAIN_SRC))
+INC_DIR := $(wildcard src/*/**/**)
+INC_FLAG := $(addprefix -I,$(INC_DIR)) -Isrc/lib
 
-# TESTING CONFIGURATION
-TESTING_FILE = $(shell find test -name "*.c")
-TESTING_OBJ = $(patsubst %.c,build/%.o,$(TESTING_FILE))
-
-# SOURCE CODE TO OBJECT FILE
-./build/src/%.o: ./src/%.c ./src/%.h
+$(BUILD_DIR)/src/%.o $(BUILD_DIR)/%.o: ./src/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) -g $(CFLAG) -c $< -o $@
+	@$(CC) -g $(CFLAG) $(INC_FLAG) -c $< -o $@
 
-./build/src/%.o: ./src/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) -g $(CFLAG) -c $< -o $@
+$(TARGET): $(OBJS) $(BUILD_DIR)/main.o
+	@mkdir -p bin
+	@$(CC) $(INC_FLAG) $^ -o $@ -O3
 
-./build/test/%.o: ./test/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) -g $(CFLAG) -fprofile-arcs -ftest-coverage -c $< -o $@
+build: $(OBJS) $(BUILD_DIR)/main.o
+	@mkdir -p bin
+	@$(CC) -g $(INC_FLAG) $^ -o $(TARGET)
 
-all: clear build
+run: build
+	@$(TARGET)
 
 clear:
-	@rm -rf build/* bin/*
+	@rm -rf build/*
 
-./bin/test: ${TESTING_OBJ} $(NMAIN_OBJ)
-	@mkdir -p bin
-	@$(CC) -g $^ -o $@ $(BUILD_FLAG) $(TEST_FLAG)
+all : clear run
 
-./bin/mobilita: $(NMAIN_OBJ) $(BUILD_SRC)/main.o
-	@mkdir -p bin
-	@$(CC) $^ -o $@ $(BUILD_FLAG) -O3
+.PHONY : clear all build run
 
-build: ./bin/mobilita
 
-build_debug: $(NMAIN_OBJ) $(BUILD_SRC)/main.o
-	@mkdir -p bin
-	@$(CC) -g $^ -o ./bin/mobilita $(BUILD_FLAG)
-
-run: build_debug
-	@./bin/mobilita
-
-debug: build_debug
-
-test_debug: clean ./bin/test
-	@./bin/test -tno-fork
-
-test: clean ./bin/test
-	@./bin/test
-
-main_builder/%: % $(NMAIN_OBJ)
-	@$(CC) -g $^ -o ./bin/ADT_RUNNER $(BUILD_FLAG)
-
-clean: clear
-
-.PHONY: test clear all adt tc clean vscode build run

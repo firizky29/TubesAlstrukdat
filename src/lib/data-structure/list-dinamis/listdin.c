@@ -8,7 +8,7 @@ Deskripsi : Pra Praktikum 4 (Program listdin.c)
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "listdin.h"
+#include <listdin.h>
 
 
 void setLoc(Location *L, int x, int y, char c){

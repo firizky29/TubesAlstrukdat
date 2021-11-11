@@ -1,8 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "../../data-structure/list-dinamis/listdin.h"
-#include "../../data-structure/matriks/matrix.h"
+#include <listdin.h>
+#include <matrix.h>
 extern int N, M, L;
 // N: rows, M: cols, L: location
 

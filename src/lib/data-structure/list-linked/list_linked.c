@@ -5,7 +5,7 @@
 // Deskripsi : Membuat ADT List Berkait
 
 #include <stdio.h>
-#include "list_linked.h"
+#include <list_linked.h>
 
 /* Definisi List : */
 /* List kosong : FIRST(l) = NULL */
