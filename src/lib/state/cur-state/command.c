@@ -182,12 +182,37 @@ void displayMap(){
 	printf("(current position = yellow point)\n");
 }
 void displayToDoList(){
-	printf("Here's your to-do list:\n");
-	// isi bagian ini sama display to-do list
+    printf("Pesanan pada To Do List:\n");
+    Address p = FIRST(curToDoList);
+    for (int i=1; i<=lengthLL(curToDoList); i++){
+        printf("%d. %c -> %c ",i,INFO(p).pickup,INFO(p).dropoff);
+        if (INFO(p).type == 'N'){
+            printf("(Normal Item)\n");
+        } else if (INFO(p).type == 'H'){
+            printf("(Heavy Item)\n");
+        } else if (INFO(p).type == 'P'){
+            printf("(Perishable Item)\n");
+        }
+        p = NEXT(p);
+    }
 }
 void displayInProgress(){
-	printf("Order(s) in-progress:\n");
-	// isi bagian ini sama display in progress
+    // ngeprint dari awal-akhir
+    // berarti kalo PICK_UP lebih gampang insertFirst ke LinkedList, 
+    // trus kalo DROP_OFF deleteLast
+    printf("Pesanan yang sedang diantarkan:\n");
+    Address p = FIRST(curProgress);
+    for (int i=1; i<=lengthLL(curProgress); i++){
+
+        if (INFO(p).type == 'N'){
+            printf("%d. Normal Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+        } else if (INFO(p).type == 'H'){
+            printf("%d. Heavy Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+        } else if (INFO(p).type == 'P'){
+            printf("%d. Perishable Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+        }
+        p = NEXT(p);
+    }    
 }
 void Buy(){
 	if (IsHQ(curPosition)){
