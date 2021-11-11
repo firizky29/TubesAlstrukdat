@@ -11,9 +11,14 @@ Deskripsi : Pra Praktikum 4 (Program listdin.c)
 #include <listdin.h>
 
 
-void setLoc(Location *L, int x, int y, char c){
+void setLocComponent(Location *L, int x, int y, char c){
     COORLOC(*L) = MakePoint(x, y);
     CHARLOC(*L) = c;
+}
+
+void setLoc(Location *L, Location L1){
+    COORLOC(*L) = COORLOC(L1);
+    CHARLOC(*L) = CHARLOC(L1);
 }
 
 void displayLoc(Location L){
@@ -310,9 +315,7 @@ ListDin getNeighbor(Location L){
     return P;
 }
 
-void displayNeighbor(Location L){
-    ListDin P;
-    P = getNeighbor(L);
+void displayBuilding(ListDin P){
     for(int i=0; i<NEFF(P); i++){
         if(CHARELMT(P,i)=='8'){
             printf("%d. %s ", i+1, "HQ");

@@ -28,12 +28,24 @@ boolean isStackFull(Stack s){
     return IDX_TOP(s) == CURCAP(s)-1;
 }
 
-boolean isCanUpgrade(Stack s){
-/* Mengirim true jika s masih upgradeable */
-    /* KAMUS LOKAL */
-    /* ALGORITMA */
-    return CURCAP(s) == STACK_CAP;
+void capMultiplier(Stack* s, int mult){
+    if(CURCAP(*s)*mult <= STACK_CAP){
+        CURCAP(*s) *= mult;
+    }
+    else{
+        CURCAP(*s) = STACK_CAP;
+    }
 }
+
+void capInc(Stack* s, int inc){
+    if(CURCAP(*s)+inc <= STACK_CAP){
+        CURCAP(*s) += inc;
+    }
+    else{
+        CURCAP(*s) = STACK_CAP;
+    }
+}
+
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void push(Stack *s, Pesanan val){
 /* Menambahkan val sebagai elemen Stack s */

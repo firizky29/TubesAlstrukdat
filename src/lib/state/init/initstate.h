@@ -16,10 +16,11 @@ void getAdjacency(Matrix *m, int n);
 /* get and return adjacency matrix from config */
 void getLoc(Point pointhq);
 /* get char and coord of loc and return list dinamis */
-
+void getPesananList();
 /* global init */
 void globalinit();
 /* Menginisialisasi segala hal */
+
 
 void interface();
 

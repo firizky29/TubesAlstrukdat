@@ -56,7 +56,8 @@ extern Location curPosition;
 #define COORLOC(L) (L).coorLoc
 
 
-void setLoc(Location *L, int x, int y, char c);
+void setLocComponent(Location *L, int x, int y, char c);
+void setLoc(Location *L, Location L1);
 void displayLoc(Location L);
 boolean IsHQ (Location P);
 boolean isSpace(Location P);
@@ -64,7 +65,7 @@ boolean isDropOffPoint(Location P);
 boolean isPickUpPoint(Location P);
 boolean isMobitaPoint(Location P);
 ListDin getNeighbor(Location L);
-void displayNeighbor(Location L);
+void displayBuilding(ListDin P);
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */

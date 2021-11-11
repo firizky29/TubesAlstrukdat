@@ -90,12 +90,20 @@ boolean isReturn(Word kata){
 
 /* Mengubah curPosition, curTime*/
 void Move(){
+	ListDin Neighbor;
+	printf("Time: %ld\n", curTime);
 	printf("Here are the nearest buildings:\n");
 	// disini tambahin bagian ngecek adjacency dari curposition
 	// disini display posisi yang dicapai + 0 to cancel
-	displayNeighbor(curPosition);
+	Neighbor = getNeighbor(curPosition);
+	displayBuilding(Neighbor);
 	printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
+	while(choice<0 || choice > length(Neighbor)){
+		// Ga bisa bikin kata katanya T_T
+		printf("...");
+		choice = wtoi(inputWord());
+	}
 	if (choice != 0){
 		// TIME HANDLING
 		if (speedBoost && countHeavyItem == 0){ // ini kasus punya speedboost & gaada heavy item
@@ -123,9 +131,9 @@ void Move(){
 		// POSITION HANDLING
 		/* move player based on choice
 		curPosition = [POSITION_CHOICE] */
-
-		// printf("You are now in point (%d, %d)", curPosition.X, curPosition.Y);
-		// printf("Time: %lld", curTime);
+		setLoc(&curPosition, ELMT(Neighbor, choice-1));
+		printf("You are now in building %c at point (%d, %d)\n", CHARLOC(curPosition), Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
+		printf("Time: %ld\n", curTime);
 	}
 }
 
@@ -288,11 +296,7 @@ void displayInventory(){
 					push(&curBag, val);
 				}
 			}else if(IDGADGET(g) == 2){
-				if(CURCAP(curBag)*2 >= STACK_CAP){
-					CURCAP(curBag) = STACK_CAP;
-				}else{
-					CURCAP(curBag) *= 2;
-				}
+				capMultiplier(&curBag, 2);
 			}else if(IDGADGET(g) == 3){
 				displayMap();
 				printf("Where do you want to go next? : ");

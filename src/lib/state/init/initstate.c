@@ -63,6 +63,16 @@ void getLoc(Point pointhq){
 	NEFF(LocList) = L+1;
 }
 
+void getPesananList(){
+    int i;
+    P = wtoi(currentWord);
+    // create Queue pesanan
+    for (i=0; i<P; i++){    
+        // masukin item pesanan
+        advWord_file();
+    }
+}
+
 void interface(){
     Word interface = {"data/interface/grafitti.txt", 27};
     readFile(interface);
@@ -126,6 +136,7 @@ void globalinit(){
     printf("\n\n");
     displayList(LocList);
     printf("\n\n");
+
     // sisanya di print dulu aja karena nunggu ADTnya ada dulu
     while(!endFile){
         printWordFile(currentWord);

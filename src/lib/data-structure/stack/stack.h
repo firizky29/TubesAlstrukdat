@@ -35,8 +35,8 @@ boolean isStackEmpty(Stack s);
 /* Mengirim true jika s kosong: lihat definisi di atas */
 boolean isStackFull(Stack s);
 /* Mengirim true jika tabel penampung nilai s stack penuh */
-boolean isCanUpgrade(Stack s);
-/* Mengirim true jika s masih upgradeable */
+void capMultiplier(Stack* s, int mult);
+void capInc(Stack* s, int inc);
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void push(Stack *s, Pesanan val);
