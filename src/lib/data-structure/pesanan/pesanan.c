@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include"pesanan.h"
 
-Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT){
+Pesanan CreatePesanan(int T, char PU, char DO, char TP, int FPI, int PT){
 /* Membentuk Pesanan */
 /* Mereturn pesanan yang akan dimasukkan ke dalam queue/linkedlist */
     Pesanan P;
@@ -9,13 +9,14 @@ Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT){
     PICKUPPESANAN(P) = PU;
     DROPOFFPESANAN(P) = DO;
     TIPEITEM(P) = TP;
+    FIRSTPITEM(P) = FPI;
     PTIME(P) = PT;
 
     return P;
 }
 void displayPesanan(Pesanan P){
 /* Menulis Pesanan dengan format time pickup dropoff type ptime */
-    printf("%d %c %c %c %d",TIMEPESANAN(P),PICKUPPESANAN(P),DROPOFFPESANAN(P),TIPEITEM(P),PTIME(P));
+    printf("%d %c %c %c %d %d",TIMEPESANAN(P),PICKUPPESANAN(P),DROPOFFPESANAN(P),TIPEITEM(P),FIRSTPITEM(p), PTIME(P));
 }
 
 void subtractPtime(Pesanan *P){
@@ -33,5 +34,5 @@ boolean isXItem(Pesanan P, char itemChar){
 boolean isEqualPesanan(Pesanan P1, Pesanan P2){
 /* Mereturn true jika Pesanan P1 sama dengan Pesanan P2 */
 /* Perishable time tidak diperhitungkan karena dapat berubah-ubah */
-    return (TIMEPESANAN(P1) == TIMEPESANAN(P2)) && (PICKUPPESANAN(P1) == PICKUPPESANAN(P2)) && (DROPOFFPESANAN(P1) == DROPOFFPESANAN(P2)) && (TIPEITEM(P1) == TIPEITEM(P2));
+    return (TIMEPESANAN(P1) == TIMEPESANAN(P2)) && (PICKUPPESANAN(P1) == PICKUPPESANAN(P2)) && (DROPOFFPESANAN(P1) == DROPOFFPESANAN(P2)) && (TIPEITEM(P1) == TIPEITEM(P2) && (FIRSTPITEM(P1)==FIRSTPITEM(P2)));
 }
