@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "point.h"
+#include <point.h>
 
 /* *** Konstruktor membentuk Point *** */
 Point MakePoint (int X, int Y) {

@@ -2,10 +2,10 @@
 #define GLOBAL_H
 #define ll long long
 
-#include "../data-structure/stack/stack.h"
-#include "../data-structure/point/point.h"
-#include "../data-structure/list-statis/liststat.h"
-#include "../data-structure/list-linked/list_linked.h"
+#include <stack.h>
+#include <point.h>
+#include <liststat.h>
+#include <list_linked.h>
 
 
 

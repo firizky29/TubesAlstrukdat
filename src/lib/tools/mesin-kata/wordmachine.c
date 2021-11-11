@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "wordmachine.h"
+#include <wordmachine.h>
 
 /* Word Engine State */
 boolean endWord;

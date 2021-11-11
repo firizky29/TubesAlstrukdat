@@ -6,9 +6,9 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "node.h"
-#include "../../boolean.h"
-#include "../pesanan/pesanan.h"
+#include <node.h>
+#include <boolean.h>
+#include <pesanan.h>
 
 typedef Address LinkedList;
 

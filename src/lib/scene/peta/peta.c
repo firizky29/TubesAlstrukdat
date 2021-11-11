@@ -1,5 +1,5 @@
-#include "peta.h"
-#include "../../tools/pcolor/pcolor.h"
+#include <peta.h>
+#include <pcolor.h>
 #include <stdio.h>
 
 void CreateMap(Map* m, int rows, int cols){

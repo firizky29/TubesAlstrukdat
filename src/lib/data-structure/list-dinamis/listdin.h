@@ -8,9 +8,9 @@
 #define LISTDIN_H
 
 // #include "../../../boolean.h"
-#include "../point/point.h"
-#include "../../component/global.h"
-#include "../matriks/matrix.h"
+#include <point.h>
+#include <global.h>
+#include <matrix.h>
 
 #define IDX_UNDEF -1
 typedef int IdxType;

@@ -1,9 +1,9 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../../tools/mesin-kata/wordmachine.h"
-#include "../../scene/peta/peta.h"
-#include "../../component/global.h"
+#include <wordmachine.h>
+#include <peta.h>
+#include <global.h>
 
 /* CHECK COMMAND VALIDITY */
 boolean isNewGame(Word kata);

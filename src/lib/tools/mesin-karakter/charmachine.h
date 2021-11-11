@@ -1,7 +1,7 @@
 #ifndef CHAR_ENGINE_H
 #define CHAR_ENGINE_H
 
-#include "../../boolean.h"
+#include <boolean.h>
 #include <string.h>
 #include <stdio.h>
 

@@ -7,7 +7,7 @@
 #ifndef LISTSTAT_H
 #define LISTSTAT_H
 
-#include "../../boolean.h"
+#include <boolean.h>
 
 #define INVENTORY_CAP 5
 #define IDGADGET_UNDEF -1

@@ -1,7 +1,7 @@
 /* NIM/NAMA : 13520095/FIRIZKY ARDIANSYAH */
 /* TANGGAL : 16/10/2021 */
 /* LIBRARY STACK*/
-#include "stack.h"
+#include <stack.h>
 
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s){

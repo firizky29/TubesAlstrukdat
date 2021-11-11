@@ -7,7 +7,7 @@ Deskripsi : Pra Praktikum 5 (Program matrix.c)
 */
 
 #include <stdio.h>
-#include "matrix.h"
+#include <matrix.h>
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk Matrix *** */
