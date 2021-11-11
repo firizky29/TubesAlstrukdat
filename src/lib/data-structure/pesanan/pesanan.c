@@ -34,5 +34,5 @@ boolean isXItem(Pesanan P, char itemChar){
 boolean isEqualPesanan(Pesanan P1, Pesanan P2){
 /* Mereturn true jika Pesanan P1 sama dengan Pesanan P2 */
 /* Perishable time tidak diperhitungkan karena dapat berubah-ubah */
-    return (TIMEPESANAN(P1) == TIMEPESANAN(P2)) && (PICKUPPESANAN(P1) == PICKUPPESANAN(P2)) && (DROPOFFPESANAN(P1) == DROPOFFPESANAN(P2)) && (TIPEITEM(P1) == TIPEITEM(P2) && (FIRSTPITEM(P1)==FIRSTPITEM(P2)));
+    return (TIMEPESANAN(P1) == TIMEPESANAN(P2)) && (PICKUPPESANAN(P1) == PICKUPPESANAN(P2)) && (DROPOFFPESANAN(P1) == DROPOFFPESANAN(P2)) && (TIPEITEM(P1) == TIPEITEM(P2)) && (FIRSTPITEM(P1)==FIRSTPITEM(P2)));
 }
