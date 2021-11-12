@@ -1,5 +1,7 @@
 #include <command.h>
 #include <global.h>
+#include <pesanan.h>
+#include <list_linked.h>
 
 
 /* CHECK COMMAND VALIDITY */
@@ -155,19 +157,40 @@ void Move(){
 }
 
 void Pickup(){
-	// CASE 1: ITEM IS AVAILABLE FOR PICKUP
-	/*if ([ada item di cur position]){
-		printf("Pickup of [isi type item] successful!\n");
-		(isi bagian ini sama proses pengambilan pesanan)
-		(Aktifkan efek-efeknya bila bukan Normal Item) -> punya Ghebyon
-		printf("Item destination: [isi destinasi drop off] \n");
-	}
+	char curPositionBuilding = CHARLOC(curPosition);
+	Pesanan pesanan;
 
-	// CASE 2: NO AVAILABLE ITEM FOR PICKUP
-	else{
-		printf("There seems to be no items here... Pickup unsuccessful.\n");
-	}*/
-	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
+	/* Jika tas tidak penuh */
+    if (!isStackFull(curBag)) { 
+		/* Jika ada item di bangunan */
+        if (indexOfPesananBuilding(curToDoList, curPositionBuilding) != IDX_UNDEF){ 
+            /* Menghapus item dari curToDoList */
+            deleteAt(&curToDoList, indexOfPesananBuilding(curToDoList, curPositionBuilding), &pesanan);
+
+            /* Menambahkan item ke curProgress dan curBag */
+            insertFirst(&curProgress, pesanan);
+            push(&curBag, pesanan);
+
+            if (TIPEITEM(pesanan) == 'N'){
+                printf("Pesanan berupa Normal Item berhasil diambil!");
+                // Efek item
+            } else if (TIPEITEM(pesanan) == 'H'){
+                printf("Pesanan berupa Heavy Item berhasil diambil!");
+                // Efek item
+            } else if (TIPEITEM(pesanan) == 'P'){
+                printf("Pesanan berupa Perishable Item berhasil diambil!");
+                // Efek item
+            }
+            // VIP Item belum ditambahkan
+            
+            printf("Tujuan Pesanan: %c", DROPOFFPESANAN(pesanan));
+
+        } else {
+            printf("There seems to be no items here... Pickup unsuccessful.\n");
+        }
+    } else {
+        printf("Tas penuh!\n");
+    }
 }
 
 /* Mengubah curBag, curProgress, cur..*/

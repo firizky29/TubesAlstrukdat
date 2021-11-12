@@ -101,4 +101,7 @@ int lengthLL(LinkedList l);
 /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 
+/* PICK_UP */
+int indexOfPesananBuilding(LinkedList to_do, char building);
+
 #endif

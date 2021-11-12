@@ -206,3 +206,27 @@ int lengthLL(LinkedList l){
 
     return idxcount;
 }
+
+/* PICK_UP */
+int indexOfPesananBuilding(LinkedList to_do, char building){
+/* Mengirimkan index pertama to_do yang bangunan pick up pesanannya adalah building atau
+               IDX_UNDEF jika tidak ada */
+    int idxcount = 0;
+    Address p = FIRST(to_do);
+    boolean found = false;
+
+    while (p != NULL && !found){
+        if (PICKUPPESANAN(INFO(p)) == building){
+            found = true;
+        } else {
+            idxcount += 1;
+            p = NEXT(p);
+        }
+    }
+
+    if (found){
+        return idxcount;
+    } else {
+        return IDX_UNDEF;
+    }
+}
