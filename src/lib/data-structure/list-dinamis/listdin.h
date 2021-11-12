@@ -57,15 +57,25 @@ extern Location curPosition;
 
 
 void setLocComponent(Location *L, int x, int y, char c);
+/* Set lokasi di titik (x, y) bangunan c*/
 void setLoc(Location *L, Location L1);
+/* Mengcopy lokasi L1 ke L */
 void displayLoc(Location L);
+/* display lokasi */
 boolean IsHQ (Location P);
+/* Mereturn True jika P ada di HQ */
 boolean isSpace(Location P);
+/* Mereturn True jika titik di lokasi P tidak ada bangunannya */
 boolean isDropOffPoint(Location P);
+/* Mereturn True jika barang paling atas dari tas perlu di dropoff di P */
 boolean isPickUpPoint(Location P);
+/* Mereturn True jika Lokasi P memiliki barang untuk di pickup*/
 boolean isMobitaPoint(Location P);
+/* Mereturn True jika P adalah current position dari Mobita*/
 ListDin getNeighbor(Location L);
+/* Menghasilkan list dari tetangga lokasi L */
 void displayBuilding(ListDin P);
+/* Menampilkan list of bangunan P */
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */

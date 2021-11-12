@@ -136,7 +136,6 @@ void globalinit(){
     printf("\n\n");
     displayList(LocList);
     printf("\n\n");
-
     // sisanya di print dulu aja karena nunggu ADTnya ada dulu
     while(!endFile){
         printWordFile(currentWord);

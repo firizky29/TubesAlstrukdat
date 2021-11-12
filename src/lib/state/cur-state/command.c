@@ -92,6 +92,12 @@ boolean isReturn(Word kata){
 void Move(){
 	ListDin Neighbor;
 	printf("Time: %ld\n", curTime);
+	if(CHARLOC(curPosition)=='8'){
+		printf("You are now in building HQ at point (%d, %d)\n", Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
+	}
+	else{
+		printf("You are now in building %c at point (%d, %d)\n", CHARLOC(curPosition), Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
+	}
 	printf("Here are the nearest buildings:\n");
 	// disini tambahin bagian ngecek adjacency dari curposition
 	// disini display posisi yang dicapai + 0 to cancel
@@ -100,8 +106,18 @@ void Move(){
 	printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
 	while(choice<0 || choice > length(Neighbor)){
-		// Ga bisa bikin kata katanya T_T
-		printf("...");
+		system("cls");
+		system("clear");
+		printf("Ga bisa bikin kata katanya T_T\n");
+		if(CHARLOC(curPosition)=='8'){
+			printf("You are now in building HQ at point (%d, %d)\n", Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
+		}
+		else{
+			printf("You are now in building %c at point (%d, %d)\n", CHARLOC(curPosition), Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
+		}
+		printf("Here are the nearest buildings:\n");
+		displayBuilding(Neighbor);
+		printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
 		choice = wtoi(inputWord());
 	}
 	if (choice != 0){
@@ -127,7 +143,8 @@ void Move(){
 		else{ // ini kasus gaada speedboost dan gaada heavy item
 			curTime += 1;
 		}
-
+		printf("mindahin daftar pesanan ke todolist\n");
+		printf("ngurangin waktu perishableitem\n");
 		// POSITION HANDLING
 		/* move player based on choice
 		curPosition = [POSITION_CHOICE] */
