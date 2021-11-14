@@ -66,6 +66,11 @@ void CreateListDin(ListDin *l, int capacity) {
     CAPACITY(*l) = capacity;
 }
 
+boolean isAdjacent(Location L1, Location L2){
+    ListDin P = getNeighbor(L1);
+    return indexOfCharLoc(P, CHARLOC(L2))!=IDX_UNDEF;
+}
+
 void dealocate(ListDin *l) {
     /* KAMUS */
     /* ALGORITMA */

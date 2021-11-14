@@ -44,6 +44,9 @@ void DisplayMap(Map m){
             else if(isPickUpPoint(ELMT(LocList, k))){
                 print_red(TILE(m, i, j));
             }
+            else if(isAdjacent(curPosition, ELMT(LocList, k))){
+                print_green(TILE(m, i, j));
+            }
             else{
                 printf("%c", TILE(m, i, j));
             }
