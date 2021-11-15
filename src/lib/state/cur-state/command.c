@@ -355,9 +355,13 @@ void displayInventory(){
 			if(IDGADGET(g) == 1){
 				Stack tempBag;
 				int i = 0;
-				boolean flag = true;
-				Pesanan val;
-				
+				if (TIPEITEM(TOP(curBag)) == 'P'){
+					PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag))
+				}
+
+				//boolean flag = true;
+				// KALAU PERISHABLE BERADA PADA ITEM TERATAS
+				/* KALAU PERISHABLE TERATAS
 				while(i != IDX_UNDEF && flag){
 					if(TIPEITEM(TOP(curBag)) == 'P'){
 						PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag));
@@ -370,7 +374,7 @@ void displayInventory(){
 					// Pesanan val2;
 					pop(&tempBag, &val);
 					push(&curBag, val);
-				}
+				}*/
 			}else if(IDGADGET(g) == 2){
 				capMultiplier(&curBag, 2);
 			}else if(IDGADGET(g) == 3){
@@ -379,7 +383,6 @@ void displayInventory(){
 				//menampilkan map atau menampilkan posisi dalam bentuk point?
 				// Word loc = inputWord();
 				//curPosition = [POSITION_CHOICE];
-
 			}else if(IDGADGET(g) == 4){
 				if(curTime <= 50){
 					curTime = 0;
@@ -388,8 +391,10 @@ void displayInventory(){
 				}
 			}else if(IDGADGET(g) == 5){
 				//Diskusi sama yang ngerjakan MOVE
-			}
-			else{
+				if (TIPEITEM(TOP(curBag)) == 'H'){
+					countHeavyItem -= 1;
+				}
+			}else{
 				printf("Gadget is unavailable\n");
 				return;
 			}
