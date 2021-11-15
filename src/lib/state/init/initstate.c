@@ -15,6 +15,8 @@ boolean speedBoost;
 int countHeavyItem ;
 int countMove;
 ListDin LocList;
+Queue daftarPesanan;
+Word configName;
 
 // List curInventory;
 // LinkedList curProgress;
@@ -67,9 +69,29 @@ void getPesananList(){
     int i;
     P = wtoi(currentWord);
     // create Queue pesanan
-    for (i=0; i<P; i++){    
+    Pesanan pesanan;
+    int t, fpi, pt;
+    char pu, d, tp;
+    CreateQueue(&daftarPesanan);
+    for (i=0; i < P; i++){    
         // masukin item pesanan
+        t = wtoi(currentWord);
+        pu = currentWord.contents[0];
         advWord_file();
+        d = currentWord.contents[0];
+        advWord_file();
+        tp = currentWord.contents[0];
+        advWord_file();
+        if (tp == 'P'){
+            fpi = wtoi(currentWord);
+            pt = fpi;
+        }
+        else{
+            fpi = -1;
+            pt = -1;
+        }
+        pesanan = CreatePesanan(t, pu, d, tp, fpi, pt);
+        enqueue(&daftarPesanan, pesanan);
     }
 }
 
@@ -87,6 +109,28 @@ void interface(){
     }
 }
 
+void initConfig(Word filepath){
+    readFile(filepath);
+    getMap();
+    Point hq = getPoint();
+    getLoc(hq);
+    BuildingToMap(&curMap, LocList);
+    getAdjacency(&adj, NEFF(LocList));
+    getPesananList();
+
+    // display info2"\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
+    printf("Map: %d x %d\n", REFF(curMap), CEFF(curMap));
+    DisplayMap(curMap);
+    printf("\n\n");
+    displayMatrix(adj);
+    printf("\n\n");
+    displayList(LocList);
+    printf("\n\n");
+    displayQueue(daftarPesanan);
+    printf("\n\n");
+    // sisanya di print dulu aja karena nunggu ADTnya ada dulu
+}
+
 void globalinit(){
 	struct dirent *de;  // Pointer for directory entry
     char* newGameDir = "data/original-config-file/";
@@ -102,48 +146,30 @@ void globalinit(){
         }
     }
     closedir(dr);
-    printf("Enter configuration file level ([filename]): ");
-    Word filename = inputWord();
+    printf("Enter configuration file level (filename): ");
+    configName = inputWord();
     Word filepath;
     strcpy(filepath.contents, newGameDir);
-    strcat(filepath.contents, filename.contents);
+    strcat(filepath.contents, configName.contents);
     strcat(filepath.contents, ".txt");
-    filepath.length = 31+filename.length;
+    filepath.length = 31+configName.length;
     while (!fopen(filepath.contents, "r")){
         printf("File not found, enter filename again: ");
-        filename = inputWord();
+        configName = inputWord();
         strcpy(filepath.contents, newGameDir);
-        strcat(filepath.contents, filename.contents);
+        strcat(filepath.contents, configName.contents);
         strcat(filepath.contents, ".txt");
-        filepath.length = 31+filename.length;
+        filepath.length = 31+configName.length;
     }
     printf("Opening ");
-    printWord(filename);
+    printWord(configName);
     printf("....\n");
     interface();
     // reading file config + get info
-    readFile(filepath);
-    getMap();
-    Point hq = getPoint();
-    getLoc(hq);
-    BuildingToMap(&curMap, LocList);
-    getAdjacency(&adj, NEFF(LocList));
-// display info2"\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
-    printf("Map: %d x %d\n", REFF(curMap), CEFF(curMap));
-    DisplayMap(curMap);
-    printf("\n\n");
-    displayMatrix(adj);
-    printf("\n\n");
-    displayList(LocList);
-    printf("\n\n");
-    // sisanya di print dulu aja karena nunggu ADTnya ada dulu
-    while(!endFile){
-        printWordFile(currentWord);
-    }
+    initConfig(filepath);
+    fclose(tape);
     curMoney = 0;
     curTime = 0;
     curSpeed = 100;
-    curPosition = ELMT(LocList, 0);
-    fclose(tape);
-
+    curPosition = ELMT(LocList, 0);    
 }

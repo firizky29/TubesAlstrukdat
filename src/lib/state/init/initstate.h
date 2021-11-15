@@ -5,7 +5,9 @@
 #include <global.h>
 #include <peta.h>
 #include <dirent.h>
+#include <queue.h>
 
+extern Word configName;
 
 /* GET INFO FROM CONFIG FILE */
 void getMap();
@@ -18,6 +20,8 @@ void getLoc(Point pointhq);
 /* get char and coord of loc and return list dinamis */
 void getPesananList();
 /* global init */
+void initConfig();
+/* initialize from config */
 void globalinit();
 /* Menginisialisasi segala hal */
 
