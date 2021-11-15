@@ -4,6 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+LinkedList reverseStack(Stack *s){
+    LinkedList rStack;
+    CreateList(&rStack);
+    Pesanan p;
+    while (!isStackEmpty(curBag)){
+        pop(&curBag, &p);
+        insertFirst(&rStack, p);
+    }
+    return rStack;
+}
+
 void save(){
     char* saveDir = "data/saved-file/";
 	printf("Save file as (filename): \n");
@@ -19,43 +30,63 @@ void save(){
 		printf("Oops! Error saving file\n");
 		exit(1);
 	}
-    // ini nanti kalo bisa diapus
 	emptyWord();
-    char* newGameDir = "data/original-config-file/";
-    //printf("Enter configuration file level ([filename]): ");
-    //Word filename = inputWord();
-
-    // write config file --> extract map, matrix adj, loc list, pesanan
     printf("Saving ");
     printWord(file);
     printf("....\n");
 
+    // save config (config name)
     fprintf(f, "%s\n", configName.contents);
-    // write current progress --> extract non-adt progress
-    fprintf(f, "%ld\n", curMoney);
+    // save location (curposition)
+    fprintf(f, "%c %d %d\n", CHARLOC(curPosition), Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
+    // save non-adt progress
     fprintf(f, "%ld\n", curTime);
+    fprintf(f, "%ld\n", curMoney);
     fprintf(f, "%d\n", curSpeed);
+    fprintf(f, "%d\n", speedBoost);
     fprintf(f, "%d\n", countHeavyItem);
     fprintf(f, "%d\n", countMove);
-    // speedboost (1 atau 0 --> on atau off)
+    int i;
+    Pesanan pesan;
+    LinkedList rStack;
+    // save stack (curbag)
+    rStack = reverseStack(&curBag);
+    fprintf(f, "%d\n", lengthLL(rStack));
+    for (i = 0; i < lengthLL(rStack); i++){
+        pesan = getElmt(rStack, i);
+        fprintf(f, "%d ", TIMEPESANAN(pesan));
+        fprintf(f, "%c ", PICKUPPESANAN(pesan));
+        fprintf(f, "%c ", DROPOFFPESANAN(pesan));
+        fprintf(f, "%c ", TIPEITEM(pesan));
+        fprintf(f, "%d\n", PTIME(pesan));
+    }
+    // save inventory (curInventory)
+    fprintf(f, "%d\n", INVENTORY_CAP);
+    for (i = 0; i < INVENTORY_CAP; i++){
+        fprintf(f, "%d ", INVIDGADGET(curInventory, i));
+        fprintf(f, "%d\n", INVHARGAGADGET(curInventory, i));
+    }
+    // save linked list (curprogress + curtodolist)
+    fprintf(f, "%d\n", lengthLL(curProgress));
+    for (i = 0; i < lengthLL(curProgress); i++){
+        pesan = getElmt(curProgress, i);
+        fprintf(f, "%d ", TIMEPESANAN(pesan));
+        fprintf(f, "%c ", PICKUPPESANAN(pesan));
+        fprintf(f, "%c ", DROPOFFPESANAN(pesan));
+        fprintf(f, "%c ", TIPEITEM(pesan));
+        fprintf(f, "%d\n", PTIME(pesan));
+    }
+    fprintf(f, "%d\n", lengthLL(curToDoList));
+    for (i = 0; i < lengthLL(curToDoList); i++){
+        pesan = getElmt(curToDoList, i);
+        fprintf(f, "%d ", TIMEPESANAN(pesan));
+        fprintf(f, "%c ", PICKUPPESANAN(pesan));
+        fprintf(f, "%c ", DROPOFFPESANAN(pesan));
+        fprintf(f, "%c ", TIPEITEM(pesan));
+        fprintf(f, "%d\n", PTIME(pesan));
+    }
 
-    // write current progress --> extract adt progress
-    fprintf(f, "%c %d %d\n", CHARLOC(curPosition), Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
     fclose(f);
-
+    // done saving
     printf("...\nYour progress has been saved!\n");
-
-/*
-Stack curBag;
-Inventory curInventory;
-LinkedList curProgress;
-LinkedList curToDoList;
-ListDin LocList;
-
-    fclose(tape);
-*/
-}
-
-void saveLoad(){
-
 }
