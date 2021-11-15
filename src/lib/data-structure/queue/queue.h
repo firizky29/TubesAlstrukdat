@@ -8,12 +8,12 @@
 #include <pesanan.h>
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define QUEUE_CAP 31
 
 /* Definisi elemen dan address */
 /*typedef Pesanan ElType; */
 typedef struct {
-	Pesanan buffer[CAPACITY]; 
+	Pesanan buffer[QUEUE_CAP]; 
 	int idxHead;
 	int idxTail;
 } Queue;
@@ -40,7 +40,7 @@ boolean isEmptyQueue(Queue q);
 /* Mengirim true jika q kosong: lihat definisi di atas */
 boolean isFullQueue(Queue q);
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
-/* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
+/* yaitu jika index head bernilai 0 dan index tail bernilai QUEUE_CAP-1 */
 int lengthQueue(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 

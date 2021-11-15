@@ -128,6 +128,7 @@ void Move(){
 			if (countMove < 10){
 				if (countMove != 0 && (countMove % 2) == 0){
 					curTime += 1;
+					DecrementAllPerishableItem(&curToDoList, 1);
 				}
 			}
 			else{
@@ -141,12 +142,42 @@ void Move(){
 				countMove = 0;
 			}
 			curTime += 1 + countHeavyItem;
+			DecrementAllPerishableItem(&curToDoList, 1+countHeavyItem);
 		}
 		else{ // ini kasus gaada speedboost dan gaada heavy item
 			curTime += 1;
+			DecrementAllPerishableItem(&curToDoList, 1);
 		}
-		printf("mindahin daftar pesanan ke todolist\n");
-		printf("ngurangin waktu perishableitem\n");
+		while(!isEmptyQueue(daftarPesanan)&&TIMEPESANAN(HEAD(daftarPesanan))==curTime){
+			Pesanan val;
+			dequeue(&daftarPesanan, &val);
+			insertLastLL(&curToDoList, val);
+		}
+		// Handling perishable item
+		Address AdrP = FIRST(curToDoList);
+		int idx = 0;
+		while(AdrP!=NULL){
+			if(TIPEITEM(INFO(AdrP))=='P'&&PTIME(INFO(AdrP))==0){
+				Pesanan val;
+				Stack tempBag;
+				deleteAt(&curToDoList, idx, &val);
+				while(!isEqualPesanan(TOP(curBag), val)){
+					Pesanan temp;
+					pop(&curBag, &temp);
+					push(&tempBag, temp);
+				}
+				if(isEqualPesanan(TOP(curBag), val)){
+					Pesanan temp;
+					pop(&curBag, &temp);
+					while(!isStackEmpty(tempBag)){
+						pop(&tempBag, &temp);
+						push(&curBag, temp);
+					}
+				}
+			}
+			idx++;
+			AdrP = NEXT(AdrP);
+		}
 		// POSITION HANDLING
 		/* move player based on choice
 		curPosition = [POSITION_CHOICE] */
@@ -250,6 +281,8 @@ void displayToDoList(){
             printf("(Heavy Item)\n");
         } else if (INFO(p).type == 'P'){
             printf("(Perishable Item)\n");
+        } else if (INFO(p).type == 'V'){
+            printf("(VIP Item)\n");
         }
         p = NEXT(p);
     }
@@ -268,6 +301,8 @@ void displayInProgress(){
             printf("%d. Heavy Item (Tujuan: %c)\n",i,INFO(p).dropoff);
         } else if (INFO(p).type == 'P'){
             printf("%d. Perishable Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+        }else{
+			printf("%d. VIP Item (Tujuan: %c)\n",i,INFO(p).dropoff);
         }
         p = NEXT(p);
     }    
@@ -360,18 +395,16 @@ void displayInventory(){
 				deleteGadget(&curInventory,choice-1,&g);
 				// isi juga sama aktivasi efek dari gadget
 				if(IDGADGET(g) == 1){
-					Stack tempBag;
-					int i = 0;
 					if (TIPEITEM(TOP(curBag)) == 'P'){
-						PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag));
+						PTIME(INFO(fSearch(curToDoList, TOP(curBag)))) = PTIME(TOP(curBag));
 					}
 				}else if(IDGADGET(g) == 2){
 					capMultiplier(&curBag, 2);
 				}else if(IDGADGET(g) == 3){
 					displayMap();
 					printf("Where do you want to go next? : ");
-					char loc = (inputWord()).contents;
-					setLoc(&curPosition, ELMT(LocList, indexOf(LocList, loc)));
+					// char loc = (inputWord()).contents;
+					// setLoc(&curPosition, ELMT(LocList, indexOfCharLoc(LocList, loc)));
 				}else if(IDGADGET(g) == 4){
 					if(curTime <= 50){
 						curTime = 0;

@@ -70,9 +70,10 @@ void getPesananList(){
     P = wtoi(currentWord);
     // create Queue pesanan
     Pesanan pesanan;
-    int t, fpi, pt;
+    int t, pt;
     char pu, d, tp;
     CreateQueue(&daftarPesanan);
+    CreateList(&curToDoList);
     for (i=0; i < P; i++){    
         // masukin item pesanan
         t = wtoi(currentWord);
@@ -83,15 +84,18 @@ void getPesananList(){
         tp = currentWord.contents[0];
         advWord_file();
         if (tp == 'P'){
-            fpi = wtoi(currentWord);
-            pt = fpi;
+            pt = wtoi(currentWord);
         }
         else{
-            fpi = -1;
             pt = -1;
         }
-        pesanan = CreatePesanan(t, pu, d, tp, fpi, pt);
-        enqueue(&daftarPesanan, pesanan);
+        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        if(t == 0){
+            insertLastLL(&curToDoList, pesanan);
+        }
+        else{
+            enqueue(&daftarPesanan, pesanan);
+        }
     }
 }
 

@@ -230,3 +230,35 @@ int indexOfPesananBuilding(LinkedList to_do, char building){
         return IDX_UNDEF;
     }
 }
+
+Address fSearch(LinkedList L, Pesanan P){
+/* Mencari alamat elemen list yang valuenya P */
+    /* KAMUS */
+    Address p = FIRST(L);
+    boolean found = false;
+
+    while (p != NULL && !found){
+        if (isEqualPesanan(INFO(p),P)){
+            found = true;
+        } else {
+            p = NEXT(p);
+        }
+    }
+
+    if (found){
+        return p;
+    } else {
+        return NULL;
+    }
+}
+
+void DecrementAllPerishableItem(LinkedList *L, int decr){
+    /* KAMUS */
+    Address p = FIRST(*L);
+    /* ALGORITMA */
+    while (p != NULL){
+        if(TIPEITEM(INFO(p))=='P'){
+            subtractPtime(&INFO(p), decr);
+        }
+    }
+}

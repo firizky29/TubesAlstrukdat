@@ -24,8 +24,8 @@ boolean isEmptyQueue(Queue q){
 }
 boolean isFullQueue(Queue q){
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
-/* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
-    return (IDX_HEAD(q) == 0) && (IDX_TAIL(q) == CAPACITY-1);
+/* yaitu jika index head bernilai 0 dan index tail bernilai QUEUE_CAP-1 */
+    return (IDX_HEAD(q) == 0) && (IDX_TAIL(q) == QUEUE_CAP-1);
 }
 int lengthQueue(Queue q){
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
@@ -46,15 +46,14 @@ void enqueue(Queue *q, Pesanan val){
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
     
     // priority Queue, dengan elemen time terurut membesar
-    int n, k, j;
-
+    int j;
     if(isEmptyQueue(*q)) {
         IDX_HEAD(*q) = 0;
         IDX_TAIL(*q) = 0;
         TAIL(*q) = val;
     } 
     else{
-        if(IDX_TAIL(*q)==(CAPACITY-1)) {
+        if(IDX_TAIL(*q)==(QUEUE_CAP-1)) {
             for(int i=IDX_HEAD(*q); i<=IDX_TAIL(*q); i++) {
                 (*q).buffer[i-IDX_HEAD(*q)] = (*q).buffer[i];
             }
