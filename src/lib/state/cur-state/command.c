@@ -176,6 +176,8 @@ void Pickup(){
                 // Efek item
             } else if (TIPEITEM(pesanan) == 'H'){
                 printf("Pesanan berupa Heavy Item berhasil diambil!");
+				countHeavyItem++;
+				speedBoost = false;
                 // Efek item
             } else if (TIPEITEM(pesanan) == 'P'){
                 printf("Pesanan berupa Perishable Item berhasil diambil!");
@@ -195,26 +197,35 @@ void Pickup(){
 
 /* Mengubah curBag, curProgress, cur..*/
 void Dropoff(){
-	// CASE 1: ITEM IS AVAILABLE FOR DROP OFF
-	/*if ([ada item yg sabi di drop off]){
-		printf("[isi type item] successfully dropped off!\n");
-		(isi bagian ini sama proses drop off)
-		printf("You gained: %d Yen", [isi harga dari type item]\n");
+	char curPositionBuilding = CHARLOC(curPosition);
+	Pesanan pesanan;
 
-		// AKTIVASI ABILITY
-		if (type item == heavy item){
-			speedBoost == true;
+	/* Jika tas tidak kosong */
+	if (isStackEmpty(curBag) != IDX_UNDEF) {
+		/* Jika lokasi dropoff barang paling atas sama dengan posisi Mobita sekarang */
+		if (DROPOFFPESANAN(TOP(curBag)) == curPositionBuilding) {
+			deleteFirst(&curProgress, &pesanan);
+			pop(&curBag, &pesanan);
+
+			if (TIPEITEM(pesanan) == 'N'){
+                printf("Pesanan berupa Normal Item berhasil diantarkan!");
+                // Efek item
+            } else if (TIPEITEM(pesanan) == 'H'){
+                printf("Pesanan berupa Heavy Item berhasil diantarkan!");
+				countHeavyItem--;
+				countMove = 0;
+				speedBoost = true;
+                // Efek item
+            } else if (TIPEITEM(pesanan) == 'P'){
+                printf("Pesanan berupa Perishable Item berhasil diantarkan!");
+                // Efek item
+            }
+		} else {
+			printf("Lokasi ini bukan merupakan lokasi dropoff item teratas tas!");
 		}
-		else if (type item == perishable item){
-			increase capacity + 1 buat bawa item (max 100)
-		}
+	} else {
+		printf("Tidak ada item yang dapat di-dropoff dari dalam tas!");
 	}
-
-	// CASE 2: NO AVAILABLE ITEM FOR DROP OFF
-	else{
-		printf("There's nothing to drop off here.\n");
-	}*/
-	printf("sori masih dalam bentuk komen kl mo edit+tes uncomment aja\n");
 }
 void displayMap(){
 	printf("Here's the Map:\n");
