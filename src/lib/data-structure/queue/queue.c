@@ -44,21 +44,31 @@ void enqueue(Queue *q, Pesanan val){
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen q
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
-    if (isEmptyQueue(*q)) {
+    
+    // priority Queue, dengan elemen time terurut membesar
+    int n, k, j;
+
+    if(isEmptyQueue(*q)) {
         IDX_HEAD(*q) = 0;
         IDX_TAIL(*q) = 0;
-    } else {
-        if (IDX_TAIL(*q) == (CAPACITY-1)){
-            for (int i=IDX_HEAD(*q); i<=IDX_TAIL(*q); i++){
-                (*q).buffer[i-IDX_HEAD(*q)] = (*q).buffer[i]; // menggeser elemen
+        TAIL(*q) = val;
+    } 
+    else{
+        if(IDX_TAIL(*q)==(CAPACITY-1)) {
+            for(int i=IDX_HEAD(*q); i<=IDX_TAIL(*q); i++) {
+                (*q).buffer[i-IDX_HEAD(*q)] = (*q).buffer[i];
             }
-            // setelah menggeser
-            IDX_TAIL(*q) = IDX_TAIL(*q) - IDX_HEAD(*q);
+            IDX_TAIL(*q) -= IDX_HEAD(*q);
             IDX_HEAD(*q) = 0;
         }
-        IDX_TAIL(*q) += 1;
+        j = IDX_TAIL(*q);
+        while (j >= 0 && (*q).buffer[j].time > val.time){ 
+            (*q).buffer[j+1] = (*q).buffer[j];
+            j = j - 1;
+        }
+        (*q).buffer[j + 1] = val;
+        IDX_TAIL(*q)++;
     }
-    TAIL(*q) = val;
 }
 void dequeue(Queue *q, Pesanan *val){
 /* Proses: Menghapus val pada q dengan aturan FIFO */
