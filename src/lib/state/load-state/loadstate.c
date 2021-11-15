@@ -78,14 +78,86 @@ void load(){
     printWord(filename);
     printf("....\n");
     interface();
-    // reading file config + get info
+    // initialize
+    CreateInventory(&curInventory);
+    CreateList(&curProgress);
+    CreateStack(&curBag);
+    LinkedList temp;
+    CreateList(&temp);
+    // get config name
     readFile(filepath);
     configName = currentWord;
+    advWord_file();
+    // load loc (curposition)
+    CHARLOC(curPosition) = currentWord.contents[0];
+    advWord_file();
+    COORLOC(curPosition) = getPoint();
+    // load non-adt progress
+    curTime = (long)(wtoi(currentWord));
+    curMoney = (long)(wtoi(currentWord));
+    curSpeed = wtoi(currentWord);
+    speedBoost = wtoi(currentWord);
+    countHeavyItem = wtoi(currentWord);
+    countMove = wtoi(currentWord);
+    int i, par, t, pt;
+    char pu, d, tp; 
+    Pesanan pesanan;
+    // load curbag (stack)
+    par = wtoi(currentWord);
+    for (i = 0; i < par; i++){
+        t = wtoi(currentWord);
+        pu = currentWord.contents[0];
+        advWord_file();
+        d = currentWord.contents[0];
+        advWord_file();
+        tp = currentWord.contents[0];
+        advWord_file();
+        pt = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        push(&curBag, pesanan);
+    }
+    // load curinventory (inventory)
+    par = wtoi(currentWord);
+    for (i = 0; i < par; i++){
+        INVIDGADGET(curInventory, i) = wtoi(currentWord);
+        INVHARGAGADGET(curInventory, i) = wtoi(currentWord);
+    }
+    // load curprogress (linked list)
+    par = wtoi(currentWord);
+    for (i = 0; i < par; i++){
+        t = wtoi(currentWord);
+        pu = currentWord.contents[0];
+        advWord_file();
+        d = currentWord.contents[0];
+        advWord_file();
+        tp = currentWord.contents[0];
+        advWord_file();
+        pt = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        insertLastLL(&curProgress, pesanan);
+    }
+    // load curtodolist (linked list)
+    par = wtoi(currentWord);
+    for (i = 0; i < par; i++){
+        // masukin item pesanan
+        t = wtoi(currentWord);
+        pu = currentWord.contents[0];
+        advWord_file();
+        d = currentWord.contents[0];
+        advWord_file();
+        tp = currentWord.contents[0];
+        advWord_file();
+        pt = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        insertLastLL(&temp, pesanan);
+    }
+
     while(!endFile){
         printWordFile(currentWord);
     }
     fclose(tape);
 
+    // initialize pconfig
     Word filepathconfig;
     char* newGameDir = "data/original-config-file/";
     strcpy(filepathconfig.contents, newGameDir);
@@ -93,14 +165,6 @@ void load(){
     strcat(filepathconfig.contents, ".txt");
     filepathconfig.length = 31+configName.length;
     initConfig(filepathconfig);
-
-    // isi pake lanjut ngeread filenya yang bukan dari file config
-    //curPosition = ELMT(LocList, 0);    
-    /* yang belom ada 
-    Stack curBag;
-    Inventory curInventory;
-    LinkedList curProgress;
-    LinkedList curToDoList;
-    ListDin LocList;
-    */
+    fclose(tape);
+    curToDoList = temp;
 }
