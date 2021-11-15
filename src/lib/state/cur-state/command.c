@@ -363,15 +363,15 @@ void displayInventory(){
 					Stack tempBag;
 					int i = 0;
 					if (TIPEITEM(TOP(curBag)) == 'P'){
-						PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag))
+						PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag));
 					}
 				}else if(IDGADGET(g) == 2){
 					capMultiplier(&curBag, 2);
 				}else if(IDGADGET(g) == 3){
 					displayMap();
 					printf("Where do you want to go next? : ");
-					char loc = inputWord();
-					setLoc(&curPosition, ELMT(locList, indexOf(locList, loc)))
+					char loc = (inputWord()).contents;
+					setLoc(&curPosition, ELMT(LocList, indexOf(LocList, loc)));
 				}else if(IDGADGET(g) == 4){
 					if(curTime <= 50){
 						curTime = 0;
@@ -399,18 +399,18 @@ void displayInventory(){
 	}
 }
 void displayHelp(){
-	printf("1.  MOVE: move to next location\n");
-	printf("2.  PICK_UP: pickup item in current location\n");
-	printf("3.  DROP_OFF: deliver top-most item to current location\n");
-	printf("4.  MAP: display map\n");
-	printf("5.  TO_DO: display list of to-do order(s)\n");
-	printf("6.  IN_PROGRESS: display list of in-progress order(s)\n");
-	printf("7.  BUY: purchase gadgets (only available when in HQ)\n");
-	printf("8.  INVENTORY: display list of inventory\n");
-	printf("9.  RETURN: \n");
-	printf("10. HELP: display list of available command(s)\n");
-	printf("11. EXIT: \n");
-	printf("12. SAVE: \n");
+	printf("-  MOVE: move to next location\n");
+	printf("-  PICK_UP: pickup item in current location\n");
+	printf("-  DROP_OFF: deliver top-most item to current location\n");
+	printf("-  MAP: display map\n");
+	printf("-  TO_DO: display list of to-do order(s)\n");
+	printf("-  IN_PROGRESS: display list of in-progress order(s)\n");
+	printf("-  BUY: purchase gadgets (only available when in HQ)\n");
+	printf("-  INVENTORY: display list of inventory\n");
+	printf("-  RETURN: \n");
+	printf("-  HELP: display list of available command(s)\n");
+	printf("-  EXIT: exit game\n");
+	printf("-  SAVE: save current progress\n");
 }
 void Retur(){
 	printf("Retur\n");
