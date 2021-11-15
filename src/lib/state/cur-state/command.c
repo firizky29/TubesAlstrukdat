@@ -174,16 +174,19 @@ void Pickup(){
             if (TIPEITEM(pesanan) == 'N'){
                 printf("Pesanan berupa Normal Item berhasil diambil!");
                 // Efek item
+				// None
             } else if (TIPEITEM(pesanan) == 'H'){
                 printf("Pesanan berupa Heavy Item berhasil diambil!");
+                // Efek item
 				countHeavyItem++;
 				speedBoost = false;
-                // Efek item
             } else if (TIPEITEM(pesanan) == 'P'){
                 printf("Pesanan berupa Perishable Item berhasil diambil!");
                 // Efek item
-            }
-            // VIP Item belum ditambahkan
+            } else if (TIPEITEM(pesanan) == 'V'){
+                printf("Pesanan berupa VIP Item berhasil diambil!");
+                // Efek item
+			}
             
             printf("Tujuan Pesanan: %c", DROPOFFPESANAN(pesanan));
 
@@ -209,17 +212,21 @@ void Dropoff(){
 
 			if (TIPEITEM(pesanan) == 'N'){
                 printf("Pesanan berupa Normal Item berhasil diantarkan!");
-                // Efek item
+                // Reward item
             } else if (TIPEITEM(pesanan) == 'H'){
                 printf("Pesanan berupa Heavy Item berhasil diantarkan!");
 				countHeavyItem--;
 				countMove = 0;
+                // Reward item
 				speedBoost = true;
-                // Efek item
             } else if (TIPEITEM(pesanan) == 'P'){
                 printf("Pesanan berupa Perishable Item berhasil diantarkan!");
-                // Efek item
-            }
+                // Reward item
+				capInc(&curBag, 1);
+            } else if (TIPEITEM(pesanan) == 'V'){
+				printf("Pesanan berupa VIP Item berhasil diantarkan!");
+                // Reward item
+			}
 		} else {
 			printf("Lokasi ini bukan merupakan lokasi dropoff item teratas tas!");
 		}
