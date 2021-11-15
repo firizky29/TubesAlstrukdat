@@ -350,41 +350,21 @@ void displayInventory(){
 		if (choice >= 1 && choice <= INVENTORY_CAP){
 			if (INVIDGADGET(curInventory, choice-1) != IDGADGET_UNDEF){
 				Gadget g;
-				// isi bagian ini sama proses penghilangan gadget dari inventory
 				deleteGadget(&curInventory,choice-1,&g);
 				// isi juga sama aktivasi efek dari gadget
-				// Cek kalau masih salah
 				if(IDGADGET(g) == 1){
 					Stack tempBag;
 					int i = 0;
 					if (TIPEITEM(TOP(curBag)) == 'P'){
 						PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag))
 					}
-
-					//boolean flag = true;
-					// KALAU PERISHABLE BERADA PADA ITEM TERATAS
-					/* KALAU PERISHABLE TERATAS
-					while(i != IDX_UNDEF && flag){
-						if(TIPEITEM(TOP(curBag)) == 'P'){
-							PTIME(TOP(curBag)) = FIRSTPITEM(TOP(curBag));
-						}else{
-							pop(&curBag, &val);
-							push(&tempBag, val);
-						}
-					}
-					while(!isStackEmpty(tempBag)){
-						// Pesanan val2;
-						pop(&tempBag, &val);
-						push(&curBag, val);
-					}*/
 				}else if(IDGADGET(g) == 2){
 					capMultiplier(&curBag, 2);
 				}else if(IDGADGET(g) == 3){
 					displayMap();
 					printf("Where do you want to go next? : ");
-					//menampilkan map atau menampilkan posisi, input loc dalam bentuk point?
-					// Word loc = inputWord();
-					//curPosition = [POSITION_CHOICE];
+					char loc = inputWord();
+					setLoc(&curPosition, ELMT(locList, indexOf(locList, loc)))
 				}else if(IDGADGET(g) == 4){
 					if(curTime <= 50){
 						curTime = 0;
@@ -392,7 +372,7 @@ void displayInventory(){
 						curTime -= 50;
 					}
 				}else if(IDGADGET(g) == 5){
-					//Diskusi sama yang ngerjakan MOVE
+					//Belum
 					if (TIPEITEM(TOP(curBag)) == 'H'){
 						countHeavyItem -= 1;
 					}
