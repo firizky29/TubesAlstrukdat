@@ -6,10 +6,7 @@
 #include <point.h>
 #include <liststat.h>
 #include <list_linked.h>
-
-
-
-
+#include <queue.h>
 
 // P: Jumlah pesanan
 extern int P;
@@ -20,6 +17,7 @@ extern Stack curBag;
 extern Inventory curInventory;
 extern LinkedList curProgress;
 extern LinkedList curToDoList;
+extern Queue daftarPesanan;
 
 // extern Queue curUsedGadget; {maaf kayaknya ini ga perlu, karna gadget langsung dipakai di saat itu juga biar ga susah}
 extern boolean speedBoost;
