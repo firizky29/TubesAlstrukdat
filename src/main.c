@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <initstate.h>
+#include <savestate.h>
+#include <loadstate.h>
 #include <command.h>
 #include <boolean.h>
 
@@ -11,16 +12,29 @@ baru sampe get map matrix, matrix adjacency, sama point lokasi2 */
 
 int main(){
     // main menu
-	printf("Type one of the following:\n1. NEW_GAME\n2. EXIT\nEnter your choice: ");
-	Word choice = inputWord();
-	while (!isNewGame(choice) && !isExit(choice)){
-		printf("Stop joking around, that's an invalid command. Try again: ");
-		choice = inputWord();
+    Word state, choice;
+	printf("Type one of the following:\n- NEW_GAME\n- LOAD_GAME\n- EXIT\nEnter your choice: ");
+	state = inputWord();
+	while ((!isNewGame(state) && !isExit(state) && !isLoadGame(state)) || (isLoadGame(state) && !isLoadAvailable())){
+        if (isLoadGame(state) && !isLoadAvailable()){
+            printf("No saved files. Couldn't load anything.\nTry again: ");
+        }
+        else{
+		    printf("Stop joking around, that's an invalid command. \nTry again: ");
+        }
+		state = inputWord();
 	}
-    // NEW_GAME (start new game)
-	if (isNewGame(choice)){
-
-		globalinit();
+    if (isExit(state)){
+    	printf("Exiting program...\nSee you later!");
+		exit(0);
+    }
+	else{
+        if (isNewGame(state)){
+            globalinit();
+        }
+        else{
+            load();
+        }
         while(true){
             printf("\n>> ");
             choice = inputWord();
@@ -57,15 +71,13 @@ int main(){
             else if(isExit(choice)){
                 Exit();
             }
+            else if(isSaveGame(choice)){
+                save();
+            }
             else{
                 printf("Your command is not recognized. Input one of these following command: \n");
                 displayHelp();
             }
         }
-	}
-    // exit game
-	else{
-		printf("Exiting program...\nSee you later!");
-		exit(0);
 	}
 }
