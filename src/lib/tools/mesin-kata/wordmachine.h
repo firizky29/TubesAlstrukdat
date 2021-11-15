@@ -75,7 +75,7 @@ void printWord(Word kata);
 int wtoi(Word kata);
 /* convert word to integer */
 
-
+void emptyWord();
 
 
 

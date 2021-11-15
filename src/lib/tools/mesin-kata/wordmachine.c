@@ -69,18 +69,14 @@ void startWord_command(){
 
 void advWord_file(){
 /* advance ke word berikutnya buat input file */
-	if (currentWord.length != 0){
-		memset (currentWord.contents, 0, strlen(currentWord.contents));
-	}
+	emptyWord();
 	ignoreBlank();
 	copyWord_file();
 }
 
 void advWord_command(){
 /* advance ke word berikutnya buat input file */
-	if (currentWord.length != 0){
-		memset (currentWord.contents, 0, strlen(currentWord.contents));
-	}
+	emptyWord();
 	ignoreBlank();
 	if (currentChar == MARK){
 		endWord = true;
@@ -110,6 +106,7 @@ boolean isWordEqual(Word kata1, Word kata2){
 /* READ INPUT & PRINT OUTPUT (File & CMD) */
 Word inputWord(){
 /* menerima input dan direturnd dalam bentuk word */
+	emptyWord();
 	startWord_command();
 	Word input = currentWord;
 	return input;
@@ -143,4 +140,8 @@ int wtoi(Word kata){
 	return x;
 }
 
-
+void emptyWord(){
+	if (currentWord.length != 0){
+		memset (currentWord.contents, 0, strlen(currentWord.contents));
+	}
+}
