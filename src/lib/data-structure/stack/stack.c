@@ -12,6 +12,7 @@ void CreateStack(Stack *s){
     /* KAMUS LOKAL */
     /* ALGORITMA */
     IDX_TOP(*s) = IDX_UNDEF;
+    CURCAP(*s) = 3;
 }
 
 /* ************ Prototype ************ */
