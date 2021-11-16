@@ -104,6 +104,8 @@ int lengthLL(LinkedList l);
 /* PICK_UP */
 int indexOfPesananBuilding(LinkedList to_do, char building);
 
+int indexOfVIP(LinkedList to_do, char building);
+
 Address fSearch(LinkedList L, Pesanan P);
 /* Mencari alamat elemen list yang valuenya P */
 

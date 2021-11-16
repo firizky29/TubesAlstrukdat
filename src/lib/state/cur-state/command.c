@@ -193,10 +193,23 @@ void Pickup(){
 	/* Jika tas tidak penuh */
     if ((!isStackFull(curBag))) { 
 		/* Jika ada item di bangunan */
-		int idx = indexOfPesananBuilding(curToDoList, curPositionBuilding);
-        if (idx != IDX_UNDEF){ 
+		int idx;
+		if(countVIP){
+			idx = indexOfVIP(curToDoList, curPositionBuilding);
+			if(idx!=IDX_UNDEF){
+				deleteAt(&curToDoList, idx, &pesanan);
+				insertFirst(&curProgress, pesanan);
+				push(&curBag, pesanan);
+				printf("VIP Item successfully picked up!\n");
+			}
+			else{
+				printf("Anda harus segera mem-pickup VIP item. Tidak ada VIP item di tempat ini!\n");
+			}
+		}
+		else{
+			idx = indexOfPesananBuilding(curToDoList, curPositionBuilding);
+			if (idx != IDX_UNDEF){ 
             /* Menghapus item dari curToDoList */
-			if(TIPEITEM(getElmt(curToDoList, idx))=='V'||!countVIP){
 				deleteAt(&curToDoList, idx, &pesanan);
 				/* Menambahkan item ke curProgress dan curBag */
 				insertFirst(&curProgress, pesanan);
@@ -215,21 +228,13 @@ void Pickup(){
 					printf("Perishable Item successfully picked up!\n");
 					// Efek item
 					// Sudah dihandle di MOVE
-				} else if (TIPEITEM(pesanan) == 'V'){
-					printf("VIP Item successfully picked up!\n");
-					// Efek item
-					// Jujur ini bingung bet
-				}
-				
+				}		
 				printf("Order destination: %c\n", DROPOFFPESANAN(pesanan));
-			}	
-            else{
-				printf("You have a VIP item...");
 			}
-
-        } else {
-            printf("There seems to be no items here... Pickup unsuccessful.\n");
-        }
+            else{
+				printf("There seems to be no items here... Pickup unsuccessful.\n");
+			}
+        } 
     } else {
         printf("Bag is full!\n");
     }

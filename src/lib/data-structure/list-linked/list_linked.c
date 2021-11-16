@@ -231,6 +231,27 @@ int indexOfPesananBuilding(LinkedList to_do, char building){
     }
 }
 
+int indexOfVIP(LinkedList to_do, char building){
+    int idxcount = 0;
+    Address p = FIRST(to_do);
+    boolean found = false;
+
+    while (p != NULL && !found){
+        if (PICKUPPESANAN(INFO(p)) == building&&TIMEPESANAN(INFO(p))=='V'){
+            found = true;
+        } else {
+            idxcount += 1;
+            p = NEXT(p);
+        }
+    }
+
+    if (found){
+        return idxcount;
+    } else {
+        return IDX_UNDEF;
+    }
+}
+
 Address fSearch(LinkedList L, Pesanan P){
 /* Mencari alamat elemen list yang valuenya P */
     /* KAMUS */
