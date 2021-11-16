@@ -23,7 +23,7 @@ void save(){
     strcpy(path.contents, saveDir);
     strcat(path.contents, file.contents);
     strcat(path.contents, ".txt");
-    path.length = 31+file.length;
+    path.length = 21+file.length;
 	FILE *f = fopen(path.contents, "w");
 	if (f == NULL)
 	{

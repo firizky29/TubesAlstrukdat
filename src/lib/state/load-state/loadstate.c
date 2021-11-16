@@ -26,16 +26,16 @@ Word configName;
 
 boolean isLoadAvailable(){
     int n = 0;
-	struct dirent *de;  // Pointer for directory entry
-    char* loadGameDir = "data/saved-file/";
-    DIR *dr = opendir(loadGameDir);
-    if (dr == NULL){
+	struct dirent *det;  // Pointer for directory entry
+    char* loadGameDirt = "data/saved-file/";
+    DIR *drt = opendir(loadGameDirt);
+    if (drt == NULL){
 		return false;
     }
-    while ((de = readdir(dr)) != NULL){
+    while ((det = readdir(drt)) != NULL){
         n++;
     }
-    closedir(dr);
+    closedir(drt);
     if (n <= 2){
         return false;
     }
@@ -65,14 +65,14 @@ void load(){
     strcpy(filepath.contents, loadGameDir);
     strcat(filepath.contents, filename.contents);
     strcat(filepath.contents, ".txt");
-    filepath.length = 31+filename.length;
+    filepath.length = 21+filename.length;
     while (!fopen(filepath.contents, "r")){
         printf("File not found, enter filename again: ");
         filename = inputWord();
         strcpy(filepath.contents, loadGameDir);
         strcat(filepath.contents, filename.contents);
         strcat(filepath.contents, ".txt");
-        filepath.length = 31+filename.length;
+        filepath.length = 21+filename.length;
     }
     printf("Loading ");
     printWord(filename);
@@ -85,6 +85,7 @@ void load(){
     LinkedList temp;
     CreateList(&temp);
     // get config name
+    emptyWord();
     readFile(filepath);
     configName = currentWord;
     advWord_file();
@@ -153,11 +154,6 @@ void load(){
         insertLastLL(&temp, pesanan);
     }
 
-    while(!endFile){
-        printWordFile(currentWord);
-    }
-    fclose(tape);
-
     // initialize pconfig
     Word filepathconfig;
     char* newGameDir = "data/original-config-file/";
@@ -166,6 +162,5 @@ void load(){
     strcat(filepathconfig.contents, ".txt");
     filepathconfig.length = 31+configName.length;
     initConfig(filepathconfig);
-    fclose(tape);
     curToDoList = temp;
 }
