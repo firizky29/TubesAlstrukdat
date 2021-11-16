@@ -131,12 +131,6 @@ void initConfig(Word filepath){
     printf("\n\n");
     displayQueue(daftarPesanan);
     printf("\n\n");
-    curMoney = 0;
-    curTime = 0;
-    curSpeed = 100;
-    curPosition = ELMT(LocList, 0);  
-    CreateStack(&curBag);
-    CreateList(&curProgress);
 }
 
 void globalinit(){
@@ -176,4 +170,11 @@ void globalinit(){
     // reading file config + get info
     initConfig(filepath);
     fclose(tape);  
+    curMoney = 0;
+    curTime = 0;
+    curSpeed = 100;
+    curPosition = ELMT(LocList, 0);  
+    CreateStack(&curBag);
+    CURCAP(curBag) = 3;
+    CreateList(&curProgress);
 }

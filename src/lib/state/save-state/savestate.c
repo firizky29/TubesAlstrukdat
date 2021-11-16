@@ -50,6 +50,7 @@ void save(){
     Pesanan pesan;
     LinkedList rStack;
     // save stack (curbag)
+    fprintf(f, "%d\n", CURCAP(curBag));
     rStack = reverseStack(&curBag);
     fprintf(f, "%d\n", lengthLL(rStack));
     for (i = 0; i < lengthLL(rStack); i++){

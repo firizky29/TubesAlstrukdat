@@ -103,6 +103,7 @@ void load(){
     char pu, d, tp; 
     Pesanan pesanan;
     // load curbag (stack)
+    CURCAP(curBag) = wtoi(currentWord);
     par = wtoi(currentWord);
     for (i = 0; i < par; i++){
         t = wtoi(currentWord);
