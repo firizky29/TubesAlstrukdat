@@ -78,6 +78,8 @@ void displayBuilding(ListDin P);
 /* Menampilkan list of bangunan P */
 boolean isAdjacent(Location L1, Location L2);
 /* Mengirimkan true jika L2 bisa dicapai dari L1 */
+boolean HasVIPItem(Location P);
+/* Mengirimkan true jika ada VIP item di location P */
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */

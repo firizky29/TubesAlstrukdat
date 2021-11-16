@@ -27,6 +27,7 @@ typedef struct{
 #define INVIDGADGET(I,idx) (I).contents[(idx)].idGadget
 #define INVHARGAGADGET(I,idx) (I).contents[(idx)].harga
 
+void CreateGadget(Gadget *g);
 void CreateInventory(Inventory *inv);
 /* I.S. inv sembarang */
 /* F.S. Terbentuk Inventory inv kosong dengan kapasitas INVENTORY_CAP */
@@ -38,7 +39,7 @@ void addGadget(Inventory *inv, Gadget g);
 /*      Bila penuh tampilkan : Inventory penuh!!*/
 /* Proses : Melakukan searching dengan traversal pada inventory, penambahan*/
 /*          dilakukan pada bagian inv yang kosong dan pertama kali ketemu */
-
+void setGadget(Gadget *g, int id, int harga);
 void displayGadgetinInventory(Inventory inv);
 /* Proses : Menuliskan gadget pada Inventory dengan traversal, gadget ditulis berurutan*/
 /*          berdasarkan idGadget pada Inventory.*/

@@ -78,6 +78,9 @@ int main(){
                 printf("Your command is not recognized. Input one of these following command: \n");
                 displayHelp();
             }
+            if(isEmptyQueue(daftarPesanan)&&isEmpty(curToDoList)&&isEmpty(curProgress)){
+                printf("Selamat Anda berhasil menyelesaikan game ini!");
+            }
         }
 	}
 }

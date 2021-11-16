@@ -175,7 +175,7 @@ void globalinit(){
     // reading file config + get info
     initConfig(filepath);
     fclose(tape);  
-    curMoney = 0;
+    curMoney = 100000;
     curTime = 0;
     speedBoost = false;
     curPosition = ELMT(LocList, 0);  

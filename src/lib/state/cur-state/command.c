@@ -108,8 +108,6 @@ void Move(){
 	printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
 	while(choice<0 || choice > length(Neighbor)){
-		system("cls");
-		system("clear");
 		printf("That's an invalid option. Let's retry, shall we?\n");
 		if(CHARLOC(curPosition)=='8'){
 			printf("You are now in building HQ at point (%d, %d)\n", Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
@@ -306,7 +304,7 @@ void displayToDoList(){
 			} else if (INFO(p).type == 'H'){
 				printf("(Heavy Item)\n");
 			} else if (INFO(p).type == 'P'){
-				printf("(Perishable Item)\n");
+				printf("(Perishable Item, required delivery time: %d)\n", PTIME(INFO(p)));
 			} else if (INFO(p).type == 'V'){
 				printf("(VIP Item)\n");
 			}
@@ -334,7 +332,7 @@ void displayInProgress(){
 			} else if (INFO(p).type == 'H'){
 				printf("%d. Heavy Item (Destination: %c)\n",i,INFO(p).dropoff);
 			} else if (INFO(p).type == 'P'){
-				printf("%d. Perishable Item (Destination: %c)\n",i,INFO(p).dropoff);
+				printf("%d. Perishable Item (Destination: %c, Remaining Time: %d)\n",i,INFO(p).dropoff, PTIME(INFO(p)));
 			} else {
 				printf("%d. VIP Item (Destination: %c)\n",i,INFO(p).dropoff);
 			}
@@ -353,8 +351,6 @@ void Buy(){
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 		int choice = wtoi(inputWord());
 		while(choice<0||choice>4){
-			system("cls");
-			system("clear");
 			printf("The gadget you selected is not available.\n");
 			printf("Current money: %ld Yen\n", curMoney);
 			printf("Select one of these gadget...\n");
@@ -365,12 +361,15 @@ void Buy(){
 			printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 			choice = wtoi(inputWord());
 		}
+		Gadget g;
+		CreateGadget(&g);
 		if(choice == 1){
 			if (curMoney >= 800){
-				// isi bagian ini sama proses beli gadgetnya
 				curMoney -= 800;
 				printf("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
+				setGadget(&g, choice, 800);
+				addGadget(&curInventory, g);
 			}
 			else{
 				printf("Oops... Seems like you don't have enough money!\n");
@@ -378,10 +377,11 @@ void Buy(){
 		}
 		else if(choice == 2){
 			if (curMoney >= 1200){
-				// isi bagian ini sama proses beli gadgetnya
 				curMoney -= 1200;
 				printf("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
+				setGadget(&g, choice, 1200);
+				addGadget(&curInventory, g);
 			}
 			else{
 				printf("Oops... Seems like you don't have enough money!\n");
@@ -389,10 +389,11 @@ void Buy(){
 		}
 		else if(choice == 3){
 			if (curMoney >= 1500){
-				// isi bagian ini sama proses beli gadgetnya
 				curMoney -= 1500;
 				printf("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
+				setGadget(&g, choice, 1500);
+				addGadget(&curInventory, g);
 			}
 			else{
 				printf("Oops... Seems like you don't have enough money!\n");
@@ -400,10 +401,11 @@ void Buy(){
 		}
 		else if(choice == 4){
 			if (curMoney >= 3000){
-				// isi bagian ini sama proses beli gadgetnya
 				curMoney -= 3000;
 				printf("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
+				setGadget(&g, choice, 3000);
+				addGadget(&curInventory, g);
 			}
 			else{
 				printf("Oops... Seems like you don't have enough money!\n");
@@ -422,49 +424,51 @@ void displayInventory(){
 	displayGadgetinInventory(curInventory);
 	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
-	boolean flag = true;
-	while (flag){
-		if (choice >= 1 && choice <= INVENTORY_CAP){
-			if (INVIDGADGET(curInventory, choice-1) != IDGADGET_UNDEF){
-				Gadget g;
-				deleteGadget(&curInventory,choice-1,&g);
-				// isi juga sama aktivasi efek dari gadget
-				if(IDGADGET(g) == 1){
-					if (TIPEITEM(TOP(curBag)) == 'P'){
-						PTIME(INFO(fSearch(curToDoList, TOP(curBag)))) = PTIME(TOP(curBag));
-					}
-				}else if(IDGADGET(g) == 2){
-					capMultiplier(&curBag, 2);
-				}else if(IDGADGET(g) == 3){
-					displayMap();
-					printf("Where do you want to go next? : ");
-					// char loc = (inputWord()).contents;
-					// setLoc(&curPosition, ELMT(LocList, indexOfCharLoc(LocList, loc)));
-				}else if(IDGADGET(g) == 4){
-					if(curTime <= 50){
-						curTime = 0;
-					}else{
-						curTime -= 50;
-					}
-				}else if(IDGADGET(g) == 5){
-					//Belum
-					if (TIPEITEM(TOP(curBag)) == 'H'){
-						countHeavyItem -= 1;
-					}
-				}else{
-					printf("Gadget is unavailable\n");
-					return;
-				}
+	while(choice < 0 || choice > INVENTORY_CAP){
+		printf("That is invalid input!\n");
+		printf("Here's your inventory:\n");
+		displayGadgetinInventory(curInventory);
+		printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+		choice = wtoi(inputWord());
+	}
+	if (choice >= 1 && choice <= INVENTORY_CAP){
+		if (INVIDGADGET(curInventory, choice-1) != IDGADGET_UNDEF){
+			Gadget g;
+			deleteGadget(&curInventory,choice-1,&g);
+			// isi juga sama aktivasi efek dari gadget
+			if(IDGADGET(g) == 1){
 				printf("Gadget successfully used!\n");
+				if (TIPEITEM(TOP(curBag)) == 'P'){
+					PTIME(INFO(fSearch(curToDoList, TOP(curBag)))) = PTIME(TOP(curBag));
+				}
+			}else if(IDGADGET(g) == 2){
+				printf("Gadget successfully used!\n");
+				capMultiplier(&curBag, 2);
+			}else if(IDGADGET(g) == 3){
+				printf("Gadget successfully used!\n");
+				displayMap();
+				char x = 'A' + L-1;
+				printf("Where do you want to go?\nType \"HQ\" to go to HQ, type a letter between A to %c that represents the desired location : ", x);
+				char* loc = (inputWord()).contents;
+				if(strcmp(loc, "HQ")==0){
+					loc = "8";
+				}
+				setLoc(&curPosition, ELMT(LocList, indexOfCharLoc(LocList, loc[0])));
+			}else if(IDGADGET(g) == 4){
+				printf("Gadget successfully used!\n");
+				if(curTime <= 50){
+					curTime = 0;
+				}else{
+					curTime -= 50;
+				}
+			}else if(IDGADGET(g) == 5){
+				printf("Gadget successfully used!\n");
+				if (TIPEITEM(TOP(curBag)) == 'H'){
+					countHeavyItem -= 1;
+				}
+			}else{
+				printf("Gadget is unavailable\n");
 			}
-			else{
-				printf("Unable to use gadget\n");
-			}
-			flag = false;
-		}else if(choice == 0){
-			flag = false;
-		}else{
-			int choice = wtoi(inputWord());
 		}
 	}
 }
@@ -492,8 +496,7 @@ void Exit(){
 	Word YayOrNay = inputWord();
 	if(YayOrNay.contents[0]=='y'||YayOrNay.contents[0]=='Y'){
 		// prosedur save kalau jadi ada
-		system("clear");
-		system("cls");
+		save();
 		printf("Quitting...\n\nSAYOOONARAAAAAAAAAA!");
 		exit(0);
 	}

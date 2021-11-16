@@ -44,6 +44,9 @@ void DisplayMap(Map m){
             else if(isPickUpPoint(ELMT(LocList, k))&&!countVIP){
                 print_red(TILE(m, i, j));
             }
+            else if(countVIP && HasVIPItem(ELMT(LocList, k))){
+                print_red(TILE(m, i, j));
+            }
             else if(isAdjacent(curPosition, ELMT(LocList, k))){
                 print_green(TILE(m, i, j));
             }

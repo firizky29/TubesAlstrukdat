@@ -5,6 +5,10 @@ void CreateGadget(Gadget *g){
     IDGADGET(*g) = IDGADGET_UNDEF;
     HARGAGADGET(*g) = HARGAGADGET_UNDEF;
 }
+void setGadget(Gadget *g, int id, int harga){
+    IDGADGET(*g) = id;
+    HARGAGADGET(*g) = harga;
+}
 void CreateInventory(Inventory *inv){
     for(int i=0 ; i < INVENTORY_CAP; i++ ){
         INVIDGADGET(*inv, i) = IDGADGET_UNDEF;

@@ -4,6 +4,7 @@
 #include <wordmachine.h>
 #include <peta.h>
 #include <global.h>
+#include <savestate.h>
 
 /* CHECK COMMAND VALIDITY */
 boolean isNewGame(Word kata);

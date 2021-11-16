@@ -56,6 +56,10 @@ boolean isPickUpPoint(Location P){
 boolean isMobitaPoint(Location P){
     return CHARLOC(curPosition)==CHARLOC(P)&&EQ(COORLOC(curPosition),COORLOC(P));
 }
+
+boolean HasVIPItem(Location P){
+    return indexOfVIP(curToDoList, CHARLOC(P))!=IDX_UNDEF;
+}
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
 void CreateListDin(ListDin *l, int capacity) {
