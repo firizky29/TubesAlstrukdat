@@ -18,9 +18,7 @@ ListDin LocList;
 Queue daftarPesanan;
 Word configName;
 
-// List curInventory;
-// LinkedList curProgress;
-// Queue curUsedGadget;
+// Queue curUsedGadget; ini juga kah?
 
 void getMap(){
 /* get n x m from config and return n x m matrix */
@@ -99,6 +97,7 @@ void getPesananList(){
     }
 }
 
+
 void interface(){
     Word interface = {"data/interface/grafitti.txt", 27};
     readFile(interface);
@@ -114,6 +113,7 @@ void interface(){
 }
 
 void initConfig(Word filepath){
+    // read from config file
     readFile(filepath);
     getMap();
     Point hq = getPoint();
@@ -121,7 +121,6 @@ void initConfig(Word filepath){
     BuildingToMap(&curMap, LocList);
     getAdjacency(&adj, NEFF(LocList));
     getPesananList();
-
     // display info2"\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
     printf("Map: %d x %d\n", REFF(curMap), CEFF(curMap));
     DisplayMap(curMap);
@@ -176,5 +175,20 @@ void globalinit(){
     interface();
     // reading file config + get info
     initConfig(filepath);
+<<<<<<< HEAD
     fclose(tape);  
+=======
+    fclose(tape);
+    // empty initialization
+    CreateInventory(&curInventory);
+    CreateList(&curProgress);
+    CreateStack(&curBag);
+    curMoney = 0;
+    curTime = 0;
+    curSpeed = 100;
+    curPosition = ELMT(LocList, 0);
+    speedBoost = false;
+    countHeavyItem = 0;
+    countMove = 0;
+>>>>>>> c532e27522a818350ec6c0ab71b8d2d373f50242
 }

@@ -274,41 +274,53 @@ void displayMap(){
 	printf("(current position = yellow point)\n");
 }
 void displayToDoList(){
-    printf("Pesanan pada To Do List:\n");
-    Address p = FIRST(curToDoList);
-    for (int i=1; i<=lengthLL(curToDoList); i++){
-        printf("%d. %c -> %c ",i,INFO(p).pickup,INFO(p).dropoff);
-        if (INFO(p).type == 'N'){
-            printf("(Normal Item)\n");
-        } else if (INFO(p).type == 'H'){
-            printf("(Heavy Item)\n");
-        } else if (INFO(p).type == 'P'){
-            printf("(Perishable Item)\n");
-        } else if (INFO(p).type == 'V'){
-            printf("(VIP Item)\n");
-        }
-        p = NEXT(p);
-    }
+	if (isEmpty(curToDoList)){
+		printf("Yay! There is nothing in To Do List");
+	} else {
+		printf("Here's your To Do List:\n");
+		Address p = FIRST(curToDoList);
+		for (int i=1; i<=lengthLL(curToDoList); i++){
+			printf("%d. %c -> %c ",i,INFO(p).pickup,INFO(p).dropoff);
+			if (INFO(p).type == 'N'){
+				printf("(Normal Item)\n");
+			} else if (INFO(p).type == 'H'){
+				printf("(Heavy Item)\n");
+			} else if (INFO(p).type == 'P'){
+				printf("(Perishable Item)\n");
+			} else if (INFO(p).type == 'V'){
+				printf("(VIP Item)\n");
+			}
+			p = NEXT(p);		
+		}
+	}
 }
 void displayInProgress(){
     // ngeprint dari awal-akhir
     // berarti kalo PICK_UP lebih gampang insertFirst ke LinkedList, 
     // trus kalo DROP_OFF deleteLast
-    printf("Pesanan yang sedang diantarkan:\n");
-    Address p = FIRST(curProgress);
-    for (int i=1; i<=lengthLL(curProgress); i++){
+	if (isEmpty(curProgress)){
+		printf("Yay! There is no order in progress");
+	} else {
+		if (lengthLL(curProgress) == 1){
+			printf("Here is the order that you're sending:\n");
+		} else {
+			printf("Here are the orders that you're sending:\n");			
+		}
+		Address p = FIRST(curProgress);
+		for (int i=1; i<=lengthLL(curProgress); i++){
 
-        if (INFO(p).type == 'N'){
-            printf("%d. Normal Item (Tujuan: %c)\n",i,INFO(p).dropoff);
-        } else if (INFO(p).type == 'H'){
-            printf("%d. Heavy Item (Tujuan: %c)\n",i,INFO(p).dropoff);
-        } else if (INFO(p).type == 'P'){
-            printf("%d. Perishable Item (Tujuan: %c)\n",i,INFO(p).dropoff);
-        }else{
-			printf("%d. VIP Item (Tujuan: %c)\n",i,INFO(p).dropoff);
-        }
-        p = NEXT(p);
-    }    
+			if (INFO(p).type == 'N'){
+				printf("%d. Normal Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+			} else if (INFO(p).type == 'H'){
+				printf("%d. Heavy Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+			} else if (INFO(p).type == 'P'){
+				printf("%d. Perishable Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+			} else {
+				printf("%d. VIP Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+			}
+			p = NEXT(p);
+		}    		
+	}
 }
 void Buy(){
 	if (IsHQ(curPosition)){
