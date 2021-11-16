@@ -217,9 +217,11 @@ void Pickup(){
             } else if (TIPEITEM(pesanan) == 'P'){
                 printf("Pesanan berupa Perishable Item berhasil diambil!\n");
                 // Efek item
+				// Sudah dihandle di MOVE
             } else if (TIPEITEM(pesanan) == 'V'){
                 printf("Pesanan berupa VIP Item berhasil diambil!\n");
                 // Efek item
+				// Jujur ini bingung bet
 			}
             
             printf("Tujuan Pesanan: %c\n", DROPOFFPESANAN(pesanan));
