@@ -41,7 +41,7 @@ void DisplayMap(Map m){
             else if(isDropOffPoint(ELMT(LocList, k))){
                 print_blue(TILE(m, i, j));
             }
-            else if(isPickUpPoint(ELMT(LocList, k))){
+            else if(isPickUpPoint(ELMT(LocList, k))&&!hasVIP){
                 print_red(TILE(m, i, j));
             }
             else if(isAdjacent(curPosition, ELMT(LocList, k))){

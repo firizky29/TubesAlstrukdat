@@ -152,6 +152,9 @@ void Move(){
 		while(!isEmptyQueue(daftarPesanan)&&TIMEPESANAN(HEAD(daftarPesanan))==curTime){
 			dequeue(&daftarPesanan, &val);
 			insertLastLL(&curToDoList, val);
+			if(TIPEITEM(val)=='V'){
+				hasVIP = true;
+			}
 		}
 		// Handling perishable item
 		Address AdrP = FIRST(curProgress);
@@ -188,36 +191,41 @@ void Pickup(){
 	Pesanan pesanan;
 
 	/* Jika tas tidak penuh */
-    if (!isStackFull(curBag)) { 
+    if ((!isStackFull(curBag))) { 
 		/* Jika ada item di bangunan */
-        if (indexOfPesananBuilding(curToDoList, curPositionBuilding) != IDX_UNDEF){ 
+		int idx = indexOfPesananBuilding(curToDoList, curPositionBuilding);
+        if (idx != IDX_UNDEF){ 
             /* Menghapus item dari curToDoList */
-            deleteAt(&curToDoList, indexOfPesananBuilding(curToDoList, curPositionBuilding), &pesanan);
+			if(TIPEITEM(getElmt(curToDoList, idx))=='V'||!hasVIP){
+				deleteAt(&curToDoList, idx, &pesanan);
+				/* Menambahkan item ke curProgress dan curBag */
+				insertFirst(&curProgress, pesanan);
+				push(&curBag, pesanan);
 
-            /* Menambahkan item ke curProgress dan curBag */
-            insertFirst(&curProgress, pesanan);
-            push(&curBag, pesanan);
-
-            if (TIPEITEM(pesanan) == 'N'){
-                printf("Pesanan berupa Normal Item berhasil diambil!\n");
-                // Efek item
-				// None
-            } else if (TIPEITEM(pesanan) == 'H'){
-                printf("Pesanan berupa Heavy Item berhasil diambil!\n");
-                // Efek item
-				countHeavyItem++;
-				speedBoost = false;
-            } else if (TIPEITEM(pesanan) == 'P'){
-                printf("Pesanan berupa Perishable Item berhasil diambil!\n");
-                // Efek item
-				// Sudah dihandle di MOVE
-            } else if (TIPEITEM(pesanan) == 'V'){
-                printf("Pesanan berupa VIP Item berhasil diambil!\n");
-                // Efek item
-				// Jujur ini bingung bet
+				if (TIPEITEM(pesanan) == 'N'){
+					printf("Pesanan berupa Normal Item berhasil diambil!\n");
+					// Efek item
+					// None
+				} else if (TIPEITEM(pesanan) == 'H'){
+					printf("Pesanan berupa Heavy Item berhasil diambil!\n");
+					// Efek item
+					countHeavyItem++;
+					speedBoost = false;
+				} else if (TIPEITEM(pesanan) == 'P'){
+					printf("Pesanan berupa Perishable Item berhasil diambil!\n");
+					// Efek item
+					// Sudah dihandle di MOVE
+				} else if (TIPEITEM(pesanan) == 'V'){
+					printf("Pesanan berupa VIP Item berhasil diambil!\n");
+					// Efek item
+					// Jujur ini bingung bet
+				}
+				
+				printf("Tujuan Pesanan: %c\n", DROPOFFPESANAN(pesanan));
+			}	
+            else{
+				printf("Anda punya vip item...")
 			}
-            
-            printf("Tujuan Pesanan: %c\n", DROPOFFPESANAN(pesanan));
 
         } else {
             printf("There seems to be no items here... Pickup unsuccessful.\n");

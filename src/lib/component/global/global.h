@@ -18,6 +18,8 @@ extern Inventory curInventory;
 extern LinkedList curProgress;
 extern LinkedList curToDoList;
 extern Queue daftarPesanan;
+extern boolean hasVIP;
+extern boolean canReturn;
 
 // extern Queue curUsedGadget; {maaf kayaknya ini ga perlu, karna gadget langsung dipakai di saat itu juga biar ga susah}
 extern boolean speedBoost;

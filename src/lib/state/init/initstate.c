@@ -16,6 +16,8 @@ int countMove;
 ListDin LocList;
 Queue daftarPesanan;
 Word configName;
+boolean hasVIP;
+boolean canReturn;
 
 // Queue curUsedGadget; ini juga kah?
 
@@ -89,6 +91,9 @@ void getPesananList(){
         pesanan = CreatePesanan(t, pu, d, tp, pt);
         if(t == 0){
             insertLastLL(&curToDoList, pesanan);
+            if(TIPEITEM(pesanan)=='V'){
+                hasVIP = true;
+            }
         }
         else{
             enqueue(&daftarPesanan, pesanan);
@@ -175,6 +180,7 @@ void globalinit(){
     curPosition = ELMT(LocList, 0);  
     countHeavyItem = 0;
     countMove = 0;
+    hasVIP = false;
     CreateStack(&curBag);
     CreateList(&curProgress);
     CreateInventory(&curInventory);
