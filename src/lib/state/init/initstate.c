@@ -175,20 +175,5 @@ void globalinit(){
     interface();
     // reading file config + get info
     initConfig(filepath);
-<<<<<<< HEAD
     fclose(tape);  
-=======
-    fclose(tape);
-    // empty initialization
-    CreateInventory(&curInventory);
-    CreateList(&curProgress);
-    CreateStack(&curBag);
-    curMoney = 0;
-    curTime = 0;
-    curSpeed = 100;
-    curPosition = ELMT(LocList, 0);
-    speedBoost = false;
-    countHeavyItem = 0;
-    countMove = 0;
->>>>>>> c532e27522a818350ec6c0ab71b8d2d373f50242
 }
