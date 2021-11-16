@@ -278,6 +278,8 @@ void Dropoff(){
 				printf("You got 600 Yen. Amazing!\n");
 
                 // Reward item
+				countVIP -= 1;
+				countReturn -= 1;
 			}
 		} else {
 			printf("This is not the drop-off location of the top-most item in your bag!\n");

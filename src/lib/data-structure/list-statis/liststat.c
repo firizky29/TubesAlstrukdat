@@ -34,7 +34,7 @@ void addGadget(Inventory *inv, Gadget g){
 
 void displayGadgetinInventory(Inventory inv){
     for(int i=0 ; i < INVENTORY_CAP; i++ ){
-        printf("%d ",i+1);
+        printf("%d. ",i+1);
         if(INVIDGADGET(inv,i) == 1){
             printf("Kain Pembungkus Waktu\n");
         }else if(INVIDGADGET(inv,i) == 2){
