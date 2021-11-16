@@ -206,23 +206,23 @@ void Pickup(){
             push(&curBag, pesanan);
 
             if (TIPEITEM(pesanan) == 'N'){
-                printf("Pesanan berupa Normal Item berhasil diambil!");
+                printf("Pesanan berupa Normal Item berhasil diambil!\n");
                 // Efek item
 				// None
             } else if (TIPEITEM(pesanan) == 'H'){
-                printf("Pesanan berupa Heavy Item berhasil diambil!");
+                printf("Pesanan berupa Heavy Item berhasil diambil!\n");
                 // Efek item
 				countHeavyItem++;
 				speedBoost = false;
             } else if (TIPEITEM(pesanan) == 'P'){
-                printf("Pesanan berupa Perishable Item berhasil diambil!");
+                printf("Pesanan berupa Perishable Item berhasil diambil!\n");
                 // Efek item
             } else if (TIPEITEM(pesanan) == 'V'){
-                printf("Pesanan berupa VIP Item berhasil diambil!");
+                printf("Pesanan berupa VIP Item berhasil diambil!\n");
                 // Efek item
 			}
             
-            printf("Tujuan Pesanan: %c", DROPOFFPESANAN(pesanan));
+            printf("Tujuan Pesanan: %c\n", DROPOFFPESANAN(pesanan));
 
         } else {
             printf("There seems to be no items here... Pickup unsuccessful.\n");
@@ -245,27 +245,39 @@ void Dropoff(){
 			pop(&curBag, &pesanan);
 
 			if (TIPEITEM(pesanan) == 'N'){
-                printf("Pesanan berupa Normal Item berhasil diantarkan!");
+                printf("Pesanan berupa Normal Item berhasil diantarkan!\n");
+				curMoney += 200;
+				printf("Uang yang didapatkan: 200 Yen\n");
+
                 // Reward item
             } else if (TIPEITEM(pesanan) == 'H'){
-                printf("Pesanan berupa Heavy Item berhasil diantarkan!");
+                printf("Pesanan berupa Heavy Item berhasil diantarkan!\n");
+				curMoney += 400;
+				printf("Uang yang didapatkan: 400 Yen\n");
+
 				countHeavyItem--;
 				countMove = 0;
                 // Reward item
 				speedBoost = true;
             } else if (TIPEITEM(pesanan) == 'P'){
-                printf("Pesanan berupa Perishable Item berhasil diantarkan!");
+                printf("Pesanan berupa Perishable Item berhasil diantarkan!\n");
+				curMoney += 400;
+				printf("Uang yang didapatkan: 400 Yen\n");
+
                 // Reward item
 				capInc(&curBag, 1);
             } else if (TIPEITEM(pesanan) == 'V'){
-				printf("Pesanan berupa VIP Item berhasil diantarkan!");
+				printf("Pesanan berupa VIP Item berhasil diantarkan!\n");
+				curMoney += 600;
+				printf("Uang yang didapatkan: 600 Yen\n");
+
                 // Reward item
 			}
 		} else {
-			printf("Lokasi ini bukan merupakan lokasi dropoff item teratas tas!");
+			printf("Lokasi ini bukan merupakan lokasi dropoff item teratas tas!\n");
 		}
 	} else {
-		printf("Tidak ada item yang dapat di-dropoff dari dalam tas!");
+		printf("Tidak ada item yang dapat di-dropoff dari dalam tas!\n");
 	}
 }
 void displayMap(){
