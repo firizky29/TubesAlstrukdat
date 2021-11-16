@@ -453,6 +453,8 @@ void displayInventory(){
 				printf("Unable to use gadget\n");
 			}
 			flag = false;
+		}else if(choice == 0){
+			flag = false;
 		}else{
 			int choice = wtoi(inputWord());
 		}
