@@ -123,8 +123,9 @@ void Move(){
 	if (choice != 0){
 		// TIME HANDLING
 		if (speedBoost && countHeavyItem == 0){ // ini kasus punya speedboost & gaada heavy item
-			if (countMove < 10){
-				if (countMove != 0 && (countMove % 2) == 0){
+			countMove += 1;
+			if (countMove <= 10){
+				if ((countMove % 2) == 0){
 					curTime += 1;
 					DecrementAllPerishableItem(&curProgress, 1);
 				}
@@ -132,6 +133,8 @@ void Move(){
 			else{
 				speedBoost = false;
 				countMove = 0;
+				curTime += 1;
+				DecrementAllPerishableItem(&curProgress, 1);
 			}
 		}
 		else if (countHeavyItem > 0){ // ini kasus ada heavy item
@@ -201,7 +204,7 @@ void Pickup(){
 				printf("VIP Item successfully picked up!\n");
 			}
 			else{
-				printf("Anda harus segera mem-pickup VIP item. Tidak ada VIP item di tempat ini!\n");
+				printf("There are no VIP items here!\nYou have to pick-up VIP item(s) first, simp.\n");
 			}
 		}
 		else{
@@ -244,7 +247,7 @@ void Dropoff(){
 	Pesanan pesanan;
 
 	/* Jika tas tidak kosong */
-	if (isStackEmpty(curBag) != IDX_UNDEF) {
+	if (!isStackEmpty(curBag)) {
 		/* Jika lokasi dropoff barang paling atas sama dengan posisi Mobita sekarang */
 		if (DROPOFFPESANAN(TOP(curBag)) == curPositionBuilding) {
 			deleteFirst(&curProgress, &pesanan);
@@ -498,7 +501,11 @@ void Exit(){
 	Word YayOrNay = inputWord();
 	if(YayOrNay.contents[0]=='y'||YayOrNay.contents[0]=='Y'){
 		// prosedur save kalau jadi ada
-		save();
+		printf("Would you like to save your current progress (yes/no)? : ");
+		Word saveProg = inputWord();
+		if (saveProg.contents[0] == 'y' || saveProg.contents[0] == 'Y'){
+			save();
+		}		
 		printf("Quitting...\n\nSAYOOONARAAAAAAAAAA!");
 		exit(0);
 	}
