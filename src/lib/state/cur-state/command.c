@@ -153,7 +153,7 @@ void Move(){
 			dequeue(&daftarPesanan, &val);
 			insertLastLL(&curToDoList, val);
 			if(TIPEITEM(val)=='V'){
-				hasVIP = true;
+				countVIP+=1;
 			}
 		}
 		// Handling perishable item
@@ -196,7 +196,7 @@ void Pickup(){
 		int idx = indexOfPesananBuilding(curToDoList, curPositionBuilding);
         if (idx != IDX_UNDEF){ 
             /* Menghapus item dari curToDoList */
-			if(TIPEITEM(getElmt(curToDoList, idx))=='V'||!hasVIP){
+			if(TIPEITEM(getElmt(curToDoList, idx))=='V'||!countVIP){
 				deleteAt(&curToDoList, idx, &pesanan);
 				/* Menambahkan item ke curProgress dan curBag */
 				insertFirst(&curProgress, pesanan);
@@ -224,7 +224,7 @@ void Pickup(){
 				printf("Tujuan Pesanan: %c\n", DROPOFFPESANAN(pesanan));
 			}	
             else{
-				printf("Anda punya vip item...")
+				printf("Anda punya vip item...");
 			}
 
         } else {
