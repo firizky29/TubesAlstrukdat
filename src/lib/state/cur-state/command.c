@@ -148,11 +148,13 @@ void Move(){
 			curTime += 1;
 			DecrementAllPerishableItem(&curToDoList, 1);
 		}
+		printf("A\n");
 		while(!isEmptyQueue(daftarPesanan)&&TIMEPESANAN(HEAD(daftarPesanan))==curTime){
 			Pesanan val;
 			dequeue(&daftarPesanan, &val);
 			insertLastLL(&curToDoList, val);
 		}
+		printf("B\n");
 		// Handling perishable item
 		Address AdrP = FIRST(curToDoList);
 		int idx = 0;
@@ -178,6 +180,7 @@ void Move(){
 			idx++;
 			AdrP = NEXT(AdrP);
 		}
+		printf("C\n");
 		// POSITION HANDLING
 		/* move player based on choice
 		curPosition = [POSITION_CHOICE] */

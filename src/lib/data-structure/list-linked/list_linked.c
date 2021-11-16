@@ -260,5 +260,6 @@ void DecrementAllPerishableItem(LinkedList *L, int decr){
         if(TIPEITEM(INFO(p))=='P'){
             subtractPtime(&INFO(p), decr);
         }
+        p = NEXT(p);
     }
 }
