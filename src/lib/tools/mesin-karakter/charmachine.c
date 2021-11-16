@@ -44,7 +44,7 @@ void adv(){
 	/* Algoritma */
 	retval = fscanf(tape, "%c", &currentChar);
        if (retval == EOF){
-              // fclose(tape);
+              fclose(tape);
               endFile = true;
  	}
        else if (currentChar == '\n'){

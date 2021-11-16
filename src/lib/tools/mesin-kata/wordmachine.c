@@ -114,6 +114,7 @@ Word inputWord(){
 
 void readFile(Word filename){
 /* membaca file dengan nama filename */
+	emptyWord();
 	startWord_file(filename.contents);
 }
 
