@@ -13,6 +13,7 @@ typedef struct pesanan {
     /* ptime hanya akan berubah di inprogress list, di tas ptime tidak berubah */
 } Pesanan;
 
+/* Selektor */
 #define TIMEPESANAN(p) (p).time
 #define PICKUPPESANAN(p) (p).pickup
 #define DROPOFFPESANAN(p) (p).dropoff
@@ -21,6 +22,7 @@ typedef struct pesanan {
 
 #define TIME_UNDEF (-1)
 
+/* Konstruktor */
 Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT);
 /* Membentuk Pesanan */
 /* Mereturn pesanan yang akan dimasukkan ke dalam queue/linkedlist */

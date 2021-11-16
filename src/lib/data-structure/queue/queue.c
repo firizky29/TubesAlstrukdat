@@ -39,7 +39,7 @@ int lengthQueue(Queue q){
 }
 /* *** Primitif Add/Delete *** */
 void enqueue(Queue *q, Pesanan val){
-/* Proses: Menambahkan val pada q dengan aturan FIFO */
+/* Proses: Menambahkan val pada q dengan aturan FIFO, dengan waktu pesanan terurut secara membesar */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen q
