@@ -26,6 +26,7 @@ void addGadget(Inventory *inv, Gadget g){
             if (INVIDGADGET(*inv,i) == IDGADGET_UNDEF){
                 INVIDGADGET(*inv,i) = IDGADGET(g); 
                 INVHARGAGADGET(*inv,i) = HARGAGADGET(g); 
+                flag = false;
             i += 1;
             }
         }
@@ -54,7 +55,7 @@ void displayGadgetinInventory(Inventory inv){
 boolean isInventoryEmpty(Inventory inv){
     boolean flag = true;
     int i = 0;
-    while(i < INVENTORY_CAP){
+    while(i < INVENTORY_CAP && flag){
         if(INVIDGADGET(inv, i) != IDGADGET_UNDEF){
             flag = false;
         }
@@ -66,7 +67,7 @@ boolean isInventoryEmpty(Inventory inv){
 boolean isInventoryFull(Inventory inv){
     boolean flag = true;
     int i = 0;
-    while(i < INVENTORY_CAP){
+    while(i < INVENTORY_CAP && flag){
         if(INVIDGADGET(inv, i) == IDGADGET_UNDEF){
             flag = false;
         }
@@ -78,6 +79,6 @@ boolean isInventoryFull(Inventory inv){
 void deleteGadget(Inventory *inv, int i, Gadget *val){
     IDGADGET(*val) = INVIDGADGET(*inv, i);
     HARGAGADGET(*val) = INVHARGAGADGET(*inv, i);
-    IDGADGET(*val) = IDGADGET_UNDEF;
-    HARGAGADGET(*val) = HARGAGADGET_UNDEF;
+    INVIDGADGET(*inv,i) = IDGADGET_UNDEF;
+    INVHARGAGADGET(*inv,i) = HARGAGADGET_UNDEF;
 }
