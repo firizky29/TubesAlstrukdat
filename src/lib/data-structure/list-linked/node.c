@@ -6,6 +6,9 @@
 
 Address newNode(Pesanan val) {
     Address p = (Address) malloc(sizeof(Node));
+    while(p==NULL){
+        p = (Address) malloc(sizeof(Node));
+    }
     if (p!=NULL) {
         INFO(p) = val;
         NEXT(p) = NULL;

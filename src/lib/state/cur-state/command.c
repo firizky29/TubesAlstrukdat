@@ -128,7 +128,7 @@ void Move(){
 			if (countMove < 10){
 				if (countMove != 0 && (countMove % 2) == 0){
 					curTime += 1;
-					DecrementAllPerishableItem(&curToDoList, 1);
+					DecrementAllPerishableItem(&curProgress, 1);
 				}
 			}
 			else{
@@ -142,45 +142,38 @@ void Move(){
 				countMove = 0;
 			}
 			curTime += 1 + countHeavyItem;
-			DecrementAllPerishableItem(&curToDoList, 1+countHeavyItem);
+			DecrementAllPerishableItem(&curProgress, 1+countHeavyItem);
 		}
 		else{ // ini kasus gaada speedboost dan gaada heavy item
 			curTime += 1;
-			DecrementAllPerishableItem(&curToDoList, 1);
+			DecrementAllPerishableItem(&curProgress, 1);
 		}
-		printf("A\n");
+		Pesanan val;
 		while(!isEmptyQueue(daftarPesanan)&&TIMEPESANAN(HEAD(daftarPesanan))==curTime){
-			Pesanan val;
 			dequeue(&daftarPesanan, &val);
 			insertLastLL(&curToDoList, val);
 		}
-		printf("B\n");
 		// Handling perishable item
-		Address AdrP = FIRST(curToDoList);
+		Address AdrP = FIRST(curProgress);
 		int idx = 0;
+		Stack tempBag;
+		CreateStack(&tempBag);
+		CURCAP(tempBag) = CURCAP(curBag);
 		while(AdrP!=NULL){
+			pop(&curBag, &val);
 			if(TIPEITEM(INFO(AdrP))=='P'&&PTIME(INFO(AdrP))==0){
-				Pesanan val;
-				Stack tempBag;
-				deleteAt(&curToDoList, idx, &val);
-				while(!isEqualPesanan(TOP(curBag), val)){
-					Pesanan temp;
-					pop(&curBag, &temp);
-					push(&tempBag, temp);
-				}
-				if(isEqualPesanan(TOP(curBag), val)){
-					Pesanan temp;
-					pop(&curBag, &temp);
-					while(!isStackEmpty(tempBag)){
-						pop(&tempBag, &temp);
-						push(&curBag, temp);
-					}
-				}
+				deleteAt(&curProgress, idx, &val);
+			}
+			else{
+				push(&tempBag, val);
 			}
 			idx++;
 			AdrP = NEXT(AdrP);
 		}
-		printf("C\n");
+		while(!isStackEmpty(tempBag)){
+			pop(&tempBag, &val);
+			push(&curBag, val);
+		}
 		// POSITION HANDLING
 		/* move player based on choice
 		curPosition = [POSITION_CHOICE] */

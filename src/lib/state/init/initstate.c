@@ -4,7 +4,6 @@ int N, M, L, P;
 long curTime;
 Location curPosition;
 long curMoney;
-int curSpeed; // dalam persen
 Stack curBag;
 Map curMap;
 Matrix adj;
@@ -172,9 +171,11 @@ void globalinit(){
     fclose(tape);  
     curMoney = 0;
     curTime = 0;
-    curSpeed = 100;
+    speedBoost = false;
     curPosition = ELMT(LocList, 0);  
+    countHeavyItem = 0;
+    countMove = 0;
     CreateStack(&curBag);
-    CURCAP(curBag) = 3;
     CreateList(&curProgress);
+    CreateInventory(&curInventory);
 }
