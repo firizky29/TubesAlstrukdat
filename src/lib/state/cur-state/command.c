@@ -110,7 +110,7 @@ void Move(){
 	while(choice<0 || choice > length(Neighbor)){
 		system("cls");
 		system("clear");
-		printf("Ga bisa bikin kata katanya T_T\n");
+		printf("That's an invalid option. Let's retry, shall we?\n");
 		if(CHARLOC(curPosition)=='8'){
 			printf("You are now in building HQ at point (%d, %d)\n", Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
 		}
@@ -203,35 +203,35 @@ void Pickup(){
 				push(&curBag, pesanan);
 
 				if (TIPEITEM(pesanan) == 'N'){
-					printf("Pesanan berupa Normal Item berhasil diambil!\n");
+					printf("Normal Item successfully picked up!\n");
 					// Efek item
 					// None
 				} else if (TIPEITEM(pesanan) == 'H'){
-					printf("Pesanan berupa Heavy Item berhasil diambil!\n");
+					printf("Heavy Item successfully picked up!\n");
 					// Efek item
 					countHeavyItem++;
 					speedBoost = false;
 				} else if (TIPEITEM(pesanan) == 'P'){
-					printf("Pesanan berupa Perishable Item berhasil diambil!\n");
+					printf("Perishable Item successfully picked up!\n");
 					// Efek item
 					// Sudah dihandle di MOVE
 				} else if (TIPEITEM(pesanan) == 'V'){
-					printf("Pesanan berupa VIP Item berhasil diambil!\n");
+					printf("VIP Item successfully picked up!\n");
 					// Efek item
 					// Jujur ini bingung bet
 				}
 				
-				printf("Tujuan Pesanan: %c\n", DROPOFFPESANAN(pesanan));
+				printf("Order destination: %c\n", DROPOFFPESANAN(pesanan));
 			}	
             else{
-				printf("Anda punya vip item...");
+				printf("You have a VIP item...");
 			}
 
         } else {
             printf("There seems to be no items here... Pickup unsuccessful.\n");
         }
     } else {
-        printf("Tas penuh!\n");
+        printf("Bag is full!\n");
     }
 }
 
@@ -248,51 +248,51 @@ void Dropoff(){
 			pop(&curBag, &pesanan);
 
 			if (TIPEITEM(pesanan) == 'N'){
-                printf("Pesanan berupa Normal Item berhasil diantarkan!\n");
+                printf("Order in the form of Normal Item succesfully delivered!\n");
 				curMoney += 200;
-				printf("Uang yang didapatkan: 200 Yen\n");
+				printf("You got 200 Yen. Nice.\n");
 
                 // Reward item
             } else if (TIPEITEM(pesanan) == 'H'){
-                printf("Pesanan berupa Heavy Item berhasil diantarkan!\n");
+                printf("Order in the form of Heavy Item succesfully delivered!\n");
 				curMoney += 400;
-				printf("Uang yang didapatkan: 400 Yen\n");
+				printf("You got 400 Yen. Great job.\n");
 
 				countHeavyItem--;
 				countMove = 0;
                 // Reward item
 				speedBoost = true;
             } else if (TIPEITEM(pesanan) == 'P'){
-                printf("Pesanan berupa Perishable Item berhasil diantarkan!\n");
+                printf("Order in the form of Perishable Item succesfully delivered!\n");
 				curMoney += 400;
-				printf("Uang yang didapatkan: 400 Yen\n");
+				printf("You got 400 Yen. Good work.\n");
 
                 // Reward item
 				capInc(&curBag, 1);
             } else if (TIPEITEM(pesanan) == 'V'){
-				printf("Pesanan berupa VIP Item berhasil diantarkan!\n");
+				printf("Order in the form of VIP Item succesfully delivered!\n");
 				curMoney += 600;
-				printf("Uang yang didapatkan: 600 Yen\n");
+				printf("You got 600 Yen. Amazing!\n");
 
                 // Reward item
 			}
 		} else {
-			printf("Lokasi ini bukan merupakan lokasi dropoff item teratas tas!\n");
+			printf("This is not the drop-off location of the top-most item in your bag!\n");
 		}
 	} else {
-		printf("Tidak ada item yang dapat di-dropoff dari dalam tas!\n");
+		printf("There are no items to be dropped off from your bag!\n");
 	}
 }
 void displayMap(){
 	printf("Here's the Map:\n");
 	DisplayMap(curMap);
-	printf("(current position = yellow point)\n");
+	printf("(you're the yellow point)\n");
 }
 void displayToDoList(){
 	if (isEmpty(curToDoList)){
-		printf("Yay! There is nothing in To Do List");
+		printf("Yay! There is nothing in your To-Do List");
 	} else {
-		printf("Here's your To Do List:\n");
+		printf("Here's your To-Do List:\n");
 		Address p = FIRST(curToDoList);
 		for (int i=1; i<=lengthLL(curToDoList); i++){
 			printf("%d. %c -> %c ",i,INFO(p).pickup,INFO(p).dropoff);
@@ -317,21 +317,21 @@ void displayInProgress(){
 		printf("Yay! There is no order in progress");
 	} else {
 		if (lengthLL(curProgress) == 1){
-			printf("Here is the order that you're sending:\n");
+			printf("Here is the order that you're currently delivering:\n");
 		} else {
-			printf("Here are the orders that you're sending:\n");			
+			printf("Here are your on-going orders:\n");			
 		}
 		Address p = FIRST(curProgress);
 		for (int i=1; i<=lengthLL(curProgress); i++){
 
 			if (INFO(p).type == 'N'){
-				printf("%d. Normal Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+				printf("%d. Normal Item (Destination: %c)\n",i,INFO(p).dropoff);
 			} else if (INFO(p).type == 'H'){
-				printf("%d. Heavy Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+				printf("%d. Heavy Item (Destination: %c)\n",i,INFO(p).dropoff);
 			} else if (INFO(p).type == 'P'){
-				printf("%d. Perishable Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+				printf("%d. Perishable Item (Destination: %c)\n",i,INFO(p).dropoff);
 			} else {
-				printf("%d. VIP Item (Tujuan: %c)\n",i,INFO(p).dropoff);
+				printf("%d. VIP Item (Destination: %c)\n",i,INFO(p).dropoff);
 			}
 			p = NEXT(p);
 		}    		
@@ -472,7 +472,7 @@ void displayHelp(){
 	printf("-  IN_PROGRESS: display list of in-progress order(s)\n");
 	printf("-  BUY: purchase gadgets (only available when in HQ)\n");
 	printf("-  INVENTORY: display list of inventory\n");
-	printf("-  RETURN: \n");
+	printf("-  RETURN: return top-most item in bag to its pick-up location\n");
 	printf("-  HELP: display list of available command(s)\n");
 	printf("-  EXIT: exit game\n");
 	printf("-  SAVE: save current progress\n");
