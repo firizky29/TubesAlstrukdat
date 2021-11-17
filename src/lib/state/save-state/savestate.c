@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pcolor.h>
+#include <unistd.h>
 
 LinkedList reverseStack(Stack *s){
     LinkedList rStack;
@@ -25,6 +26,14 @@ void save(){
     strcat(path.contents, file.contents);
     strcat(path.contents, ".txt");
     path.length = 21+file.length;
+    if (access(path.contents, F_OK) == 0){
+        printf("File already exists.\nWould you like to overwrite changes (yes/no)? : ");
+        Word overWrite = inputWord();
+        if (overWrite.contents[0] != 'y' && overWrite.contents[0] != 'Y'){
+            printf("Save cancelled.\n");
+            return;
+        }
+    }
 	FILE *f = fopen(path.contents, "w");
 	if (f == NULL)
 	{
@@ -46,6 +55,8 @@ void save(){
     fprintf(f, "%d\n", curSpeed);
     fprintf(f, "%d\n", speedBoost);
     fprintf(f, "%d\n", countMove);
+    fprintf(f, "%d\n", countVIP);
+    fprintf(f, "%d\n",countReturn);
     int i;
     Pesanan pesan;
     LinkedList rStack;
