@@ -3,6 +3,10 @@
 
 #include <wordmachine.h>
 
+LinkedList reverseStack(Stack *s);
+/* get reversed stack */
+
 void save();
+/* save current progress */
 
 #endif
