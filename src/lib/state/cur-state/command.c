@@ -466,7 +466,7 @@ void displayInventory(){
 			}else if(IDGADGET(g) == 3){
 				printf("Gadget successfully used!\n");
 				displayMap();
-				char x = 'A' + L-1;
+				char x = (char) ((int)('A' + L-1));
 				printf("Where do you want to go?\nType \"HQ\" to go to HQ, type a letter between A to %c that represents the desired location : ", x);
 				char* loc = (inputWord()).contents;
 				if(strcmp(loc, "HQ")==0){
