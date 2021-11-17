@@ -103,7 +103,9 @@ int lengthLL(LinkedList l);
 
 /* PICK_UP */
 int indexOfPesananBuilding(LinkedList to_do, char building);
-/* */
+/* Mengirimkan index pertama to_do yang bangunan pick up pesanannya adalah building atau
+    IDX_UNDEF jika tidak ada */
+    
 int indexOfVIP(LinkedList to_do, char building);
 /* */
 

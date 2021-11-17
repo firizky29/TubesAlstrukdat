@@ -29,6 +29,7 @@ int main(){
     enqueue(&Q,P5);
     enqueue(&Q,P6);
 
+    printf("\n");
     printf("Perhatikan bahwa Queue terurut membesar berdasarkan elemen pertama\n");
     displayQueue(Q);
     printf("\n");

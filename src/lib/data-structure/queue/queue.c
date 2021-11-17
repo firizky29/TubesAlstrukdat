@@ -1,10 +1,7 @@
-// NIM : 13520076
-// Nama : Claudia
-// Tanggal : 6 Oktober 2021
-// Topik Praktikum : ADT Queue
-// Deskripsi : Membuat ADT Queue
+/* File : queue.c */
+/* Implementasi Queue */
 
-#include<stdio.h>
+#include <stdio.h>
 #include <queue.h>
 
 /* *** Kreator *** */

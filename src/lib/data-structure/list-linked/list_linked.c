@@ -1,8 +1,5 @@
-// NIM : 13520076
-// Nama : Claudia
-// Tanggal : 27 Oktober 2021
-// Topik Praktikum : ADT List Berkait
-// Deskripsi : Membuat ADT List Berkait
+/* File: list_linked.c */
+/* Implementasi Linked List */
 
 #include <stdio.h>
 #include <list_linked.h>
