@@ -93,7 +93,6 @@ boolean isReturn(Word kata){
 
 /* Mengubah curPosition, curTime*/
 void Move(){
-	int countHeavyItem = countWeight(curProgress);
 	ListDin Neighbor;
 	printf("Time: %ld\n", curTime);
 	if(CHARLOC(curPosition)=='8'){
@@ -472,7 +471,7 @@ void displayInventory(){
 			if(IDGADGET(g) == 1){
 				print_green("Gadget successfully used!\n");
 				if (TIPEITEM(TOP(curBag)) == 'P'){
-					PTIME(INFO(fSearch(curToDoList, TOP(curBag)))) = PTIME(TOP(curBag));
+					PTIME(INFO(FIRST(curProgress))) = PTIME(TOP(curBag));
 				}
 			}else if(IDGADGET(g) == 2){
 				print_green("Gadget successfully used!\n");

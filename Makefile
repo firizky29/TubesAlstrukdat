@@ -3,14 +3,14 @@ CC = gcc
 BUILD_DIR := ./build
 BIN_DIR := ./bin
 SRC_DIR := ./src
+TEST_DIR := ./test
 TARGET := $(BIN_DIR)/MobitaGame
 
 CFLAG = -Wall -std=c99
 BUILD_FLAG = -lm
 
-SRCS := $(shell find src -name *.c ! -name "main.c")
+SRCS := $(shell find src -name *.c ! -name "main.c" ! -name "driver_*.c")
 OBJS := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
-
 
 INC_DIR := $(wildcard src/*/**/**)
 INC_FLAG := $(addprefix -I,$(INC_DIR)) -Isrc/lib
@@ -31,8 +31,10 @@ build: $(OBJS) $(BUILD_DIR)/main.o
 run: build
 	@$(TARGET)
 
+wordmachine: 
+
 clear:
-	@rm -rf build/* bin/*
+	@rm -rf build/* bin/* test/*
 
 all : clear build
 
