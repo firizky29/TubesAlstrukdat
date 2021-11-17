@@ -21,10 +21,6 @@ Queue daftarPesanan;
 Word configName;
 int countDelivered;
 
-// List curInventory;
-// LinkedList curProgress;
-// Queue curUsedGadget;
-
 boolean isLoadAvailable(){
     int n = 0;
 	struct dirent *det;  // Pointer for directory entry
