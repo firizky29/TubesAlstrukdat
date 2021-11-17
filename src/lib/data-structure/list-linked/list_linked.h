@@ -113,7 +113,7 @@ Address fSearch(LinkedList L, Pesanan P);
 void DecrementAllPerishableItem(LinkedList *L, int decr);
 /* Mengurangi waktu dari semua perishable item sebanyak decr */
 
-int countWieght(LinkedList L);
+int countWeight(LinkedList L);
 /* Menghitung berat total di dalam tas */
 
 void setBackWeight(LinkedList *L);

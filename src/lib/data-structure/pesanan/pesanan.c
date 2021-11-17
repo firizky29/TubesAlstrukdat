@@ -15,7 +15,7 @@ Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT, int W){
 }
 void displayPesanan(Pesanan P){
 /* Menulis Pesanan dengan format time pickup dropoff type ptime */
-    printf("%d %c %c %c %d",TIMEPESANAN(P),PICKUPPESANAN(P),DROPOFFPESANAN(P),TIPEITEM(P), PTIME(P));
+    printf("%d %c %c %c %d %d",TIMEPESANAN(P),PICKUPPESANAN(P),DROPOFFPESANAN(P),TIPEITEM(P), PTIME(P), WEIGHT(P));
 }
 
 void subtractPtime(Pesanan *P, int decr){

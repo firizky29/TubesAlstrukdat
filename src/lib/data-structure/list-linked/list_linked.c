@@ -285,7 +285,7 @@ void DecrementAllPerishableItem(LinkedList *L, int decr){
     }
 }
 
-int countWieght(LinkedList L){
+int countWeight(LinkedList L){
     /* KAMUS */
     Address p = FIRST(L);
     int sum = 0;

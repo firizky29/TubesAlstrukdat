@@ -121,7 +121,7 @@ void Move(){
 		choice = wtoi(inputWord());
 	}
 	if (choice != 0){
-		int countHeavyItem = countWieght(curProgress);
+		int countHeavyItem = countWeight(curProgress);
 		// TIME HANDLING
 		if (speedBoost && countHeavyItem == 0){ // ini kasus punya speedboost & gaada heavy item
 			countMove += 1;
