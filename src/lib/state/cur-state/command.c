@@ -202,9 +202,10 @@ void Pickup(){
 				insertFirst(&curProgress, pesanan);
 				push(&curBag, pesanan);
 				printf("VIP Item successfully picked up!\n");
+				printf("Order destination: %c\n", DROPOFFPESANAN(pesanan));
 			}
 			else{
-				printf("There are no VIP items here!\nYou have to pick-up VIP item(s) first, simp.\n");
+				printf("There are no VIP items here!\nYou have VIP item(s) to be done first, simp.\n");
 			}
 		}
 		else{
@@ -282,7 +283,7 @@ void Dropoff(){
 
                 // Reward item
 				countVIP -= 1;
-				countReturn -= 1;
+				countReturn += 1;
 			}
 		} else {
 			printf("This is not the drop-off location of the top-most item in your bag!\n");
@@ -506,8 +507,50 @@ void displayHelp(){
 	printf("-  SAVE: save current progress\n");
 }
 void Retur(){
+	/* KAMUS LOKAL */
+	Pesanan pesanan;
+
+	/* ALGORITMA */
 	countUsedSenter = 0;
-	printf("Retur\n");
+	if (countReturn > 0) {
+		if (!isStackEmpty(curBag)) {
+			// Normal Item
+			if (TIPEITEM(TOP(curBag)) == 'N') {
+				countReturn--;
+				deleteFirst(&curProgress, &pesanan);
+				pop(&curBag, &pesanan);
+				insertLastLL(&curToDoList, pesanan);
+				printf("Normal Item berhasil dikembalikan ke Pick Up Point %c", PICKUPPESANAN(pesanan));
+			} 
+			
+			// Heavy Item
+			else if (TIPEITEM(TOP(curBag)) == 'H') {
+				countReturn--;
+				deleteFirst(&curProgress, &pesanan);
+				pop(&curBag, &pesanan);
+				insertLastLL(&curToDoList, pesanan);
+				printf("Heavy Item berhasil dikembalikan ke Pick Up Point %c", PICKUPPESANAN(pesanan));
+			} 
+			
+			// Perishable Item
+			else if (TIPEITEM(TOP(curBag)) == 'P') {
+				countReturn--;
+				deleteFirst(&curProgress, &pesanan);
+				pop(&curBag, &pesanan);
+				insertLastLL(&curToDoList, pesanan);
+				printf("Perishable Item berhasil dikembalikan ke Pick Up Point %c", PICKUPPESANAN(pesanan));
+			} 
+			
+			// VIP Item
+			else if (TIPEITEM(TOP(curBag)) == 'V'){
+				printf("You can't return VIP Item!\n");
+			}
+		} else {
+			printf("You don't have item to return...\n");
+		} 
+	} else {
+		printf("You don't have this ability...\n");
+	}
 }
 
 void Exit(){

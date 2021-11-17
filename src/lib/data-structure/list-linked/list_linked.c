@@ -237,7 +237,7 @@ int indexOfVIP(LinkedList to_do, char building){
     boolean found = false;
 
     while (p != NULL && !found){
-        if (PICKUPPESANAN(INFO(p)) == building&&TIMEPESANAN(INFO(p))=='V'){
+        if (PICKUPPESANAN(INFO(p)) == building && TIPEITEM(INFO(p))=='V'){
             found = true;
         } else {
             idxcount += 1;
