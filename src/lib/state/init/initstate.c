@@ -84,6 +84,7 @@ void getPesananList(){
         advWord_file();
         if (tp == 'P'){
             pt = wtoi(currentWord);
+            w = 0;
         }
         else{
             pt = -1;
