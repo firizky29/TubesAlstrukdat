@@ -179,7 +179,7 @@ void globalinit(){
     interface();
     // reading file config + get info
     initConfig(filepath);
-    curMoney = 1000000000;
+    curMoney = 0;
     curTime = 0;
     speedBoost = false;
     curPosition = ELMT(LocList, 0);  
