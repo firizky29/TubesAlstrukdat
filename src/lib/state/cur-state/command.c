@@ -134,6 +134,7 @@ void Move(){
 				}
 			}
 			else{
+				printf("You've used up your Speed Boost ability. Now back to normal walking.");
 				speedBoost = false;
 				countMove = 0;
 				curTime += 1;
@@ -142,6 +143,7 @@ void Move(){
 		}
 		else if (countHeavyItem > 0){ // ini kasus ada heavy item
 			if (speedBoost){ // kalo sblmnya ada speedboost, dideactivate + reinitialize
+				printf("You're carrying Heavy Item. Speed Boost deactivated.\n");
 				speedBoost = false;
 				countMove = 0;
 			}
@@ -227,7 +229,9 @@ void Pickup(){
 				} else if (TIPEITEM(pesanan) == 'H'){
 					print_green("Heavy Item successfully picked up!\n");
 					// Efek item
+					printf("(when carrying Heavy Item, Speed Boost ability will disappear)\n");
 					speedBoost = false;
+					countMove = 0;
 				} else if (TIPEITEM(pesanan) == 'P'){
 					print_green("Perishable Item successfully picked up!\n");
 					// Efek item
@@ -266,6 +270,7 @@ void Dropoff(){
                 print_cyan("Order in the form of Heavy Item succesfully delivered!\n");
 				curMoney += 400;
 				print_green("You got 400 Yen. Great job.\n");
+				print_green("You were rewarded the ability 'Speed Boost'. Ability activated.\n");
 				countMove = 0;
                 // Reward item
 				speedBoost = true;
@@ -273,13 +278,13 @@ void Dropoff(){
                 print_cyan("Order in the form of Perishable Item succesfully delivered!\n");
 				curMoney += 400;
 				print_green("You got 400 Yen. Good work.\n");
-
+				print_green("You were also given the 'Increase Capacity' ability. Ability activated.\n");
                 // Reward item
 				capInc(&curBag, 1);
             } else if (TIPEITEM(pesanan) == 'V'){
 				print_cyan("Order in the form of VIP Item succesfully delivered!\n");
 				curMoney += 600;
-				print_green("You got 600 Yen. Amazing!\n");
+				print_green("You got 600 Yen and the ability 'Return to Sender'. Amazing.\n");
 
                 // Reward item
 				countVIP -= 1;
@@ -506,7 +511,7 @@ void displayHelp(){
 	printf("-  RETURN: return top-most item in bag to its pick-up location\n");
 	printf("-  HELP: display list of available command(s)\n");
 	printf("-  EXIT: exit game\n");
-	printf("-  SAVE: save current progress\n");
+	printf("-  SAVE_GAME: save current progress\n");
 }
 void Retur(){
 	/* KAMUS LOKAL */
@@ -522,7 +527,7 @@ void Retur(){
 				deleteFirst(&curProgress, &pesanan);
 				pop(&curBag, &pesanan);
 				insertLastLL(&curToDoList, pesanan);
-				printf("Normal Item berhasil dikembalikan ke Pick Up Point %c", PICKUPPESANAN(pesanan));
+				printf("Normal Item successfully returned to Pick Up Point %c", PICKUPPESANAN(pesanan));
 			} 
 			
 			// Heavy Item
@@ -531,7 +536,7 @@ void Retur(){
 				deleteFirst(&curProgress, &pesanan);
 				pop(&curBag, &pesanan);
 				insertLastLL(&curToDoList, pesanan);
-				printf("Heavy Item berhasil dikembalikan ke Pick Up Point %c", PICKUPPESANAN(pesanan));
+				printf("Heavy Item successfully returned to Pick Up Point %c", PICKUPPESANAN(pesanan));
 			} 
 			
 			// Perishable Item
@@ -540,7 +545,7 @@ void Retur(){
 				deleteFirst(&curProgress, &pesanan);
 				pop(&curBag, &pesanan);
 				insertLastLL(&curToDoList, pesanan);
-				printf("Perishable Item berhasil dikembalikan ke Pick Up Point %c", PICKUPPESANAN(pesanan));
+				printf("Perishable Item successfully returned to Pick Up Point %c", PICKUPPESANAN(pesanan));
 			} 
 			
 			// VIP Item
