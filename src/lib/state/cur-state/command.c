@@ -144,7 +144,7 @@ void Move(){
 		}
 		else if (countHeavyItem > 0){ // ini kasus ada heavy item
 			if (speedBoost){ // kalo sblmnya ada speedboost, dideactivate + reinitialize
-				printf("You're carrying Heavy Item. Speed Boost deactivated.\n");
+				print_red("You're carrying Heavy Item. Speed Boost deactivated.\n");
 				speedBoost = false;
 				countMove = 0;
 			}
@@ -230,7 +230,7 @@ void Pickup(){
 				} else if (TIPEITEM(pesanan) == 'H'){
 					print_green("Heavy Item successfully picked up!\n");
 					// Efek item
-					printf("(when carrying Heavy Item, Speed Boost ability will disappear)\n");
+					print_red("(when carrying Heavy Item, Speed Boost ability will disappear)\n");
 					speedBoost = false;
 					countMove = 0;
 				} else if (TIPEITEM(pesanan) == 'P'){
@@ -363,83 +363,88 @@ void Buy(){
 		printf("5. Senter Pengecil (800 Yen)\n");
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 		int choice = wtoi(inputWord());
-		while(choice<0||choice>5){
-			system("cls");
-			print_red("The gadget you selected is not available.\n");
-			printf("Current money: %ld Yen\n", curMoney);
-			printf("Select one of these gadget...\n");
-			printf("1. Kain Pembungkus Waktu (800 Yen)\n");
-			printf("2. Senter Pembesar (1200 Yen)\n");
-			printf("3. Pintu Kemana Saja (1500 Yen)\n");
-			printf("4. Mesin Waktu (3000 Yen)\n");
-			printf("5. Senter Pengecil (800 Yen)\n");
-			printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-			choice = wtoi(inputWord());
-		}
-		Gadget g;
-		CreateGadget(&g);
-		if(choice == 1){
-			if (curMoney >= 800){
-				curMoney -= 800;
-				print_green("Gadget successfully bought!\n");
-				printf("Current money: %ld Yen\n", curMoney);
-				setGadget(&g, choice, 800);
-				addGadget(&curInventory, g);
-			}
-			else{
-				print_red("Oops... Seems like you don't have enough money!\n");
-			}
-		}
-		else if(choice == 2){
-			if (curMoney >= 1200){
-				curMoney -= 1200;
-				print_green("Gadget successfully bought!\n");
-				printf("Current money: %ld Yen\n", curMoney);
-				setGadget(&g, choice, 1200);
-				addGadget(&curInventory, g);
-			}
-			else{
-				print_red("Oops... Seems like you don't have enough money!\n");
-			}
-		}
-		else if(choice == 3){
-			if (curMoney >= 1500){
-				curMoney -= 1500;
-				print_green("Gadget successfully bought!\n");
-				printf("Current money: %ld Yen\n", curMoney);
-				setGadget(&g, choice, 1500);
-				addGadget(&curInventory, g);
-			}
-			else{
-				print_red("Oops... Seems like you don't have enough money!\n");
-			}
-		}
-		else if(choice == 4){
-			if (curMoney >= 3000){
-				curMoney -= 3000;
-				print_green("Gadget successfully bought!\n");
-				printf("Current money: %ld Yen\n", curMoney);
-				setGadget(&g, choice, 3000);
-				addGadget(&curInventory, g);
-			}
-			else{
-				print_red("Oops... Seems like you don't have enough money!\n");
-			}
-		}
-		else if(choice == 5){
-			if (curMoney >= 800){
-				curMoney -= 800;
-				print_green("Gadget successfully bought!\n");
-				printf("Current money: %ld Yen\n", curMoney);
-				setGadget(&g, choice, 800);
-				addGadget(&curInventory, g);
-			}
-			else{
-				print_red("Oops... Seems like you don't have enough money!\n");
-			}
+		if (isInventoryFull(curInventory)){
+			print_red("Inventory full. Unable to buy gadgets.\n");
 		}
 		else{
-			print_yellow("\nCancelling...\n");
+			while(choice<0||choice>5){
+				system("cls");
+				print_red("The gadget you selected is not available.\n");
+				printf("Current money: %ld Yen\n", curMoney);
+				printf("Select one of these gadget...\n");
+				printf("1. Kain Pembungkus Waktu (800 Yen)\n");
+				printf("2. Senter Pembesar (1200 Yen)\n");
+				printf("3. Pintu Kemana Saja (1500 Yen)\n");
+				printf("4. Mesin Waktu (3000 Yen)\n");
+				printf("5. Senter Pengecil (800 Yen)\n");
+				printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
+				choice = wtoi(inputWord());
+			}
+			Gadget g;
+			CreateGadget(&g);
+			if(choice == 1){
+				if (curMoney >= 800){
+					curMoney -= 800;
+					print_green("Gadget successfully bought!\n");
+					printf("Current money: %ld Yen\n", curMoney);
+					setGadget(&g, choice, 800);
+					addGadget(&curInventory, g);
+				}
+				else{
+					print_red("Oops... Seems like you don't have enough money!\n");
+				}
+			}
+			else if(choice == 2){
+				if (curMoney >= 1200){
+					curMoney -= 1200;
+					print_green("Gadget successfully bought!\n");
+					printf("Current money: %ld Yen\n", curMoney);
+					setGadget(&g, choice, 1200);
+					addGadget(&curInventory, g);
+				}
+				else{
+					print_red("Oops... Seems like you don't have enough money!\n");
+				}
+			}
+			else if(choice == 3){
+				if (curMoney >= 1500){
+					curMoney -= 1500;
+					print_green("Gadget successfully bought!\n");
+					printf("Current money: %ld Yen\n", curMoney);
+					setGadget(&g, choice, 1500);
+					addGadget(&curInventory, g);
+				}
+				else{
+					print_red("Oops... Seems like you don't have enough money!\n");
+				}
+			}
+			else if(choice == 4){
+				if (curMoney >= 3000){
+					curMoney -= 3000;
+					print_green("Gadget successfully bought!\n");
+					printf("Current money: %ld Yen\n", curMoney);
+					setGadget(&g, choice, 3000);
+					addGadget(&curInventory, g);
+				}
+				else{
+					print_red("Oops... Seems like you don't have enough money!\n");
+				}
+			}
+			else if(choice == 5){
+				if (curMoney >= 800){
+					curMoney -= 800;
+					print_green("Gadget successfully bought!\n");
+					printf("Current money: %ld Yen\n", curMoney);
+					setGadget(&g, choice, 800);
+					addGadget(&curInventory, g);
+				}
+				else{
+					print_red("Oops... Seems like you don't have enough money!\n");
+				}
+			}
+			else{
+				print_yellow("\nCancelling...\n");
+			}
 		}
 	}
 	else{
@@ -577,9 +582,9 @@ void Exit(){
 		exit(0);
 	}
 	else if(YayOrNay.contents[0]=='n'||YayOrNay.contents[0]=='N'){
-		printf("Continuing...\n");
+		print_yellow("Continuing...\n");
 	}
 	else{
-		printf("Assumed to continue...\n");
+		print_yellow("Assumed to continue...\n");
 	}
 }
