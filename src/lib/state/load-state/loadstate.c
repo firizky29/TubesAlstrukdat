@@ -99,6 +99,8 @@ void load(){
     curSpeed = wtoi(currentWord);
     speedBoost = wtoi(currentWord);
     countMove = wtoi(currentWord);
+    countVIP = wtoi(currentWord);
+    countReturn = wtoi(currentWord);
     int i, par, t, pt, w;
     char pu, d, tp; 
     Pesanan pesanan;
