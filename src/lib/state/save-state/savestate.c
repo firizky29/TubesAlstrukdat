@@ -57,6 +57,7 @@ void save(){
     fprintf(f, "%d\n", countMove);
     fprintf(f, "%d\n", countVIP);
     fprintf(f, "%d\n",countReturn);
+    fprintf(f, "%d\n", countDelivered);
     int i;
     Pesanan pesan;
     LinkedList rStack;

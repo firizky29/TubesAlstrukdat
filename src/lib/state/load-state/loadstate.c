@@ -19,6 +19,7 @@ int countMove;
 ListDin LocList;
 Queue daftarPesanan;
 Word configName;
+int countDelivered;
 
 // List curInventory;
 // LinkedList curProgress;
@@ -101,6 +102,7 @@ void load(){
     countMove = wtoi(currentWord);
     countVIP = wtoi(currentWord);
     countReturn = wtoi(currentWord);
+    countDelivered = wtoi(currentWord);
     int i, par, t, pt, w;
     char pu, d, tp; 
     Pesanan pesanan;

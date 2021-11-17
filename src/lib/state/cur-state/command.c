@@ -264,7 +264,7 @@ void Dropoff(){
                 print_cyan("Order in the form of Normal Item succesfully delivered!\n");
 				curMoney += 200;
 				print_green("You got 200 Yen. Nice.\n");
-
+				countDelivered++;
                 // Reward item
             } else if (TIPEITEM(pesanan) == 'H'){
                 print_cyan("Order in the form of Heavy Item succesfully delivered!\n");
@@ -274,6 +274,7 @@ void Dropoff(){
 				countMove = 0;
                 // Reward item
 				speedBoost = true;
+				countDelivered++;
             } else if (TIPEITEM(pesanan) == 'P'){
                 print_cyan("Order in the form of Perishable Item succesfully delivered!\n");
 				curMoney += 400;
@@ -281,6 +282,7 @@ void Dropoff(){
 				print_green("You were also given the 'Increase Capacity' ability. Ability activated.\n");
                 // Reward item
 				capInc(&curBag, 1);
+				countDelivered++;
             } else if (TIPEITEM(pesanan) == 'V'){
 				print_cyan("Order in the form of VIP Item succesfully delivered!\n");
 				curMoney += 600;
@@ -289,6 +291,7 @@ void Dropoff(){
                 // Reward item
 				countVIP -= 1;
 				countReturn += 1;
+				countDelivered++;
 			}
 		} else {
 			print_red("This is not the drop-off location of the top-most item in your bag!\n");

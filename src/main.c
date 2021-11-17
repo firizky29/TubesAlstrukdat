@@ -34,10 +34,29 @@ int main(){
             load();
         }
         while(true){
-            if(isEmptyQueue(daftarPesanan)&&isEmpty(curToDoList)&&isEmpty(curProgress)&&IsHQ(curPosition)){
-                system("cls");
-                print_green("Congratulations, You've finished the game!!!! YAYYYYYYY!!!!!!!!!!!!!");
-                break;
+            boolean warn = false;
+            if(isEmptyQueue(daftarPesanan)&&isEmpty(curToDoList)&&isEmpty(curProgress)){
+                if(!warn){
+                    system("cls");
+                    printf("Seems like there are no orders left for you to deliver. Nice work today.\n\nHead back to");
+                    print_yellow(" HQ ");
+                    printf("immediately to end the day and get your reward!");
+                    warn = true;
+                }
+                if(IsHQ(curPosition)){
+                    system("cls");
+                    print_green("Congratulations, You've finished the game!!!! YAYYYYYYY!!!!!!!!!!!!!\n");
+                    printf("============================================================================\n");
+                    print_magenta("ACHIEVEMENT\n");
+                    print_yellow("Total Delivered Items\t: ");
+                    printf("%d\n", countDelivered);
+                    print_yellow("Time elapsed\t\t: ");
+                    printf("%ld\n", curTime);
+                    print_yellow("Earned money\t\t: ");
+                    printf("%ld\n", curMoney);
+
+                    break;
+                }
             }
             printf("\n>> ");
             choice = inputWord();
