@@ -1,3 +1,6 @@
+int main(){
+    
+}
 /*
 #include<stdio.h>
 #include"../pesanan/pesanan.h"

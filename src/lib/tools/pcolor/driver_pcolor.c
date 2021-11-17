@@ -9,12 +9,12 @@ Created at: 17/10/2019
 #include <pcolor.h>
 
 int main() {
-    print_red('R');
-    print_green('G');
-    print_magenta('M');
-    print_cyan('C');
-    print_yellow('Y');
-    print_blue('B');
+    print_red_char('R');
+    print_green_char('G');
+    print_magenta_char('M');
+    print_cyan_char('C');
+    print_yellow_char('Y');
+    print_blue_char('B');
     printf("\n");
     return 0;
 }
