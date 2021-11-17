@@ -1,3 +1,6 @@
+/* File: listat.c */
+/* Implementasi List Statis */
+
 #include <stdio.h>
 #include <liststat.h>
 

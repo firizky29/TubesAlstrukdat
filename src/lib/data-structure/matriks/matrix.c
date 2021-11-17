@@ -1,10 +1,5 @@
-/* 
-NIM : 13520074
-Nama : Eiffel Aqila Amarendra
-Tanggal : 17 September 2021
-Topik praktikum : ADT Matrix
-Deskripsi : Pra Praktikum 5 (Program matrix.c)
-*/
+/* File: matrix.c */
+/* Implementasi Matrix */
 
 #include <stdio.h>
 #include <matrix.h>

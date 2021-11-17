@@ -1,5 +1,4 @@
-/* File: Point.h */
-/* Tanggal: 28 Agustus 2016 */
+/* File: point.h */
 /* *** Definisi ABSTRACT DATA TYPE Point *** */
 
 #ifndef POINT_H

@@ -1,6 +1,6 @@
-/* NIM/NAMA : 13520095/FIRIZKY ARDIANSYAH */
-/* TANGGAL : 16/10/2021 */
-/* LIBRARY STACK*/
+/* File : stack.h */
+/* Implementasi Stack */
+
 #include <stack.h>
 
 /* *** Konstruktor/Kreator *** */

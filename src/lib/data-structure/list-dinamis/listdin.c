@@ -1,10 +1,5 @@
-/* 
-NIM : 13520074
-Nama : Eiffel Aqila Amarendra
-Tanggal : 14 September 2021
-Topik praktikum : ADT List Dinamis
-Deskripsi : Pra Praktikum 4 (Program listdin.c)
-*/
+/* File: listdin.c */
+/* Implementasi List Dinamis */
 
 #include <stdio.h>
 #include <stdlib.h>
