@@ -20,11 +20,9 @@ extern LinkedList curToDoList;
 extern Queue daftarPesanan;
 extern int countVIP;
 extern int countReturn;
-extern int countUsedSenter;
 
 // extern Queue curUsedGadget; {maaf kayaknya ini ga perlu, karna gadget langsung dipakai di saat itu juga biar ga susah}
 extern boolean speedBoost;
-extern int countHeavyItem ;
 extern int countMove;
 
 #endif

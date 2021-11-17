@@ -121,6 +121,7 @@ void Move(){
 		choice = wtoi(inputWord());
 	}
 	if (choice != 0){
+		int countHeavyItem = countWieght(curProgress);
 		// TIME HANDLING
 		if (speedBoost && countHeavyItem == 0){ // ini kasus punya speedboost & gaada heavy item
 			countMove += 1;
@@ -142,8 +143,8 @@ void Move(){
 				speedBoost = false;
 				countMove = 0;
 			}
-			curTime += 1 + countHeavyItem-countUsedSenter;
-			DecrementAllPerishableItem(&curProgress, 1+countHeavyItem-countUsedSenter);
+			curTime += 1 + countHeavyItem;
+			DecrementAllPerishableItem(&curProgress, 1+countHeavyItem);
 		}
 		else{ // ini kasus gaada speedboost dan gaada heavy item
 			curTime += 1;
@@ -224,7 +225,6 @@ void Pickup(){
 				} else if (TIPEITEM(pesanan) == 'H'){
 					printf("Heavy Item successfully picked up!\n");
 					// Efek item
-					countHeavyItem++;
 					speedBoost = false;
 				} else if (TIPEITEM(pesanan) == 'P'){
 					printf("Perishable Item successfully picked up!\n");
@@ -251,9 +251,9 @@ void Dropoff(){
 	if (!isStackEmpty(curBag)) {
 		/* Jika lokasi dropoff barang paling atas sama dengan posisi Mobita sekarang */
 		if (DROPOFFPESANAN(TOP(curBag)) == curPositionBuilding) {
+			setBackWeight(&curProgress);
 			deleteFirst(&curProgress, &pesanan);
 			pop(&curBag, &pesanan);
-			countUsedSenter = 0;
 			if (TIPEITEM(pesanan) == 'N'){
                 printf("Order in the form of Normal Item succesfully delivered!\n");
 				curMoney += 200;
@@ -264,8 +264,6 @@ void Dropoff(){
                 printf("Order in the form of Heavy Item succesfully delivered!\n");
 				curMoney += 400;
 				printf("You got 400 Yen. Great job.\n");
-
-				countHeavyItem--;
 				countMove = 0;
                 // Reward item
 				speedBoost = true;
@@ -484,7 +482,7 @@ void displayInventory(){
 			}else if(IDGADGET(g) == 5){
 				printf("Gadget successfully used!\n");
 				if (TIPEITEM(TOP(curBag)) == 'H'){
-					countUsedSenter+=1;
+					WEIGHT(INFO(FIRST(curProgress))) = 0;
 				}
 			}else{
 				printf("Gadget is unavailable\n");
@@ -511,7 +509,7 @@ void Retur(){
 	Pesanan pesanan;
 
 	/* ALGORITMA */
-	countUsedSenter = 0;
+	setBackWeight(&curProgress);
 	if (countReturn > 0) {
 		if (!isStackEmpty(curBag)) {
 			// Normal Item

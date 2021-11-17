@@ -284,3 +284,27 @@ void DecrementAllPerishableItem(LinkedList *L, int decr){
         p = NEXT(p);
     }
 }
+
+int countWieght(LinkedList L){
+    /* KAMUS */
+    Address p = FIRST(L);
+    int sum = 0;
+    /* ALGORITMA */
+    while (p != NULL){
+        sum += WEIGHT(INFO(p));
+        p = NEXT(p);
+    }
+    return sum;
+}
+
+void setBackWeight(LinkedList *L){
+    /* KAMUS */
+    Address p = FIRST(*L);
+    /* ALGORITMA */
+    while (p != NULL){
+        if(TIPEITEM(INFO(p))=='H'){
+            WEIGHT(INFO(p)) = 1;
+        }
+        p = NEXT(p);
+    }
+}

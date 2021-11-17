@@ -14,7 +14,6 @@ Inventory curInventory;
 LinkedList curProgress;
 LinkedList curToDoList;
 boolean speedBoost;
-int countHeavyItem ;
 int countMove;
 ListDin LocList;
 Queue daftarPesanan;
@@ -98,9 +97,8 @@ void load(){
     curMoney = (long)(wtoi(currentWord));
     curSpeed = wtoi(currentWord);
     speedBoost = wtoi(currentWord);
-    countHeavyItem = wtoi(currentWord);
     countMove = wtoi(currentWord);
-    int i, par, t, pt;
+    int i, par, t, pt, w;
     char pu, d, tp; 
     Pesanan pesanan;
     // load curbag (stack)
@@ -115,7 +113,9 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        advWord_file();
+        w = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         push(&curBag, pesanan);
     }
     // load curinventory (inventory)
@@ -135,7 +135,9 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        advWord_file();
+        w = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         insertLastLL(&curProgress, pesanan);
     }
     // load curtodolist (linked list)
@@ -150,7 +152,9 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        advWord_file();
+        w = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         insertLastLL(&temp, pesanan);
     }
 

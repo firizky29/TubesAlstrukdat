@@ -44,7 +44,6 @@ void save(){
     fprintf(f, "%ld\n", curMoney);
     fprintf(f, "%d\n", curSpeed);
     fprintf(f, "%d\n", speedBoost);
-    fprintf(f, "%d\n", countHeavyItem);
     fprintf(f, "%d\n", countMove);
     int i;
     Pesanan pesan;
@@ -59,7 +58,8 @@ void save(){
         fprintf(f, "%c ", PICKUPPESANAN(pesan));
         fprintf(f, "%c ", DROPOFFPESANAN(pesan));
         fprintf(f, "%c ", TIPEITEM(pesan));
-        fprintf(f, "%d\n", PTIME(pesan));
+        fprintf(f, "%d", PTIME(pesan));
+        fprintf(f, "%d\n", WEIGHT(pesan));
     }
     // save inventory (curInventory)
     fprintf(f, "%d\n", INVENTORY_CAP);
@@ -75,7 +75,8 @@ void save(){
         fprintf(f, "%c ", PICKUPPESANAN(pesan));
         fprintf(f, "%c ", DROPOFFPESANAN(pesan));
         fprintf(f, "%c ", TIPEITEM(pesan));
-        fprintf(f, "%d\n", PTIME(pesan));
+        fprintf(f, "%d", PTIME(pesan));
+        fprintf(f, "%d\n", WEIGHT(pesan));
     }
     fprintf(f, "%d\n", lengthLL(curToDoList));
     for (i = 0; i < lengthLL(curToDoList); i++){
@@ -84,7 +85,8 @@ void save(){
         fprintf(f, "%c ", PICKUPPESANAN(pesan));
         fprintf(f, "%c ", DROPOFFPESANAN(pesan));
         fprintf(f, "%c ", TIPEITEM(pesan));
-        fprintf(f, "%d\n", PTIME(pesan));
+        fprintf(f, "%d", PTIME(pesan));
+        fprintf(f, "%d\n", WEIGHT(pesan));
     }
 
     fclose(f);

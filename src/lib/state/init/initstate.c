@@ -11,14 +11,12 @@ Inventory curInventory;
 LinkedList curProgress;
 LinkedList curToDoList;
 boolean speedBoost;
-int countHeavyItem ;
 int countMove;
 ListDin LocList;
 Queue daftarPesanan;
 Word configName;
 int countVIP;
 int countReturn;
-int countUsedSenter;
 
 // Queue curUsedGadget; ini juga kah?
 
@@ -70,7 +68,7 @@ void getPesananList(){
     P = wtoi(currentWord);
     // create Queue pesanan
     Pesanan pesanan;
-    int t, pt;
+    int t, pt, w;
     char pu, d, tp;
     countVIP = 0;
     CreateQueue(&daftarPesanan);
@@ -89,8 +87,14 @@ void getPesananList(){
         }
         else{
             pt = -1;
+            if(tp=='H'){
+                w = 1;
+            }
+            else{
+                w = 0;
+            }
         }
-        pesanan = CreatePesanan(t, pu, d, tp, pt);
+        pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         if(t == 0){
             insertLastLL(&curToDoList, pesanan);
             if(TIPEITEM(pesanan)=='V'){
@@ -179,10 +183,8 @@ void globalinit(){
     curTime = 0;
     speedBoost = false;
     curPosition = ELMT(LocList, 0);  
-    countHeavyItem = 0;
     countMove = 0;
     countReturn = 0;
-    countUsedSenter = 0;
     CreateStack(&curBag);
     CreateList(&curProgress);
     CreateInventory(&curInventory);

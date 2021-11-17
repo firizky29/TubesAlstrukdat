@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <pesanan.h>
-
-Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT){
+Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT, int W){
 /* Membentuk Pesanan */
 /* Mereturn pesanan yang akan dimasukkan ke dalam queue/linkedlist */
     Pesanan P;
@@ -10,6 +9,7 @@ Pesanan CreatePesanan(int T, char PU, char DO, char TP, int PT){
     DROPOFFPESANAN(P) = DO;
     TIPEITEM(P) = TP;
     PTIME(P) = PT;
+    WEIGHT(P) = W;
 
     return P;
 }
@@ -37,6 +37,6 @@ boolean isXItem(Pesanan P, char itemChar){
 
 boolean isEqualPesanan(Pesanan P1, Pesanan P2){
 /* Mereturn true jika Pesanan P1 sama dengan Pesanan P2 */
-/* Perishable time tidak diperhitungkan karena dapat berubah-ubah */
+/* Perishable time dan weight tidak diperhitungkan karena dapat berubah-ubah */
     return (TIMEPESANAN(P1) == TIMEPESANAN(P2)) && (PICKUPPESANAN(P1) == PICKUPPESANAN(P2)) && (DROPOFFPESANAN(P1) == DROPOFFPESANAN(P2)) && (TIPEITEM(P1) == TIPEITEM(P2));
 }
