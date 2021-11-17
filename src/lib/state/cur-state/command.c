@@ -93,6 +93,8 @@ boolean isReturn(Word kata){
 
 /* Mengubah curPosition, curTime*/
 void Move(){
+	int countHeavyItem = countWeight(curProgress);
+	printf("%d\n",countHeavyItem);
 	ListDin Neighbor;
 	printf("Time: %ld\n", curTime);
 	if(CHARLOC(curPosition)=='8'){

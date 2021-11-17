@@ -15,6 +15,7 @@ OBJS := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 INC_DIR := $(wildcard src/*/**/**)
 INC_FLAG := $(addprefix -I,$(INC_DIR)) -Isrc/lib
 
+
 $(BUILD_DIR)/src/%.o $(BUILD_DIR)/%.o: ./src/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -g $(CFLAG) $(INC_FLAG) -c $< -o $@
@@ -31,9 +32,9 @@ run: build
 	@$(TARGET)
 
 clear:
-	@rm -rf build/*
+	@rm -rf build/* bin/*
 
-all : clear run
+all : clear build
 
 .PHONY : clear all build run
 
