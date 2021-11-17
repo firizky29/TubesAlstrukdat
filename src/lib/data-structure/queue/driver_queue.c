@@ -1,20 +1,16 @@
-int main(){
-    
-}
-/*
-#include<stdio.h>
-#include"../pesanan/pesanan.h"
-#include"queue.h"
+#include <stdio.h>
+#include <pesanan.h>
+#include <queue.h>
 
 int main(){
     // Membuat pesanan 
     Pesanan P1, P2, P3, P4, P5, P6;
-    P1 = CreatePesanan(4,'M','B','P',3);
-    P2 = CreatePesanan(3,'H','B','P',4);
-    P3 = CreatePesanan(0,'M','C','P',5);
-    P4 = CreatePesanan(1,'K','B','P',5);
-    P5 = CreatePesanan(3,'M','B','P',7); 
-    P6 = CreatePesanan(3,'V','B','P',4); 
+    P1 = CreatePesanan(4,'M','B','P',3, 0);
+    P2 = CreatePesanan(3,'H','B','P',4, 0);
+    P3 = CreatePesanan(0,'M','C','P',5, 0);
+    P4 = CreatePesanan(1,'K','B','P',5, 0);
+    P5 = CreatePesanan(3,'M','B','P',7, 0); 
+    P6 = CreatePesanan(3,'V','B','P',4, 0); 
 
     // Memasukkan pesanan ke queue 
     Queue Q;
@@ -57,4 +53,3 @@ int main(){
 
 }
 
-*/

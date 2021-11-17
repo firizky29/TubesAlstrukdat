@@ -1,17 +1,8 @@
-int main(){
-    
-}
 
-/*
-
-#include<stdio.h>
-#include"../../boolean.h"
-#include"pesanan.h"
-#include"../queue/queue.h"
-
-int main(){
-    
-}
+#include <stdio.h>
+#include <boolean.h>
+#include <pesanan.h>
+#include <queue.h>
 
 int main(){
 
@@ -52,5 +43,3 @@ int main(){
     }
 
 }
-
-*/
