@@ -18,6 +18,7 @@ Queue daftarPesanan;
 Word configName;
 int countVIP;
 int countReturn;
+int countDelivered;
 
 
 void getMap(){
@@ -186,6 +187,7 @@ void globalinit(){
     curPosition = ELMT(LocList, 0);  
     countMove = 0;
     countReturn = 0;
+    countDelivered = 0;
     CreateStack(&curBag);
     CreateList(&curProgress);
     CreateInventory(&curInventory);
