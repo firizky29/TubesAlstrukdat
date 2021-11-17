@@ -142,15 +142,15 @@ void Move(){
 				speedBoost = false;
 				countMove = 0;
 			}
-			curTime += 1 + countHeavyItem;
-			DecrementAllPerishableItem(&curProgress, 1+countHeavyItem);
+			curTime += 1 + countHeavyItem-countUsedSenter;
+			DecrementAllPerishableItem(&curProgress, 1+countHeavyItem-countUsedSenter);
 		}
 		else{ // ini kasus gaada speedboost dan gaada heavy item
 			curTime += 1;
 			DecrementAllPerishableItem(&curProgress, 1);
 		}
 		Pesanan val;
-		while(!isEmptyQueue(daftarPesanan)&&TIMEPESANAN(HEAD(daftarPesanan))==curTime){
+		while(!isEmptyQueue(daftarPesanan)&&TIMEPESANAN(HEAD(daftarPesanan))<=curTime){
 			dequeue(&daftarPesanan, &val);
 			insertLastLL(&curToDoList, val);
 			if(TIPEITEM(val)=='V'){
@@ -252,7 +252,7 @@ void Dropoff(){
 		if (DROPOFFPESANAN(TOP(curBag)) == curPositionBuilding) {
 			deleteFirst(&curProgress, &pesanan);
 			pop(&curBag, &pesanan);
-
+			countUsedSenter = 0;
 			if (TIPEITEM(pesanan) == 'N'){
                 printf("Order in the form of Normal Item succesfully delivered!\n");
 				curMoney += 200;
@@ -353,9 +353,10 @@ void Buy(){
 		printf("2. Senter Pembesar (1200 Yen)\n");
 		printf("3. Pintu Kemana Saja (1500 Yen)\n");
 		printf("4. Mesin Waktu (3000 Yen)\n");
+		printf("5. Senter Pengecil (800 Yen)\n");
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 		int choice = wtoi(inputWord());
-		while(choice<0||choice>4){
+		while(choice<0||choice>5){
 			printf("The gadget you selected is not available.\n");
 			printf("Current money: %ld Yen\n", curMoney);
 			printf("Select one of these gadget...\n");
@@ -363,6 +364,7 @@ void Buy(){
 			printf("2. Senter Pembesar (1200 Yen)\n");
 			printf("3. Pintu Kemana Saja (1500 Yen)\n");
 			printf("4. Mesin Waktu (3000 Yen)\n");
+			printf("5. Senter Pengecil (800 Yen)\n");
 			printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 			choice = wtoi(inputWord());
 		}
@@ -410,6 +412,18 @@ void Buy(){
 				printf("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
 				setGadget(&g, choice, 3000);
+				addGadget(&curInventory, g);
+			}
+			else{
+				printf("Oops... Seems like you don't have enough money!\n");
+			}
+		}
+		else if(choice == 5){
+			if (curMoney >= 800){
+				curMoney -= 800;
+				printf("Gadget successfully bought!\n");
+				printf("Current money: %ld Yen\n", curMoney);
+				setGadget(&g, choice, 800);
 				addGadget(&curInventory, g);
 			}
 			else{
@@ -469,7 +483,7 @@ void displayInventory(){
 			}else if(IDGADGET(g) == 5){
 				printf("Gadget successfully used!\n");
 				if (TIPEITEM(TOP(curBag)) == 'H'){
-					countHeavyItem -= 1;
+					countUsedSenter+=1;
 				}
 			}else{
 				printf("Gadget is unavailable\n");
@@ -492,6 +506,7 @@ void displayHelp(){
 	printf("-  SAVE: save current progress\n");
 }
 void Retur(){
+	countUsedSenter = 0;
 	printf("Retur\n");
 }
 

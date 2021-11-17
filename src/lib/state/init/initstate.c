@@ -18,6 +18,7 @@ Queue daftarPesanan;
 Word configName;
 int countVIP;
 int countReturn;
+int countUsedSenter;
 
 // Queue curUsedGadget; ini juga kah?
 
@@ -174,13 +175,14 @@ void globalinit(){
     interface();
     // reading file config + get info
     initConfig(filepath);
-    curMoney = 0;
+    curMoney = 1000000000;
     curTime = 0;
     speedBoost = false;
     curPosition = ELMT(LocList, 0);  
     countHeavyItem = 0;
     countMove = 0;
     countReturn = 0;
+    countUsedSenter = 0;
     CreateStack(&curBag);
     CreateList(&curProgress);
     CreateInventory(&curInventory);
