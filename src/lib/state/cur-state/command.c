@@ -2,6 +2,7 @@
 #include <global.h>
 #include <pesanan.h>
 #include <list_linked.h>
+#include <pcolor.h>
 
 
 /* CHECK COMMAND VALIDITY */
@@ -108,7 +109,8 @@ void Move(){
 	printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
 	while(choice<0 || choice > length(Neighbor)){
-		printf("That's an invalid option. Let's retry, shall we?\n");
+		system("cls");
+		print_red("That's an invalid option. Let's retry, shall we?\n");
 		if(CHARLOC(curPosition)=='8'){
 			printf("You are now in building HQ at point (%d, %d)\n", Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
 		}
@@ -202,11 +204,11 @@ void Pickup(){
 				deleteAt(&curToDoList, idx, &pesanan);
 				insertFirst(&curProgress, pesanan);
 				push(&curBag, pesanan);
-				printf("VIP Item successfully picked up!\n");
+				print_green("VIP Item successfully picked up!\n");
 				printf("Order destination: %c\n", DROPOFFPESANAN(pesanan));
 			}
 			else{
-				printf("There are no VIP items here!\nYou have VIP item(s) to be done first, simp.\n");
+				print_red("There are no VIP items here!\nYou have VIP item(s) to be done first, simp.\n");
 			}
 		}
 		else{
@@ -219,26 +221,26 @@ void Pickup(){
 				push(&curBag, pesanan);
 
 				if (TIPEITEM(pesanan) == 'N'){
-					printf("Normal Item successfully picked up!\n");
+					print_green("Normal Item successfully picked up!\n");
 					// Efek item
 					// None
 				} else if (TIPEITEM(pesanan) == 'H'){
-					printf("Heavy Item successfully picked up!\n");
+					print_green("Heavy Item successfully picked up!\n");
 					// Efek item
 					speedBoost = false;
 				} else if (TIPEITEM(pesanan) == 'P'){
-					printf("Perishable Item successfully picked up!\n");
+					print_green("Perishable Item successfully picked up!\n");
 					// Efek item
 					// Sudah dihandle di MOVE
 				}		
 				printf("Order destination: %c\n", DROPOFFPESANAN(pesanan));
 			}
             else{
-				printf("There seems to be no items here... Pickup unsuccessful.\n");
+				print_red("There seems to be no items here... Pickup unsuccessful.\n");
 			}
         } 
     } else {
-        printf("Bag is full!\n");
+        print_red("Bag is full!\n");
     }
 }
 
@@ -255,39 +257,39 @@ void Dropoff(){
 			deleteFirst(&curProgress, &pesanan);
 			pop(&curBag, &pesanan);
 			if (TIPEITEM(pesanan) == 'N'){
-                printf("Order in the form of Normal Item succesfully delivered!\n");
+                print_cyan("Order in the form of Normal Item succesfully delivered!\n");
 				curMoney += 200;
-				printf("You got 200 Yen. Nice.\n");
+				print_green("You got 200 Yen. Nice.\n");
 
                 // Reward item
             } else if (TIPEITEM(pesanan) == 'H'){
-                printf("Order in the form of Heavy Item succesfully delivered!\n");
+                print_cyan("Order in the form of Heavy Item succesfully delivered!\n");
 				curMoney += 400;
-				printf("You got 400 Yen. Great job.\n");
+				print_green("You got 400 Yen. Great job.\n");
 				countMove = 0;
                 // Reward item
 				speedBoost = true;
             } else if (TIPEITEM(pesanan) == 'P'){
-                printf("Order in the form of Perishable Item succesfully delivered!\n");
+                print_cyan("Order in the form of Perishable Item succesfully delivered!\n");
 				curMoney += 400;
-				printf("You got 400 Yen. Good work.\n");
+				print_green("You got 400 Yen. Good work.\n");
 
                 // Reward item
 				capInc(&curBag, 1);
             } else if (TIPEITEM(pesanan) == 'V'){
-				printf("Order in the form of VIP Item succesfully delivered!\n");
+				print_cyan("Order in the form of VIP Item succesfully delivered!\n");
 				curMoney += 600;
-				printf("You got 600 Yen. Amazing!\n");
+				print_green("You got 600 Yen. Amazing!\n");
 
                 // Reward item
 				countVIP -= 1;
 				countReturn += 1;
 			}
 		} else {
-			printf("This is not the drop-off location of the top-most item in your bag!\n");
+			print_red("This is not the drop-off location of the top-most item in your bag!\n");
 		}
 	} else {
-		printf("There are no items to be dropped off from your bag!\n");
+		print_red("There are no items to be dropped off from your bag!\n");
 	}
 }
 void displayMap(){
@@ -297,7 +299,7 @@ void displayMap(){
 }
 void displayToDoList(){
 	if (isEmpty(curToDoList)){
-		printf("Yay! There is nothing in your To-Do List");
+		print_cyan("Yay! There is nothing in your To-Do List");
 	} else {
 		printf("Here's your To-Do List:\n");
 		Address p = FIRST(curToDoList);
@@ -356,7 +358,8 @@ void Buy(){
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 		int choice = wtoi(inputWord());
 		while(choice<0||choice>5){
-			printf("The gadget you selected is not available.\n");
+			system("cls");
+			print_red("The gadget you selected is not available.\n");
 			printf("Current money: %ld Yen\n", curMoney);
 			printf("Select one of these gadget...\n");
 			printf("1. Kain Pembungkus Waktu (800 Yen)\n");
@@ -372,69 +375,69 @@ void Buy(){
 		if(choice == 1){
 			if (curMoney >= 800){
 				curMoney -= 800;
-				printf("Gadget successfully bought!\n");
+				print_green("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
 				setGadget(&g, choice, 800);
 				addGadget(&curInventory, g);
 			}
 			else{
-				printf("Oops... Seems like you don't have enough money!\n");
+				print_red("Oops... Seems like you don't have enough money!\n");
 			}
 		}
 		else if(choice == 2){
 			if (curMoney >= 1200){
 				curMoney -= 1200;
-				printf("Gadget successfully bought!\n");
+				print_green("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
 				setGadget(&g, choice, 1200);
 				addGadget(&curInventory, g);
 			}
 			else{
-				printf("Oops... Seems like you don't have enough money!\n");
+				print_red("Oops... Seems like you don't have enough money!\n");
 			}
 		}
 		else if(choice == 3){
 			if (curMoney >= 1500){
 				curMoney -= 1500;
-				printf("Gadget successfully bought!\n");
+				print_green("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
 				setGadget(&g, choice, 1500);
 				addGadget(&curInventory, g);
 			}
 			else{
-				printf("Oops... Seems like you don't have enough money!\n");
+				print_red("Oops... Seems like you don't have enough money!\n");
 			}
 		}
 		else if(choice == 4){
 			if (curMoney >= 3000){
 				curMoney -= 3000;
-				printf("Gadget successfully bought!\n");
+				print_green("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
 				setGadget(&g, choice, 3000);
 				addGadget(&curInventory, g);
 			}
 			else{
-				printf("Oops... Seems like you don't have enough money!\n");
+				print_red("Oops... Seems like you don't have enough money!\n");
 			}
 		}
 		else if(choice == 5){
 			if (curMoney >= 800){
 				curMoney -= 800;
-				printf("Gadget successfully bought!\n");
+				print_green("Gadget successfully bought!\n");
 				printf("Current money: %ld Yen\n", curMoney);
 				setGadget(&g, choice, 800);
 				addGadget(&curInventory, g);
 			}
 			else{
-				printf("Oops... Seems like you don't have enough money!\n");
+				print_red("Oops... Seems like you don't have enough money!\n");
 			}
 		}
 		else{
-			printf("\nCancelling...\n");
+			print_yellow("\nCancelling...\n");
 		}
 	}
 	else{
-		printf("You can only buy when you're in HQ.\n");
+		print_red("You can only buy when you're in HQ.\n");
 	}
 }
 void displayInventory(){
@@ -443,7 +446,8 @@ void displayInventory(){
 	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
 	int choice = wtoi(inputWord());
 	while(choice < 0 || choice > INVENTORY_CAP){
-		printf("That is invalid input!\n");
+		system("cls");
+		print_red("That is invalid input!\n");
 		printf("Here's your inventory:\n");
 		displayGadgetinInventory(curInventory);
 		printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
@@ -455,17 +459,17 @@ void displayInventory(){
 			deleteGadget(&curInventory,choice-1,&g);
 			// isi juga sama aktivasi efek dari gadget
 			if(IDGADGET(g) == 1){
-				printf("Gadget successfully used!\n");
+				print_green("Gadget successfully used!\n");
 				if (TIPEITEM(TOP(curBag)) == 'P'){
 					PTIME(INFO(fSearch(curToDoList, TOP(curBag)))) = PTIME(TOP(curBag));
 				}
 			}else if(IDGADGET(g) == 2){
-				printf("Gadget successfully used!\n");
+				print_green("Gadget successfully used!\n");
 				capMultiplier(&curBag, 2);
 			}else if(IDGADGET(g) == 3){
-				printf("Gadget successfully used!\n");
+				print_green("Gadget successfully used!\n");
 				displayMap();
-				char x = (char) ((int)('A') + L-1);
+				char x = ((int)('A') + length(LocList)-2);
 				printf("Where do you want to go?\nType \"HQ\" to go to HQ, type a letter between A to %c that represents the desired location : ", x);
 				char* loc = (inputWord()).contents;
 				if(strcmp(loc, "HQ")==0){
@@ -473,19 +477,19 @@ void displayInventory(){
 				}
 				setLoc(&curPosition, ELMT(LocList, indexOfCharLoc(LocList, loc[0])));
 			}else if(IDGADGET(g) == 4){
-				printf("Gadget successfully used!\n");
+				print_green("Gadget successfully used!\n");
 				if(curTime <= 50){
 					curTime = 0;
 				}else{
 					curTime -= 50;
 				}
 			}else if(IDGADGET(g) == 5){
-				printf("Gadget successfully used!\n");
+				print_green("Gadget successfully used!\n");
 				if (TIPEITEM(TOP(curBag)) == 'H'){
 					WEIGHT(INFO(FIRST(curProgress))) = 0;
 				}
 			}else{
-				printf("Gadget is unavailable\n");
+				print_red("Gadget is unavailable\n");
 			}
 		}
 	}
@@ -541,13 +545,13 @@ void Retur(){
 			
 			// VIP Item
 			else if (TIPEITEM(TOP(curBag)) == 'V'){
-				printf("You can't return VIP Item!\n");
+				print_red("You can't return VIP Item!\n");
 			}
 		} else {
-			printf("You don't have item to return...\n");
+			print_red("You don't have item to return...\n");
 		} 
 	} else {
-		printf("You don't have this ability...\n");
+		print_red("You don't have this ability...\n");
 	}
 }
 
@@ -561,7 +565,8 @@ void Exit(){
 		Word saveProg = inputWord();
 		if (saveProg.contents[0] == 'y' || saveProg.contents[0] == 'Y'){
 			save();
-		}		
+		}
+		system("cls");		
 		printf("Quitting...\n\nSAYOOONARAAAAAAAAAA!");
 		exit(0);
 	}

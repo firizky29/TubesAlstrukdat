@@ -5,10 +5,8 @@
 #include <loadstate.h>
 #include <command.h>
 #include <boolean.h>
+#include <pcolor.h>
 
-/* SIMULASI MAIN MENU + BACA CONFIG
-dari tahap main menu sampe get info dari config 
-baru sampe get map matrix, matrix adjacency, sama point lokasi2 */
 
 int main(){
     // main menu
@@ -17,10 +15,10 @@ int main(){
 	state = inputWord();
 	while ((!isNewGame(state) && !isExit(state) && !isLoadGame(state)) || (isLoadGame(state) && !isLoadAvailable())){
         if (isLoadGame(state) && !isLoadAvailable()){
-            printf("No saved files. Couldn't load anything.\nTry again: ");
+            print_red("No saved files. Couldn't load anything.\nTry again: ");
         }
         else{
-		    printf("Stop joking around, that's an invalid command. \nTry again: ");
+		    print_red("Stop joking around, that's an invalid command. \nTry again: ");
         }
 		state = inputWord();
 	}
@@ -36,6 +34,11 @@ int main(){
             load();
         }
         while(true){
+            if(isEmptyQueue(daftarPesanan)&&isEmpty(curToDoList)&&isEmpty(curProgress)&&IsHQ(curPosition)){
+                system("cls");
+                print_green("Congratulations, You've finished the game!!!! YAYYYYYYY!!!!!!!!!!!!!");
+                break;
+            }
             printf("\n>> ");
             choice = inputWord();
             if(isMove(choice)){
@@ -75,11 +78,8 @@ int main(){
                 save();
             }
             else{
-                printf("Your command is not recognized. Input one of these following command: \n");
+                print_red("Your command is not recognized. Input one of these following command: \n");
                 displayHelp();
-            }
-            if(isEmptyQueue(daftarPesanan)&&isEmpty(curToDoList)&&isEmpty(curProgress)){
-                printf("Selamat Anda berhasil menyelesaikan game ini!");
             }
         }
 	}

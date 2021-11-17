@@ -7,7 +7,7 @@ void CreateMap(Map* m, int rows, int cols){
     for(i=0; i<rows+2; i++){
         for(j=0; j<cols+2; j++){
             if(i==0||i==rows+1||j==0||j==cols+1){
-                TILE(*m, i, j) = '#';
+                TILE(*m, i, j) = '*';
             }
             else{
                 TILE(*m, i, j) = ' ';
@@ -36,19 +36,19 @@ void DisplayMap(Map m){
                 printf("%c", TILE(m, i, j));
             }
             else if(isMobitaPoint(ELMT(LocList, k))){
-                print_yellow(TILE(m, i, j));
+                print_yellow_char(TILE(m, i, j));
             }
             else if(isDropOffPoint(ELMT(LocList, k))){
-                print_blue(TILE(m, i, j));
+                print_blue_char(TILE(m, i, j));
             }
             else if(isPickUpPoint(ELMT(LocList, k))&&!countVIP){
-                print_red(TILE(m, i, j));
+                print_red_char(TILE(m, i, j));
             }
             else if(countVIP && HasVIPItem(ELMT(LocList, k))){
-                print_red(TILE(m, i, j));
+                print_red_char(TILE(m, i, j));
             }
             else if(isAdjacent(curPosition, ELMT(LocList, k))){
-                print_green(TILE(m, i, j));
+                print_green_char(TILE(m, i, j));
             }
             else{
                 printf("%c", TILE(m, i, j));

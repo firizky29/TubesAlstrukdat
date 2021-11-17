@@ -1,4 +1,5 @@
 #include <initstate.h>
+#include <pcolor.h>
 
 int N, M, L, P;
 long curTime;
@@ -18,7 +19,6 @@ Word configName;
 int countVIP;
 int countReturn;
 
-// Queue curUsedGadget; ini juga kah?
 
 void getMap(){
 /* get n x m from config and return n x m matrix */
@@ -166,7 +166,7 @@ void globalinit(){
     strcat(filepath.contents, ".txt");
     filepath.length = 31+configName.length;
     while (!fopen(filepath.contents, "r")){
-        printf("File not found, enter filename again: ");
+        print_red("File not found, enter filename again: ");
         configName = inputWord();
         strcpy(filepath.contents, newGameDir);
         strcat(filepath.contents, configName.contents);

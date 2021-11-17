@@ -1,6 +1,7 @@
 #include <initstate.h>
 #include <loadstate.h>
 #include <boolean.h>
+#include <pcolor.h>
 
 int N, M, L, P;
 long curTime;
@@ -48,7 +49,7 @@ void load(){
     char* loadGameDir = "data/saved-file/";
     DIR *dr = opendir(loadGameDir);
     if (dr == NULL){
-        printf("Could not open current directory" );
+        print_red("Could not open current directory" );
 		return;
     }
     printf("These are all available files you can load: \n");
@@ -66,7 +67,7 @@ void load(){
     strcat(filepath.contents, ".txt");
     filepath.length = 21+filename.length;
     while (!fopen(filepath.contents, "r")){
-        printf("File not found, enter filename again: ");
+        print_red("File not found, enter filename again: ");
         filename = inputWord();
         strcpy(filepath.contents, loadGameDir);
         strcat(filepath.contents, filename.contents);

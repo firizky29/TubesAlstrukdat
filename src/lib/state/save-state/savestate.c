@@ -3,6 +3,7 @@
 #include <loadstate.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pcolor.h>
 
 LinkedList reverseStack(Stack *s){
     LinkedList rStack;
@@ -27,7 +28,7 @@ void save(){
 	FILE *f = fopen(path.contents, "w");
 	if (f == NULL)
 	{
-		printf("Oops! Error saving file\n");
+		print_green("Oops! Error saving file\n");
 		exit(1);
 	}
 	emptyWord();
@@ -91,5 +92,5 @@ void save(){
 
     fclose(f);
     // done saving
-    printf("...\nYour progress has been saved!\n");
+    print_green("...\nYour progress has been saved!\n");
 }
