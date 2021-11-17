@@ -27,8 +27,8 @@ void addGadget(Inventory *inv, Gadget g){
                 INVIDGADGET(*inv,i) = IDGADGET(g); 
                 INVHARGAGADGET(*inv,i) = HARGAGADGET(g); 
                 flag = false;
-            i += 1;
             }
+            i += 1;
         }
     }
 }
