@@ -33,14 +33,14 @@ int main(){
         else{
             load();
         }
+        boolean warn = false;
         while(true){
-            boolean warn = false;
             if(isEmptyQueue(daftarPesanan)&&isEmpty(curToDoList)&&isEmpty(curProgress)){
                 if(!warn){
                     system("cls");
                     printf("Seems like there are no orders left for you to deliver. Nice work today.\n\nHead back to");
                     print_yellow(" HQ ");
-                    printf("immediately to end the day and get your reward!");
+                    printf("immediately to end the day and get your reward!\n\n");
                     warn = true;
                 }
                 if(IsHQ(curPosition)){
