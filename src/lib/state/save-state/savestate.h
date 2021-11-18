@@ -2,6 +2,8 @@
 #define SAVESTATE_H
 
 #include <wordmachine.h>
+#include <stack.h>
+#include <list_linked.h>
 
 LinkedList reverseStack(Stack *s);
 /* get reversed stack */
