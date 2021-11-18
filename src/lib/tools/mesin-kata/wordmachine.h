@@ -71,8 +71,10 @@ void printWord(Word kata);
 
 /* OTHERS */
 
-/* convert word to integer */
+/* convert word to integer for file */
 int wtoi(Word kata);
+/* convert word to integer for cmd */
+int wtoi_cmd(Word kata);
 /* clear current word */
 void emptyWord();
 /* membandingkan dua kata dan return true kalo sama, return false kalo beda */

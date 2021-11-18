@@ -107,7 +107,7 @@ void Move(){
 	Neighbor = getNeighbor(curPosition);
 	displayBuilding(Neighbor);
 	printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
-	int choice = wtoi(inputWord());
+	int choice = wtoi_cmd(inputWord());
 	while(choice<0 || choice > length(Neighbor)){
 		system("cls");
 		print_red("That's an invalid option. Let's retry, shall we?\n");
@@ -120,7 +120,7 @@ void Move(){
 		printf("Here are the nearest buildings:\n");
 		displayBuilding(Neighbor);
 		printf("Where do you want to go next?\n(Type the number of desired position or type 0 to cancel)\nEnter number: ");
-		choice = wtoi(inputWord());
+		choice = wtoi_cmd(inputWord());
 	}
 	if (choice != 0){
 		int countHeavyItem = countWeight(curProgress);
@@ -331,7 +331,7 @@ void displayInProgress(){
     // berarti kalo PICK_UP lebih gampang insertFirst ke LinkedList, 
     // trus kalo DROP_OFF deleteLast
 	if (isEmpty(curProgress)){
-		printf("Yay! There is no order in progress");
+		print_cyan("Yay! There is no order in progress");
 	} else {
 		if (lengthLL(curProgress) == 1){
 			printf("Here is the order that you're currently delivering:\n");
@@ -364,7 +364,7 @@ void Buy(){
 		printf("4. Mesin Waktu (3000 Yen)\n");
 		printf("5. Senter Pengecil (800 Yen)\n");
 		printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-		int choice = wtoi(inputWord());
+		int choice = wtoi_cmd(inputWord());
 		if (isInventoryFull(curInventory)){
 			print_red("Inventory full. Unable to buy gadgets.\n");
 		}
@@ -380,7 +380,7 @@ void Buy(){
 				printf("4. Mesin Waktu (3000 Yen)\n");
 				printf("5. Senter Pengecil (800 Yen)\n");
 				printf("Which gadget would you like to buy?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-				choice = wtoi(inputWord());
+				choice = wtoi_cmd(inputWord());
 			}
 			Gadget g;
 			CreateGadget(&g);
@@ -457,14 +457,14 @@ void displayInventory(){
 	printf("Here's your inventory:\n");
 	displayGadgetinInventory(curInventory);
 	printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-	int choice = wtoi(inputWord());
+	int choice = wtoi_cmd(inputWord());
 	while(choice < 0 || choice > INVENTORY_CAP){
 		system("cls");
 		print_red("That is invalid input!\n");
 		printf("Here's your inventory:\n");
 		displayGadgetinInventory(curInventory);
 		printf("Which gadget would you like to use?\n(Type the number of desired gadget or type 0 to cancel)\nEnter number: ");
-		choice = wtoi(inputWord());
+		choice = wtoi_cmd(inputWord());
 	}
 	if (choice >= 1 && choice <= INVENTORY_CAP){
 		if (INVIDGADGET(curInventory, choice-1) != IDGADGET_UNDEF){

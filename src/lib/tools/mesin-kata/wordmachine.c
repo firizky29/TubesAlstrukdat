@@ -135,9 +135,16 @@ void printWord(Word kata){
 
 /* CONVERT WORD */
 int wtoi(Word kata){
-/* convert word to integer */
+/* convert word to integer for file */
 	int x = atoi(kata.contents);
     advWord_file();
+	return x;
+}
+
+int wtoi_cmd(Word kata){
+/* convert word to integer for cmd */
+	int x = atoi(kata.contents);
+	emptyWord();
 	return x;
 }
 
