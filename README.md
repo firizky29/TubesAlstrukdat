@@ -82,7 +82,30 @@ make ADT_BUILDER
 # Kontributor
 Program ini dikembangkan dalam rangka memenuhi salah satu tugas besar mata kuliah Algoritma dan Struktur Data. Program ini dikembangkan oleh (K02 Kelompok Alstrukyey)
 1. Eiffel Aqila Amarendra `(13520074)`
+ADT Point, ADT List Dinamis, ADT Matrix, command PICK_UP, command DROP_OFF, command RETURN, mekanisme ability, laporan
 2. Claudia `(13520076)`
+ADT Queue, ADT Linked List, ADT Pesanan, command TO__DO, command IN_PROGRESS, laporan
 3. Ghebyon Tohada Nainggolan `(13520079)`
+ADT List, Buy, Inventory, mekanisme penggunaan gadget, mekanisme jenis-jenis item, laporan
 4. Sarah Azka Arief `(13520083)`
+ADT Mesin Karakter, ADT Mesin Kata, inisialisasi config, save/load game, ability speed boost, validasi command, laporan
 5. Firizky Ardiansyah `(13520095)`
+ADT Stack, ADT Peta, program utama, command MOVE, command MAP, mekanisme waktu, VIP Item, gadget senter pengecil, mekanisme kompilasi, laporan
+
+# Fitur/Command
+
+<table>
+<tr><td>No.</td><td>Command</td><td>Status</td></tr>
+<tr><td>1.</td><td>MOVE</td><td>Selesai</td></tr>
+<tr><td>2.</td><td>PICK_UP</td><td>Selesai</td></tr>
+<tr><td>3.</td><td>DROP_OFF</td><td>Selesai</td></tr>
+<tr><td>4.</td><td>MAP</td><td>Selesai</td></tr>
+<tr><td>5.</td><td>TO_DO</td><td>Selesai</td></tr>
+<tr><td>6.</td><td>IN_PROGRESS</td><td>Selesai</td></tr>
+<tr><td>7.</td><td>BUY</td><td>Selesai</td></tr>
+<tr><td>8.</td><td>INVENTORY</td><td>Selesai</td></tr>
+<tr><td>9.</td><td>RETURN</td><td>Selesai</td></tr>
+<tr><td>10.</td><td>HELP</td><td>Selesai</td></tr>
+<tr><td>11.</td><td>EXIT</td><td>Selesai</td></tr>
+<tr><td>12.</td><td>SAVE_GAME</td><td>Selesai</td></tr>
+</table>
