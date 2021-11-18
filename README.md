@@ -81,15 +81,15 @@ make ADT_BUILDER
 
 # Kontributor
 Program ini dikembangkan dalam rangka memenuhi salah satu tugas besar mata kuliah Algoritma dan Struktur Data. Program ini dikembangkan oleh (K02 Kelompok Alstrukyey)
-1. Eiffel Aqila Amarendra `(13520074)`
+1. Eiffel Aqila Amarendra `(13520074)`<br>
 ADT Point, ADT List Dinamis, ADT Matrix, command PICK_UP, command DROP_OFF, command RETURN, mekanisme ability, laporan
-2. Claudia `(13520076)`
+2. Claudia `(13520076)`<br>
 ADT Queue, ADT Linked List, ADT Pesanan, command TO__DO, command IN_PROGRESS, laporan
-3. Ghebyon Tohada Nainggolan `(13520079)`
+3. Ghebyon Tohada Nainggolan `(13520079)`<br>
 ADT List, Buy, Inventory, mekanisme penggunaan gadget, mekanisme jenis-jenis item, laporan
-4. Sarah Azka Arief `(13520083)`
+4. Sarah Azka Arief `(13520083)`<br>
 ADT Mesin Karakter, ADT Mesin Kata, inisialisasi config, save/load game, ability speed boost, validasi command, laporan
-5. Firizky Ardiansyah `(13520095)`
+5. Firizky Ardiansyah `(13520095)`<br>
 ADT Stack, ADT Peta, program utama, command MOVE, command MAP, mekanisme waktu, VIP Item, gadget senter pengecil, mekanisme kompilasi, laporan
 
 # Fitur/Command
