@@ -30,7 +30,7 @@ Berikut ini adalah struktur folder dari project ini:
 Anda membutuhkan terminal Bash untuk bisa menjalankan perintah Make pada OS Windows. Anda bisa mengunjungi situs berikut untuk mengetahui prosedur instalasi salah satu Bash di Windows.
  https://medium.com/danielpadua/git-bash-with-vscode-593d5998f6be
 
-Perhatikan bahwa sebagian besar interface pada program menggunakan modul *pcolor* yang (munkin saja) tidak kompatibel dengan komputer Anda (Interface Text akan menjadi berantakan).
+Perhatikan bahwa sebagian besar interface pada program menggunakan modul *pcolor* yang (mungkin saja) tidak kompatibel dengan komputer Anda (Interface Text akan menjadi berantakan).
 
 1. Untuk mengompilasi program jalankan
 ```
