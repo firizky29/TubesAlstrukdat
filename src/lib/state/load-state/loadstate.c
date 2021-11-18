@@ -84,7 +84,9 @@ void load(){
     CreateList(&curProgress);
     CreateStack(&curBag);
     LinkedList temp;
+    Queue tempdp;
     CreateList(&temp);
+    CreateQueue(&tempdp);
     emptyWord();
     readFile(filepath);
     // get name of corresponding config file
@@ -161,7 +163,22 @@ void load(){
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         insertLastLL(&temp, pesanan);
     }
-
+    // temporarily store daftar pesanan (queue)
+    par = wtoi(currentWord);
+    for (i = 0; i < par; i++){
+        t = wtoi(currentWord);
+        pu = currentWord.contents[0];
+        advWord_file();
+        d = currentWord.contents[0];
+        advWord_file();
+        tp = currentWord.contents[0];
+        advWord_file();
+        pt = wtoi(currentWord);
+        advWord_file();
+        w = wtoi(currentWord);
+        pesanan = CreatePesanan(t, pu, d, tp, pt, w);
+        enqueue(&tempdp, pesanan);
+    }
     // get config file path
     Word filepathconfig;
     char* newGameDir = "data/original-config-file/";
@@ -173,4 +190,6 @@ void load(){
     initConfig(filepathconfig);
     // set curtodolist to saved file progress
     curToDoList = temp;
+    // set daftarpesanan to saved file progress
+    daftarPesanan = tempdp;
 }

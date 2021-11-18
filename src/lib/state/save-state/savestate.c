@@ -105,6 +105,17 @@ void save(){
         fprintf(f, "%d", PTIME(pesan));
         fprintf(f, "%d\n", WEIGHT(pesan));
     }
+    // save daftar pesanan (queue)
+    fprintf(f, "%d\n", lengthQueue(daftarPesanan));
+    for (i = 0; i < lengthQueue(daftarPesanan); i++){
+        pesan = daftarPesanan.buffer[i];
+        fprintf(f, "%d ", TIMEPESANAN(pesan));
+        fprintf(f, "%c ", PICKUPPESANAN(pesan));
+        fprintf(f, "%c ", DROPOFFPESANAN(pesan));
+        fprintf(f, "%c ", TIPEITEM(pesan));
+        fprintf(f, "%d", PTIME(pesan));
+        fprintf(f, "%d\n", WEIGHT(pesan));
+    }
     fclose(f);
     print_green("...\nYour progress has been saved!\n");
 }
