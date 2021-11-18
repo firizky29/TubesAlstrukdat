@@ -46,11 +46,11 @@ make run
 ```
 4. Untuk mengompilasi sebuah modul ADT, jalankan
 ```
-make ADT_BUILDER
+make <nama modul>
 ```
 5. Untuk mengompilasi seluruh modul ADT, jalankan
 ```
-make <nama modul>
+make ADT_BUILDER
 ```
 6. Untuk menjalankan modul ADT, jalankan
 ```
