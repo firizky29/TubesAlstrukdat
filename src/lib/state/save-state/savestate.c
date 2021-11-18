@@ -6,6 +6,7 @@
 #include <pcolor.h>
 #include <unistd.h>
 
+/* get reversed stack */
 LinkedList reverseStack(Stack *s){
     LinkedList rStack;
     CreateList(&rStack);
@@ -17,6 +18,7 @@ LinkedList reverseStack(Stack *s){
     return rStack;
 }
 
+/* save current progress */
 void save(){
     char* saveDir = "data/saved-file/";
 	printf("Save file as (filename): \n");
@@ -26,6 +28,7 @@ void save(){
     strcat(path.contents, file.contents);
     strcat(path.contents, ".txt");
     path.length = 21+file.length;
+    // check if file already exists (overwrite or not)
     if (access(path.contents, F_OK) == 0){
         printf("File already exists.\nWould you like to overwrite changes (yes/no)? : ");
         Word overWrite = inputWord();
@@ -49,7 +52,7 @@ void save(){
     fprintf(f, "%s\n", configName.contents);
     // save location (curposition)
     fprintf(f, "%c %d %d\n", CHARLOC(curPosition), Absis(COORLOC(curPosition)), Ordinat(COORLOC(curPosition)));
-    // save non-adt progress
+    // save built-in progress
     fprintf(f, "%ld\n", curTime);
     fprintf(f, "%ld\n", curMoney);
     fprintf(f, "%d\n", curSpeed);
@@ -61,7 +64,7 @@ void save(){
     int i;
     Pesanan pesan;
     LinkedList rStack;
-    // save stack (curbag)
+    // save stack progress (curbag)
     fprintf(f, "%d\n", CURCAP(curBag));
     rStack = reverseStack(&curBag);
     fprintf(f, "%d\n", lengthLL(rStack));
@@ -74,13 +77,13 @@ void save(){
         fprintf(f, "%d", PTIME(pesan));
         fprintf(f, "%d\n", WEIGHT(pesan));
     }
-    // save inventory (curInventory)
+    // save inventory progress (curInventory)
     fprintf(f, "%d\n", INVENTORY_CAP);
     for (i = 0; i < INVENTORY_CAP; i++){
         fprintf(f, "%d ", INVIDGADGET(curInventory, i));
         fprintf(f, "%d\n", INVHARGAGADGET(curInventory, i));
     }
-    // save linked list (curprogress + curtodolist)
+    // save curprogress progress (linked list)
     fprintf(f, "%d\n", lengthLL(curProgress));
     for (i = 0; i < lengthLL(curProgress); i++){
         pesan = getElmt(curProgress, i);
@@ -91,6 +94,7 @@ void save(){
         fprintf(f, "%d", PTIME(pesan));
         fprintf(f, "%d\n", WEIGHT(pesan));
     }
+    // save curtodolist progress (linked list)
     fprintf(f, "%d\n", lengthLL(curToDoList));
     for (i = 0; i < lengthLL(curToDoList); i++){
         pesan = getElmt(curToDoList, i);
@@ -101,8 +105,6 @@ void save(){
         fprintf(f, "%d", PTIME(pesan));
         fprintf(f, "%d\n", WEIGHT(pesan));
     }
-
     fclose(f);
-    // done saving
     print_green("...\nYour progress has been saved!\n");
 }

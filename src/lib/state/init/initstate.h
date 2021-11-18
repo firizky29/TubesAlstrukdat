@@ -9,23 +9,29 @@
 
 extern Word configName;
 
-/* GET INFO FROM CONFIG FILE */
+
 void getMap();
-/* get n x m from config and return n x m matrix */
+/* initialize matrix (n x m) from config */
+
 Point getPoint();
 /* get and return point from config */
-void getAdjacency(Matrix *m, int n);
-/* get and return adjacency matrix from config */
-void getLoc(Point pointhq);
-/* get char and coord of loc and return list dinamis */
-void getPesananList();
-/* global init */
-void initConfig();
-/* initialize from config */
-void globalinit();
-/* Menginisialisasi segala hal */
 
+void getAdjacency(Matrix *m, int n);
+/* initialize adjacency matrix from config */
+
+void getLoc(Point pointhq);
+/* get char and coord of loc from config */
+
+void getPesananList();
+/* initialize daftar pesanan & to-do list from config */
 
 void interface();
+/* display start game interface */
+
+void initConfig();
+/* initialize global variables from config */
+
+void globalinit();
+/* global initialization */
 
 #endif

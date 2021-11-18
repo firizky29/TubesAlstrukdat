@@ -20,16 +20,15 @@ int countVIP;
 int countReturn;
 int countDelivered;
 
-
+/* initialize matrix (n x m) from config */
 void getMap(){
-/* get n x m from config and return n x m matrix */
 	N = wtoi(currentWord);
 	M = wtoi(currentWord);
 	CreateMap(&curMap, N, M);
 }
 
-Point getPoint(){
 /* get and return point from config */
+Point getPoint(){
 	int x, y;
 	x = wtoi(currentWord);
 	y = wtoi(currentWord);
@@ -37,8 +36,8 @@ Point getPoint(){
 	return hq;
 }
 
+/* initialize adjacency matrix from config */
 void getAdjacency(Matrix *m, int n){
-/* get and return adjacency matrix from config */
 	int temp, i, j;
 	CreateMatrix(n, n, m);
 	for (i = 0; i < n; i++){
@@ -49,8 +48,8 @@ void getAdjacency(Matrix *m, int n){
 	}
 }
 
+/* get char and coord of loc from config */
 void getLoc(Point pointhq){
-/* get char and coord of loc and return list dinamis */
 	int i;
 	int L = wtoi(currentWord);
 	CreateListDin(&LocList, (L+1));
@@ -64,6 +63,7 @@ void getLoc(Point pointhq){
 	NEFF(LocList) = L+1;
 }
 
+/* initialize daftar pesanan & to-do list from config */
 void getPesananList(){
     int i;
     P = wtoi(currentWord);
@@ -75,7 +75,7 @@ void getPesananList(){
     CreateQueue(&daftarPesanan);
     CreateList(&curToDoList);
     for (i=0; i < P; i++){    
-        // masukin item pesanan
+        // insert item pesanan
         t = wtoi(currentWord);
         pu = currentWord.contents[0];
         advWord_file();
@@ -84,16 +84,16 @@ void getPesananList(){
         tp = currentWord.contents[0];
         advWord_file();
         if (tp == 'P'){
-            pt = wtoi(currentWord);
+            pt = wtoi(currentWord); // get time-limit of perishable item
             w = 0;
         }
         else{
-            pt = -1;
+            pt = -1; // set non-perishable item time-limit to -1
             if(tp=='H'){
-                w = 1;
+                w = 1; // weight count for heavy item
             }
             else{
-                w = 0;
+                w = 0; // weight count for non-heavy item
             }
         }
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
@@ -109,7 +109,7 @@ void getPesananList(){
     }
 }
 
-
+/* display start game interface */
 void interface(){
     Word interface = {"data/interface/grafitti.txt", 27};
     readFile(interface);
@@ -124,8 +124,8 @@ void interface(){
     }
 }
 
+/* initialize global variables from config */
 void initConfig(Word filepath){
-    // read from config file
     readFile(filepath);
     getMap();
     Point hq = getPoint();
@@ -133,32 +133,25 @@ void initConfig(Word filepath){
     BuildingToMap(&curMap, LocList);
     getAdjacency(&adj, NEFF(LocList));
     getPesananList();
-    // display info2"\nHQ berada pada (x,y): (%f, %f)\n\n", hq.X, hq.Y);
-    printf("Map: %d x %d\n", REFF(curMap), CEFF(curMap));
-    DisplayMap(curMap);
-    printf("\n\n");
-    displayMatrix(adj);
-    printf("\n\n");
-    displayList(LocList);
-    printf("\n\n");
-    displayQueue(daftarPesanan);
-    printf("\n\n");
 }
 
+/* global initialization */
 void globalinit(){
-	struct dirent *de;  // Pointer for directory entry
+	struct dirent *de;  // pointer for directory entry
     char* newGameDir = "data/original-config-file/";
     DIR *dr = opendir(newGameDir);
     if (dr == NULL){
         printf("Could not open current directory" );
 		return;
     }
+    // print available config files
     printf("These are all available files you can choose: \n");
     while ((de = readdir(dr)) != NULL){
         if(de->d_name[0]!='.'){
             printf("- %s\n", de->d_name);
         }
     }
+    // get selected config file path
     closedir(dr);
     printf("Enter configuration file level (filename): ");
     configName = inputWord();
@@ -179,8 +172,9 @@ void globalinit(){
     printWord(configName);
     printf("....\n");
     interface();
-    // reading file config + get info
+    // initialize global variables from config
     initConfig(filepath);
+    // initialize built-in global variables
     curMoney = 0;
     curTime = 0;
     speedBoost = false;

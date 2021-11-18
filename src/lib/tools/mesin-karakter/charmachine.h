@@ -13,12 +13,12 @@ extern boolean endFile;
 extern char currentChar;
 
 void start_file(char *filename);
-/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+/* (For Files) Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
    F.S. : currentChar adalah karakter pertama pada pita
-          Jika currentChar != MARK maka EOP akan padam (false)
-          Jika currentChar = MARK maka EOP akan menyala (true) */
+          Jika currentChar != EOF maka EOP akan padam (false)
+          Jika currentChar = EOF maka EOP akan menyala (true) */
 
 void start_command();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -29,12 +29,17 @@ void start_command();
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 void adv();
-/* Pita dimajukan satu karakter. 
+/* (For Files) Pita dimajukan satu karakter. 
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 
 void adv_command();
+/* Pita dimajukan satu karakter. 
+   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
+   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, 
+          currentChar mungkin = MARK
+          Jika  currentChar = MARK maka EOP akan menyala (true) */
 
 #endif

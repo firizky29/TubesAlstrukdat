@@ -21,9 +21,10 @@ Queue daftarPesanan;
 Word configName;
 int countDelivered;
 
+/* check if saved files are available for load game */
 boolean isLoadAvailable(){
     int n = 0;
-	struct dirent *det;  // Pointer for directory entry
+	struct dirent *det;  // pointer for directory entry
     char* loadGameDirt = "data/saved-file/";
     DIR *drt = opendir(loadGameDirt);
     if (drt == NULL){
@@ -41,20 +42,23 @@ boolean isLoadAvailable(){
     }
 }
 
+/* load saved file */
 void load(){
-	struct dirent *de;  // Pointer for directory entry
+	struct dirent *de;  // pointer for directory entry
     char* loadGameDir = "data/saved-file/";
     DIR *dr = opendir(loadGameDir);
     if (dr == NULL){
         print_red("Could not open current directory" );
 		return;
     }
+    // print available saved files
     printf("These are all available files you can load: \n");
     while ((de = readdir(dr)) != NULL){
         if(de->d_name[0]!='.'){
             printf("- %s\n", de->d_name);
         }
     }
+    // get selected saved file path
     closedir(dr);
     printf("Enter filename (filename): ");
     Word filename = inputWord();
@@ -81,16 +85,16 @@ void load(){
     CreateStack(&curBag);
     LinkedList temp;
     CreateList(&temp);
-    // get config name
     emptyWord();
     readFile(filepath);
+    // get name of corresponding config file
     configName = currentWord;
     advWord_file();
-    // load loc (curposition)
+    // get current position
     CHARLOC(curPosition) = currentWord.contents[0];
     advWord_file();
     COORLOC(curPosition) = getPoint();
-    // load non-adt progress
+    // get built-in progress
     curTime = (long)(wtoi(currentWord));
     curMoney = (long)(wtoi(currentWord));
     curSpeed = wtoi(currentWord);
@@ -102,7 +106,7 @@ void load(){
     int i, par, t, pt, w;
     char pu, d, tp; 
     Pesanan pesanan;
-    // load curbag (stack)
+    // get curbag progress (stack)
     CURCAP(curBag) = wtoi(currentWord);
     par = wtoi(currentWord);
     for (i = 0; i < par; i++){
@@ -119,13 +123,13 @@ void load(){
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         push(&curBag, pesanan);
     }
-    // load curinventory (inventory)
+    // get curinventory progress (inventory)
     par = wtoi(currentWord);
     for (i = 0; i < par; i++){
         INVIDGADGET(curInventory, i) = wtoi(currentWord);
         INVHARGAGADGET(curInventory, i) = wtoi(currentWord);
     }
-    // load curprogress (linked list)
+    // get curprogress progress (linked list)
     par = wtoi(currentWord);
     for (i = 0; i < par; i++){
         t = wtoi(currentWord);
@@ -141,10 +145,9 @@ void load(){
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         insertLastLL(&curProgress, pesanan);
     }
-    // load curtodolist (linked list)
+    // temporarily store curtodolist progress (linked list)
     par = wtoi(currentWord);
     for (i = 0; i < par; i++){
-        // masukin item pesanan
         t = wtoi(currentWord);
         pu = currentWord.contents[0];
         advWord_file();
@@ -159,13 +162,15 @@ void load(){
         insertLastLL(&temp, pesanan);
     }
 
-    // initialize pconfig
+    // get config file path
     Word filepathconfig;
     char* newGameDir = "data/original-config-file/";
     strcpy(filepathconfig.contents, newGameDir);
     strcat(filepathconfig.contents, configName.contents);
     strcat(filepathconfig.contents, ".txt");
     filepathconfig.length = 31+configName.length;
+    // initialize global variables from config
     initConfig(filepathconfig);
+    // set curtodolist to saved file progress
     curToDoList = temp;
 }

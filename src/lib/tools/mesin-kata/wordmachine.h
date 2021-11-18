@@ -16,7 +16,6 @@ typedef struct {
 extern boolean endWord;
 extern Word currentWord;
 
-/* PRIMITIVE FUNCTIONS: From File & Command */
 void ignoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang 
@@ -57,25 +56,27 @@ void advWord_command();
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika currentChar = MARK, endWord = true.		  
    Proses : Akuisisi kata menggunakan procedure copyWord */
-boolean isWordEqual(Word kata1, Word kata2);
-/* membandingkan dua kata dan return true kalo sama, return false kalo beda */
 
 
 /* READ INPUT & PRINT OUTPUT (File & CMD) */
-Word inputWord();
+
 /* menerima input dari command line dan dijadikan output berupa Word */
-void readFile(Word filename);
+Word inputWord();
 /* membaca file dengan nama filename */
-void printWordFile(Word kata);
+void readFile(Word filename);
 /* print kata dari suatu file */
-void printWord(Word kata);
+void printWordFile(Word kata);
 /* print kata */
+void printWord(Word kata);
 
-/* CONVERT WORD */
-int wtoi(Word kata);
+/* OTHERS */
+
 /* convert word to integer */
-
+int wtoi(Word kata);
+/* clear current word */
 void emptyWord();
+/* membandingkan dua kata dan return true kalo sama, return false kalo beda */
+boolean isWordEqual(Word kata1, Word kata2);
 
 
 
