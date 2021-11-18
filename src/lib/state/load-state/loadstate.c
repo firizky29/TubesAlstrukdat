@@ -120,7 +120,6 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        advWord_file();
         w = wtoi(currentWord);
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         push(&curBag, pesanan);
@@ -142,7 +141,6 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        advWord_file();
         w = wtoi(currentWord);
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         insertLastLL(&curProgress, pesanan);
@@ -158,7 +156,6 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        advWord_file();
         w = wtoi(currentWord);
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         insertLastLL(&temp, pesanan);
@@ -174,7 +171,6 @@ void load(){
         tp = currentWord.contents[0];
         advWord_file();
         pt = wtoi(currentWord);
-        advWord_file();
         w = wtoi(currentWord);
         pesanan = CreatePesanan(t, pu, d, tp, pt, w);
         enqueue(&tempdp, pesanan);

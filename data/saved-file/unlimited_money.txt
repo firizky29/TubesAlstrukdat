@@ -1,7 +1,7 @@
 tes_config
 8 1 1
 0
-10000000
+100000
 0
 0
 0
@@ -19,13 +19,13 @@ tes_config
 0
 0
 10
-1 G N N -10
-1 M B H -11
-2 B M N -10
-3 G N H -11
-3 F E N -10
-5 C D N -10
-5 G N P 100
-8 O P V -10
-8 Q L V -10
-10 P Q P 200
+1 G N N -1 0
+1 M B H -1 1
+2 B M N -1 0
+3 G N H -1 1
+3 F E N -1 0
+5 C D N -1 0
+5 G N P 10 0
+8 O P V -1 0
+8 Q L V -1 0
+10 P Q P 20 0
