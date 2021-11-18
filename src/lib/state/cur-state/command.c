@@ -307,7 +307,7 @@ void displayMap(){
 }
 void displayToDoList(){
 	if (isEmpty(curToDoList)){
-		print_cyan("Yay! There is nothing in your To-Do List");
+		print_cyan("Yay! There is nothing in your To-Do List\n");
 	} else {
 		printf("Here's your To-Do List:\n");
 		Address p = FIRST(curToDoList);
@@ -331,7 +331,7 @@ void displayInProgress(){
     // berarti kalo PICK_UP lebih gampang insertFirst ke LinkedList, 
     // trus kalo DROP_OFF deleteLast
 	if (isEmpty(curProgress)){
-		print_cyan("Yay! There is no order in progress");
+		print_cyan("Yay! There is no order in progress\n");
 	} else {
 		if (lengthLL(curProgress) == 1){
 			printf("Here is the order that you're currently delivering:\n");
