@@ -21,7 +21,7 @@ int main(){
     readMatrix(&m, rowDim,colDim);
 
     /* display */
-    printf("\Isi matrix: ");
+    printf("\nIsi matrix: ");
     displayMatrix(m);
 
     return 0;

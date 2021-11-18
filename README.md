@@ -23,7 +23,7 @@ Berikut ini adalah struktur folder dari project ini:
 
 ## Prosedur Penggunaan
 > <b>Notes :</b> 
-> Program ini dikompilasi menggunakan Makefile.
+> Program ini dikompilasi menggunakan Makefile. Direkomendasikan untuk selalu mengompilasi ulang program sebelum menggunakan.
 
 
 ### **Windows**
